@@ -12,7 +12,7 @@ layout: default
   </header>
 
   <section class="posts-grid">
-    {% assign category_posts = site.categories[page.slug] %}
+    {% assign category_posts = site.posts | where_exp: "post", "post.categories contains page.slug" %}
     {% if category_posts.size > 0 %}
       <div class="card-grid">
         {% for post in category_posts %}
