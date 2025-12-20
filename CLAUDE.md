@@ -49,11 +49,12 @@ Blog posts must follow the naming convention `YYYY-MM-DD-title-of-post.md` and i
 layout: post
 title: "Post Title"
 date: YYYY-MM-DD HH:MM:SS +0000
-tags: [tag1, tag2]
+categories: [category-slug]
+excerpt: "Brief description for post cards and SEO"
 ---
 ```
 
-The default layout for posts is automatically set to "post" and author to "sobanieca" via _config.yml defaults.
+Posts are organized by categories (general, build-remotely, build-anywhere, neovim, tools). The default layout for posts is automatically set to "post" and author to "sobanieca" via _config.yml defaults.
 
 ### Deployment
 GitHub Actions workflow (`.github/workflows/jekyll.yml`) automatically builds and deploys to GitHub Pages on push to `main` branch. The workflow:

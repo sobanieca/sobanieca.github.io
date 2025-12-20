@@ -3,7 +3,6 @@ layout: post
 title: "WSL2: The Ultimate Windows Development Environment"
 date: 2025-12-10 13:15:00 +0000
 categories: [build-anywhere]
-tags: [wsl, windows, linux]
 excerpt: "Transform your Windows machine into a powerful Linux development environment with WSL2."
 ---
 

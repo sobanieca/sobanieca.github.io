@@ -3,7 +3,6 @@ layout: post
 title: "Building Cross-Platform Applications with Docker"
 date: 2025-12-19 11:20:00 +0000
 categories: [build-anywhere]
-tags: [docker, containers, cross-platform]
 excerpt: "How to use Docker to create applications that run seamlessly across different operating systems."
 ---
 

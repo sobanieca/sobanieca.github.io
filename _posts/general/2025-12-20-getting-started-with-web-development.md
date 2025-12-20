@@ -3,7 +3,6 @@ layout: post
 title: "Getting Started with Web Development in 2025"
 date: 2025-12-20 10:00:00 +0000
 categories: [general]
-tags: [web-development, beginners, programming]
 excerpt: "A comprehensive guide for beginners who want to start their journey in web development this year."
 ---
 
