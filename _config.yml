@@ -19,18 +19,31 @@ paginate_path: "/page:num/"
 
 # Collections
 collections:
+  categories:
+    output: true
+    permalink: /category/:name/
   posts:
     output: true
-    permalink: /blog/:year/:month/:day/:title/
+    permalink: /blog/:categories/:year/:month/:day/:title/
 
 # Defaults
 defaults:
+  - scope:
+      path: ""
+      type: "categories"
+    values:
+      layout: "category"
   - scope:
       path: ""
       type: "posts"
     values:
       layout: "post"
       author: "sobanieca"
+
+# SASS Processing
+sass:
+  sass_dir: assets/css
+  style: compressed
 
 # Exclude from processing
 exclude:

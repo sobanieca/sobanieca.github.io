@@ -2,29 +2,64 @@
 layout: default
 ---
 
-<article class="post">
-  <header>
-    <h1>{{ page.title }}</h1>
-    <p class="post-meta">
-      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: "%B %-d, %Y" }}</time>
-      {% if page.author %} • {{ page.author }}{% endif %}
-    </p>
+<article class="post-page">
+  <nav class="breadcrumb" style="margin-bottom: 2rem; color: #9ca3af; font-size: 0.875rem;">
+    <a href="{{ "/" | relative_url }}" style="color: #3b82f6;">Home</a>
+    {% if page.categories %}
+      {% assign category = page.categories | first %}
+      <span> / </span>
+      <a href="{{ '/category/' | append: category | relative_url }}" style="color: #3b82f6;">{{ category | capitalize }}</a>
+    {% endif %}
+    <span> / </span>
+    <span>{{ page.title }}</span>
+  </nav>
+
+  <header style="margin-bottom: 3rem;">
+    {% if page.categories %}
+      {% assign category_name = page.categories | first %}
+      <span class="category-tag" style="display: inline-block; background-color: #3b82f6; color: #ffffff; padding: 0.5rem 1rem; border-radius: 0.5rem; font-size: 0.875rem; font-weight: 500; margin-bottom: 1rem;">
+        {{ category_name | capitalize }}
+      </span>
+    {% endif %}
+
+    <h1 style="font-size: 2.5rem; font-weight: 700; color: #ffffff; margin-bottom: 1.5rem; line-height: 1.25;">
+      {{ page.title }}
+    </h1>
+
+    <div class="post-meta" style="display: flex; align-items: center; gap: 0.75rem; color: #9ca3af; font-size: 0.875rem;">
+      <span style="font-weight: 500;">{{ page.author | default: site.author }}</span>
+      <span>•</span>
+      <time datetime="{{ page.date | date_to_xmlschema }}">
+        {{ page.date | date: "%B %-d, %Y" }}
+      </time>
+    </div>
   </header>
 
-  <div class="post-content">
+  <div class="post-content" style="color: #ffffff; line-height: 1.75; font-size: 1.125rem;">
     {{ content }}
   </div>
 
   {% if page.tags %}
-  <div class="post-tags" style="margin-top: 2em; padding-top: 1em; border-top: 1px solid #eee;">
-    <strong>Tags:</strong>
+  <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #2d3142;">
+    <strong style="color: #ffffff; font-weight: 600; margin-right: 1rem;">Tags:</strong>
     {% for tag in page.tags %}
-      <span style="background: #e0e0e0; padding: 2px 8px; border-radius: 3px; margin-right: 5px; font-size: 0.9em;">{{ tag }}</span>
+      <span style="background: #2d3142; color: #9ca3af; padding: 0.5rem 1rem; border-radius: 0.5rem; margin-right: 0.5rem; font-size: 0.875rem; display: inline-block; margin-bottom: 0.5rem;">
+        {{ tag }}
+      </span>
     {% endfor %}
   </div>
   {% endif %}
-</article>
 
-<div style="margin-top: 3em; padding-top: 1em; border-top: 2px solid #eee;">
-  <a href="{{ "/blog/" | relative_url }}">← Back to all posts</a>
-</div>
+  <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid #2d3142;">
+    {% if page.categories %}
+      {% assign category = page.categories | first %}
+      <a href="{{ '/category/' | append: category | relative_url }}" class="btn btn-secondary">
+        ← Back to {{ category | capitalize }}
+      </a>
+    {% else %}
+      <a href="{{ "/" | relative_url }}" class="btn btn-secondary">
+        ← Back to Home
+      </a>
+    {% endif %}
+  </div>
+</article>

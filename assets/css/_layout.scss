@@ -1,0 +1,134 @@
+// Reset and Base
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-family;
+  font-size: $font-size-base;
+  line-height: $line-height-normal;
+  color: $text-primary;
+  background-color: $main-bg;
+}
+
+// Page Wrapper
+.page-wrapper {
+  display: flex;
+  min-height: 100vh;
+}
+
+// Sidebar
+.sidebar {
+  width: $sidebar-width;
+  background-color: $sidebar-bg;
+  padding: $spacing-xl;
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 100;
+
+  @media (max-width: $tablet) {
+    transform: translateX(-100%);
+    transition: transform $transition-normal;
+
+    &.active {
+      transform: translateX(0);
+    }
+  }
+}
+
+// Mobile Menu Toggle
+.menu-toggle {
+  display: none;
+  position: fixed;
+  top: $spacing-md;
+  left: $spacing-md;
+  z-index: 200;
+  background: $sidebar-bg;
+  border: none;
+  padding: $spacing-sm;
+  border-radius: $button-border-radius;
+  cursor: pointer;
+
+  @media (max-width: $tablet) {
+    display: block;
+  }
+
+  span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #333;
+    margin: 5px 0;
+    transition: $transition-fast;
+  }
+}
+
+// Main Content
+.main-content {
+  flex: 1;
+  margin-left: $sidebar-width;
+  padding: $spacing-2xl;
+  max-width: $max-content-width;
+
+  @media (max-width: $tablet) {
+    margin-left: 0;
+    padding: $spacing-xl $spacing-md;
+    padding-top: calc($spacing-2xl + 40px); // Account for menu button
+  }
+}
+
+// Grid Layouts
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $spacing-xl;
+  margin-top: $spacing-xl;
+
+  @media (max-width: $desktop) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $tablet) {
+    grid-template-columns: 1fr;
+  }
+}
+
+// Section Spacing
+.home-page,
+.category-page,
+.post-page {
+  animation: fadeIn $transition-slow;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive Utilities
+.container {
+  max-width: $max-content-width;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+}
+
+// Footer
+footer {
+  margin-top: $spacing-2xl;
+  padding-top: $spacing-xl;
+  border-top: 1px solid $border-color;
+  text-align: center;
+  color: $text-secondary;
+  font-size: $font-size-sm;
+}

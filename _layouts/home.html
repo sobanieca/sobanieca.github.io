@@ -2,28 +2,26 @@
 layout: default
 ---
 
-{{ content }}
+<div class="home-page">
+  {{ content }}
 
-<h2>Latest Posts</h2>
+  {% if site.posts.size > 0 %}
+    {% assign featured_post = site.posts.first %}
+    {% include hero-post.html post=featured_post %}
 
-{% if site.posts.size > 0 %}
-  <ul class="post-list">
-    {% for post in site.posts limit:5 %}
-      <li>
-        <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-        <h3>
-          <a class="post-link" href="{{ post.url | relative_url }}">
-            {{ post.title | escape }}
-          </a>
-        </h3>
-        {% if post.excerpt %}
-          <p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
-        {% endif %}
-      </li>
-    {% endfor %}
-  </ul>
-
-  <p><a href="{{ "/blog/" | relative_url }}">View all posts →</a></p>
-{% else %}
-  <p>No posts yet. Stay tuned!</p>
-{% endif %}
+    {% if site.posts.size > 1 %}
+      <section class="posts-grid">
+        <h2>Recent Posts</h2>
+        <div class="card-grid">
+          {% for post in site.posts offset:1 limit:6 %}
+            {% include post-card.html post=post %}
+          {% endfor %}
+        </div>
+      </section>
+    {% endif %}
+  {% else %}
+    <div class="empty-state">
+      <p>No posts yet. Stay tuned!</p>
+    </div>
+  {% endif %}
+</div>
