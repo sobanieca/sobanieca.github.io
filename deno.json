@@ -1,0 +1,9 @@
+{
+  "tasks": {
+    "build": "deno run --allow-read --allow-write --allow-env build.ts"
+  },
+  "imports": {
+    "marked": "npm:marked@^12.0.0",
+    "yaml": "npm:yaml@^2.3.4"
+  }
+}

@@ -1,4 +1,4 @@
-name: Build and Deploy Jekyll Site
+name: Build and Deploy Site
 
 on:
   push:
@@ -23,20 +23,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Ruby
-        uses: ruby/setup-ruby@v1
+      - name: Setup Deno
+        uses: denoland/setup-deno@v1
         with:
-          ruby-version: '3.2'
-          bundler-cache: true
+          deno-version: v1.x
 
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4
 
-      - name: Build with Jekyll
-        run: bundle exec jekyll build
-        env:
-          JEKYLL_ENV: production
+      - name: Build with Deno
+        run: deno task build
 
       - name: Upload artifact
         if: github.event_name != 'pull_request'
