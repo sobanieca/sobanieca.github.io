@@ -38,6 +38,8 @@ jobs:
       - name: Upload artifact
         if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
+        with:
+          path: 'dist'
 
   deploy:
     if: github.event_name != 'pull_request'

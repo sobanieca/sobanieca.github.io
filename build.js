@@ -108,16 +108,16 @@ async function readPosts() {
 async function build() {
   console.log("Building site...");
 
-  // Clean and create _site directory
+  // Clean and create dist directory
   try {
-    await Deno.remove("_site", { recursive: true });
+    await Deno.remove("dist", { recursive: true });
   } catch {
     // Directory doesn't exist, ignore
   }
-  await Deno.mkdir("_site", { recursive: true });
-  await Deno.mkdir("_site/blog", { recursive: true });
-  await Deno.mkdir("_site/category", { recursive: true });
-  await Deno.mkdir("_site/assets/css", { recursive: true });
+  await Deno.mkdir("dist", { recursive: true });
+  await Deno.mkdir("dist/blog", { recursive: true });
+  await Deno.mkdir("dist/category", { recursive: true });
+  await Deno.mkdir("dist/assets/css", { recursive: true });
 
   // Read all posts
   const posts = await readPosts();
@@ -134,14 +134,14 @@ async function build() {
   // Generate index page
   const homeContent = homePage(posts, context);
   const homeHtml = layout(homeContent, "", undefined, context);
-  await Deno.writeTextFile("_site/index.html", homeHtml);
+  await Deno.writeTextFile("dist/index.html", homeHtml);
   console.log("Generated index.html");
 
   // Generate individual post pages
   for (const post of posts) {
     const postContent = postPage(post, context);
     const postHtml = layout(postContent, post.title, undefined, context);
-    await Deno.writeTextFile(`_site/blog/${post.slug}.html`, postHtml);
+    await Deno.writeTextFile(`dist/blog/${post.slug}.html`, postHtml);
   }
   console.log(`Generated ${posts.length} post pages`);
 
@@ -149,15 +149,15 @@ async function build() {
   for (const category of Object.values(CATEGORIES)) {
     const catContent = categoryPage(category, posts, context);
     const catHtml = layout(catContent, category.name, category.slug, context);
-    await Deno.writeTextFile(`_site/category/${category.slug}.html`, catHtml);
+    await Deno.writeTextFile(`dist/category/${category.slug}.html`, catHtml);
   }
   console.log(`Generated ${Object.keys(CATEGORIES).length} category pages`);
 
   // Copy CSS
-  await Deno.copyFile("assets/css/main.css", "_site/assets/css/main.css");
+  await Deno.copyFile("assets/css/main.css", "dist/assets/css/main.css");
   console.log("Copied CSS");
 
-  console.log("\n✓ Build complete! Output in _site/");
+  console.log("\n✓ Build complete! Output in dist/");
 }
 
 if (import.meta.main) {
