@@ -1,26 +1,9 @@
 import { marked } from "marked";
 import { parse as parseYaml } from "yaml";
 
-interface Post {
-  title: string;
-  date: string;
-  categories: string[];
-  excerpt: string;
-  content: string;
-  slug: string;
-  url: string;
-}
-
-interface Category {
-  name: string;
-  icon: string;
-  description: string;
-  slug: string;
-}
-
 const SITE_TITLE = "sobanieca";
 const SITE_AUTHOR = "sobanieca";
-const CATEGORIES: Record<string, Category> = {
+const CATEGORIES = {
   general: {
     name: "General",
     icon: "general",
@@ -54,7 +37,7 @@ const CATEGORIES: Record<string, Category> = {
 };
 
 // Parse front matter from markdown
-function parseFrontMatter(content: string): { data: any; content: string } {
+function parseFrontMatter(content) {
   const match = content.match(/^---\n([\s\S]+?)\n---\n([\s\S]*)$/);
   if (!match) return { data: {}, content };
 
@@ -66,12 +49,12 @@ function parseFrontMatter(content: string): { data: any; content: string } {
 }
 
 // Generate slug from filename
-function getSlugFromFilename(filename: string): string {
+function getSlugFromFilename(filename) {
   return filename.replace(/^\d{4}-\d{2}-\d{2}-/, "").replace(/\.md$/, "");
 }
 
 // Format date
-function formatDate(dateStr: string): string {
+function formatDate(dateStr) {
   const date = new Date(dateStr);
   return date.toLocaleDateString("en-US", {
     year: "numeric",
@@ -81,8 +64,8 @@ function formatDate(dateStr: string): string {
 }
 
 // Read all posts
-async function readPosts(): Promise<Post[]> {
-  const posts: Post[] = [];
+async function readPosts() {
+  const posts = [];
 
   for await (const dirEntry of Deno.readDir("_posts")) {
     if (!dirEntry.isDirectory) continue;
@@ -98,7 +81,7 @@ async function readPosts(): Promise<Post[]> {
       const { data, content } = parseFrontMatter(fileContent);
 
       const slug = getSlugFromFilename(file.name);
-      const html = marked.parse(content) as string;
+      const html = marked.parse(content);
 
       posts.push({
         title: data.title || "Untitled",
@@ -118,11 +101,7 @@ async function readPosts(): Promise<Post[]> {
 }
 
 // HTML Templates
-function layout(
-  content: string,
-  title: string,
-  activeCategory?: string
-): string {
+function layout(content, title, activeCategory) {
   const categoriesNav = Object.entries(CATEGORIES)
     .map(
       ([key, cat]) => `
@@ -167,7 +146,7 @@ function layout(
 </html>`;
 }
 
-function postCard(post: Post): string {
+function postCard(post) {
   const category = post.categories[0];
   const categoryData = CATEGORIES[category];
 
@@ -186,7 +165,7 @@ function postCard(post: Post): string {
 </article>`;
 }
 
-function postPage(post: Post): string {
+function postPage(post) {
   const category = post.categories[0];
   const categoryData = CATEGORIES[category];
 
@@ -223,7 +202,7 @@ function postPage(post: Post): string {
   return layout(content, post.title);
 }
 
-function homePage(posts: Post[]): string {
+function homePage(posts) {
   const [featuredPost, ...recentPosts] = posts;
 
   const heroHtml = featuredPost
@@ -257,7 +236,7 @@ function homePage(posts: Post[]): string {
   return layout(content, "");
 }
 
-function categoryPage(category: Category, posts: Post[]): string {
+function categoryPage(category, posts) {
   const categoryPosts = posts.filter((p) =>
     p.categories.includes(category.slug)
   );
