@@ -1,5 +1,6 @@
 import { marked } from "marked";
 import { parse as parseYaml } from "yaml";
+import { createHighlighter } from "shiki";
 import { layout } from "./templates/layout.js";
 import { homePage } from "./templates/home-page.js";
 import { postPage } from "./templates/post-page.js";
@@ -107,6 +108,51 @@ async function readPosts() {
 // Build site
 async function build() {
   console.log("Building site...");
+
+  // Initialize Shiki highlighter with cyberpunk theme
+  console.log("Initializing Shiki...");
+  const highlighter = await createHighlighter({
+    themes: ["synthwave-84", "tokyo-night"],
+    langs: [
+      "javascript",
+      "typescript",
+      "bash",
+      "lua",
+      "vim",
+      "dockerfile",
+      "powershell",
+      "json",
+      "yaml",
+      "html",
+      "css",
+      "markdown",
+    ],
+  });
+
+  // Configure marked to use Shiki for syntax highlighting
+  marked.use({
+    async: false,
+    renderer: {
+      code(code, lang) {
+        if (!lang) {
+          return `<pre><code>${code}</code></pre>`;
+        }
+        try {
+          const html = highlighter.codeToHtml(code, {
+            lang: lang,
+            themes: {
+              light: "synthwave-84",
+              dark: "synthwave-84",
+            },
+          });
+          return html;
+        } catch (e) {
+          console.warn(`Failed to highlight ${lang}: ${e.message}`);
+          return `<pre><code class="language-${lang}">${code}</code></pre>`;
+        }
+      },
+    },
+  });
 
   // Clean and create dist directory
   try {
