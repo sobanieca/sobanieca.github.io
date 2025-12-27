@@ -98,10 +98,8 @@ export function layout(content, title, activeCategory, { siteTitle, siteAuthor, 
       localStorage.setItem('theme', newTheme);
     });
   </script>
-  <script>
-    <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-    <script>eruda.init();</script>
-  </script>
+  <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+  <script>eruda.init();</script>
 </body>
 </html>`;
 }

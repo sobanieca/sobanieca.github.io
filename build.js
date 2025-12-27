@@ -62,6 +62,22 @@ function formatDate(dateStr) {
   });
 }
 
+// Recursively copy directory
+async function copyDir(src, dest) {
+  await Deno.mkdir(dest, { recursive: true });
+
+  for await (const entry of Deno.readDir(src)) {
+    const srcPath = `${src}/${entry.name}`;
+    const destPath = `${dest}/${entry.name}`;
+
+    if (entry.isDirectory) {
+      await copyDir(srcPath, destPath);
+    } else {
+      await Deno.copyFile(srcPath, destPath);
+    }
+  }
+}
+
 // Read all posts
 async function readPosts() {
   const posts = [];
@@ -157,8 +173,6 @@ async function build() {
   await Deno.mkdir("dist", { recursive: true });
   await Deno.mkdir("dist/blog", { recursive: true });
   await Deno.mkdir("dist/category", { recursive: true });
-  await Deno.mkdir("dist/assets/css", { recursive: true });
-  await Deno.mkdir("dist/assets/images", { recursive: true });
 
   // Read all posts
   const posts = await readPosts();
@@ -194,27 +208,9 @@ async function build() {
   }
   console.log(`Generated ${Object.keys(CATEGORIES).length} category pages`);
 
-  // Copy CSS files
-  await Deno.copyFile("assets/css/main.css", "dist/assets/css/main.css");
-  await Deno.copyFile("assets/css/markdown.css", "dist/assets/css/markdown.css");
-  await Deno.copyFile("assets/css/shiki.css", "dist/assets/css/shiki.css");
-  console.log("Copied CSS files");
-
-  // Copy images
-  const imagesToCopy = [
-    "sidebar.png",
-    "avatar.jpg",
-    "placeholder.jpg"
-  ];
-
-  for (const image of imagesToCopy) {
-    try {
-      await Deno.copyFile(`assets/images/${image}`, `dist/assets/images/${image}`);
-    } catch (e) {
-      console.warn(`Failed to copy ${image}:`, e.message);
-    }
-  }
-  console.log("Copied images");
+  // Copy assets folder
+  await copyDir("assets", "dist/assets");
+  console.log("Copied assets");
 
   console.log("\n✓ Build complete! Output in dist/");
 }
