@@ -201,12 +201,20 @@ async function build() {
   console.log("Copied CSS files");
 
   // Copy images
-  try {
-    await Deno.copyFile("assets/images/sidebar.png", "dist/assets/images/sidebar.png");
-    console.log("Copied images");
-  } catch (e) {
-    console.warn("No images to copy or error copying images:", e.message);
+  const imagesToCopy = [
+    "sidebar.png",
+    "avatar.jpg",
+    "placeholder.jpg"
+  ];
+
+  for (const image of imagesToCopy) {
+    try {
+      await Deno.copyFile(`assets/images/${image}`, `dist/assets/images/${image}`);
+    } catch (e) {
+      console.warn(`Failed to copy ${image}:`, e.message);
+    }
   }
+  console.log("Copied images");
 
   console.log("\n✓ Build complete! Output in dist/");
 }

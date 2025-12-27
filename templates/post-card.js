@@ -3,16 +3,19 @@ export function postCard(post, { siteAuthor, categories, formatDate }) {
   const categoryData = categories[category];
 
   return `<article class="post-card">
-  <span class="category-tag">${categoryData?.name || category}</span>
-  <h2 class="post-title">
-    <a href="${post.url}">${post.title}</a>
-  </h2>
-  <div class="post-meta">
-    <span class="author">${siteAuthor}</span>
-    <span class="separator">•</span>
-    <time datetime="${post.date}">${formatDate(post.date)}</time>
+  <div class="post-card-image">
+    <img src="${post.image || '/assets/images/placeholder.jpg'}" alt="${post.title}" />
   </div>
-  <p class="post-excerpt">${post.excerpt}</p>
-  <a href="${post.url}" class="read-more">Read more</a>
+  <div class="post-card-content">
+    <div class="post-card-meta">
+      <span class="category-tag">${categoryData?.name || category}</span>
+      <span class="read-time">5 min read</span>
+    </div>
+    <h2 class="post-title">
+      <a href="${post.url}">${post.title}</a>
+    </h2>
+    <p class="post-excerpt">${post.excerpt}</p>
+    <a href="${post.url}" class="read-more">Read more →</a>
+  </div>
 </article>`;
 }
