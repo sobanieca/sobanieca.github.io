@@ -3,16 +3,11 @@ export function postPage(post, context) {
   const categoryData = context.categories[category];
 
   return `<article class="post-page">
-  <nav class="breadcrumb">
-    <a href="/">Home</a>
-    <span> / </span>
-    <a href="/category/${category}.html">${categoryData?.name || category}</a>
-    <span> / </span>
-    <span>${post.title}</span>
-  </nav>
+  <div class="post-top">
+    <a href="/category/${category}.html" class="post-category-tag">${categoryData?.name || category}</a>
+  </div>
 
   <header>
-    <span class="category-tag">${categoryData?.name || category}</span>
     <h1>${post.title}</h1>
     <div class="post-meta">
       <span>${context.siteAuthor}</span>
