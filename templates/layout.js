@@ -39,7 +39,9 @@ export function layout(content, title, activeCategory, { siteTitle, siteAuthor, 
       <div class="profile-avatar">
         <img src="/assets/images/avatar.jpg" alt="${siteAuthor}" />
       </div>
-      <h2 class="profile-name">${siteAuthor}</h2>
+      <a href="/" class="profile-name-link">
+        <h2 class="profile-name">${siteAuthor}</h2>
+      </a>
       <p class="profile-title">Software Developer</p>
     </div>
 

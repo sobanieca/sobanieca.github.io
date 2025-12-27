@@ -66,6 +66,15 @@ body {
   object-fit: cover;
 }
 
+.profile-name-link {
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.profile-name-link:hover {
+  opacity: 0.8;
+}
+
 .profile-name {
   color: white;
   font-size: 1.5rem;
@@ -219,17 +228,60 @@ nav a svg {
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 
-.article-card-image {
+.article-card-header {
   width: 100%;
   height: 200px;
+  position: relative;
   overflow: hidden;
-  background-color: #e5e7eb;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.article-card-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.article-card-title-bg {
+  font-size: 3.5rem;
+  font-weight: 900;
+  color: rgba(255, 255, 255, 0.15);
+  filter: blur(2px);
+  text-align: center;
+  padding: 2rem;
+  line-height: 1.2;
+  word-break: break-word;
+  animation: drift 75s ease-in-out infinite;
+}
+
+@keyframes drift {
+  0% {
+    transform: translate(-10px, -5px) rotate(-1deg);
+  }
+  25% {
+    transform: translate(8px, 5px) rotate(0.5deg);
+  }
+  50% {
+    transform: translate(12px, -3px) rotate(1deg);
+  }
+  75% {
+    transform: translate(-5px, 8px) rotate(-0.5deg);
+  }
+  100% {
+    transform: translate(-10px, -5px) rotate(-1deg);
+  }
+}
+
+.category-1 {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.category-2 {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.category-3 {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.category-4 {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
 }
 
 .article-card-content {
