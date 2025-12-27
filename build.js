@@ -15,12 +15,6 @@ const CATEGORIES = {
     description: "General development topics and thoughts",
     slug: "general",
   },
-  "build-remotely": {
-    name: "Build Remotely",
-    icon: "build-remotely",
-    description: "Remote development workflows and tools",
-    slug: "build-remotely",
-  },
   "build-anywhere": {
     name: "Build Anywhere",
     icon: "build-anywhere",
@@ -33,11 +27,11 @@ const CATEGORIES = {
     description: "Neovim tips, tricks, and configurations",
     slug: "neovim",
   },
-  tools: {
-    name: "Tools",
-    icon: "tools",
-    description: "Developer tools and productivity",
-    slug: "tools",
+  "build-on-the-go": {
+    name: "Build on the Go",
+    icon: "build-on-the-go",
+    description: "Mobile and on-the-go development workflows",
+    slug: "build-on-the-go",
   },
 };
 
@@ -164,6 +158,7 @@ async function build() {
   await Deno.mkdir("dist/blog", { recursive: true });
   await Deno.mkdir("dist/category", { recursive: true });
   await Deno.mkdir("dist/assets/css", { recursive: true });
+  await Deno.mkdir("dist/assets/images", { recursive: true });
 
   // Read all posts
   const posts = await readPosts();
@@ -199,9 +194,19 @@ async function build() {
   }
   console.log(`Generated ${Object.keys(CATEGORIES).length} category pages`);
 
-  // Copy CSS
+  // Copy CSS files
   await Deno.copyFile("assets/css/main.css", "dist/assets/css/main.css");
-  console.log("Copied CSS");
+  await Deno.copyFile("assets/css/markdown.css", "dist/assets/css/markdown.css");
+  await Deno.copyFile("assets/css/shiki.css", "dist/assets/css/shiki.css");
+  console.log("Copied CSS files");
+
+  // Copy images
+  try {
+    await Deno.copyFile("assets/images/sidebar.png", "dist/assets/images/sidebar.png");
+    console.log("Copied images");
+  } catch (e) {
+    console.warn("No images to copy or error copying images:", e.message);
+  }
 
   console.log("\n✓ Build complete! Output in dist/");
 }
