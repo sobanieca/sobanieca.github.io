@@ -73,13 +73,11 @@ export function layout(content, title, activeCategory, { siteTitle, siteAuthor, 
     const darkModeToggle = document.getElementById('darkModeToggle');
     const html = document.documentElement;
 
-    // Mobile menu
     toggle.addEventListener('click', () => {
       sidebar.classList.toggle('active');
       toggle.classList.toggle('active');
     });
 
-    // Close sidebar when clicking outside on mobile
     document.addEventListener('click', (e) => {
       if (window.innerWidth <= 768 && !sidebar.contains(e.target) && !toggle.contains(e.target)) {
         sidebar.classList.remove('active');
@@ -87,7 +85,6 @@ export function layout(content, title, activeCategory, { siteTitle, siteAuthor, 
       }
     });
 
-    // Dark mode toggle
     const currentTheme = localStorage.getItem('theme') || 'dark';
     html.setAttribute('data-theme', currentTheme);
 

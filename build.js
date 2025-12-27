@@ -35,7 +35,6 @@ const CATEGORIES = {
   },
 };
 
-// Parse front matter from markdown
 function parseFrontMatter(content) {
   const match = content.match(/^---\n([\s\S]+?)\n---\n([\s\S]*)$/);
   if (!match) return { data: {}, content };
@@ -47,12 +46,10 @@ function parseFrontMatter(content) {
   };
 }
 
-// Generate slug from filename
 function getSlugFromFilename(filename) {
   return filename.replace(/^\d{4}-\d{2}-\d{2}-/, "").replace(/\.md$/, "");
 }
 
-// Format date
 function formatDate(dateStr) {
   const date = new Date(dateStr);
   return date.toLocaleDateString("en-US", {
@@ -62,7 +59,6 @@ function formatDate(dateStr) {
   });
 }
 
-// Recursively copy directory
 async function copyDir(src, dest) {
   await Deno.mkdir(dest, { recursive: true });
 
@@ -78,7 +74,6 @@ async function copyDir(src, dest) {
   }
 }
 
-// Read all posts
 async function readPosts() {
   const posts = [];
 
@@ -115,11 +110,9 @@ async function readPosts() {
   );
 }
 
-// Build site
 async function build() {
   console.log("Building site...");
 
-  // Initialize Shiki highlighter with cyberpunk theme
   console.log("Initializing Shiki...");
   const highlighter = await createHighlighter({
     themes: ["synthwave-84", "tokyo-night"],
@@ -139,7 +132,6 @@ async function build() {
     ],
   });
 
-  // Configure marked to use Shiki for syntax highlighting
   marked.use({
     async: false,
     renderer: {
@@ -164,21 +156,17 @@ async function build() {
     },
   });
 
-  // Clean and create dist directory
   try {
     await Deno.remove("dist", { recursive: true });
   } catch {
-    // Directory doesn't exist, ignore
   }
   await Deno.mkdir("dist", { recursive: true });
   await Deno.mkdir("dist/blog", { recursive: true });
   await Deno.mkdir("dist/category", { recursive: true });
 
-  // Read all posts
   const posts = await readPosts();
   console.log(`Found ${posts.length} posts`);
 
-  // Template context
   const context = {
     siteTitle: SITE_TITLE,
     siteAuthor: SITE_AUTHOR,
@@ -186,13 +174,11 @@ async function build() {
     formatDate,
   };
 
-  // Generate index page
   const homeContent = homePage(posts, context);
   const homeHtml = layout(homeContent, "", undefined, context);
   await Deno.writeTextFile("dist/index.html", homeHtml);
   console.log("Generated index.html");
 
-  // Generate individual post pages
   for (const post of posts) {
     const postContent = postPage(post, context);
     const postHtml = layout(postContent, post.title, undefined, context);
@@ -200,7 +186,6 @@ async function build() {
   }
   console.log(`Generated ${posts.length} post pages`);
 
-  // Generate category pages
   for (const category of Object.values(CATEGORIES)) {
     const catContent = categoryPage(category, posts, context);
     const catHtml = layout(catContent, category.name, category.slug, context);
@@ -208,7 +193,6 @@ async function build() {
   }
   console.log(`Generated ${Object.keys(CATEGORIES).length} category pages`);
 
-  // Copy assets folder
   await copyDir("assets", "dist/assets");
   console.log("Copied assets");
 
