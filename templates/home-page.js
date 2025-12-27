@@ -1,15 +1,15 @@
-import { postCard } from "./post-card.js";
+import { articleCard } from "./article-card.js";
 
-export function homePage(posts, context) {
-  const recentPosts = posts.slice(0, 6);
+export function homePage(articles, context) {
+  const recentArticles = articles.slice(0, 6);
 
   return `<div class="home-page">
   <header class="page-header">
-    <h1>Latest Posts</h1>
+    <h1>Latest Articles</h1>
     <p>Exploring software development, tools, and workflows</p>
   </header>
   <div class="card-grid">
-    ${recentPosts.map((post) => postCard(post, context)).join("")}
+    ${recentArticles.map((article) => articleCard(article, context)).join("")}
   </div>
 </div>`;
 }

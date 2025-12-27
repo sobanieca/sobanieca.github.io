@@ -1,16 +1,16 @@
-import { postCard } from "./post-card.js";
+import { articleCard } from "./article-card.js";
 
-export function categoryPage(category, posts, context) {
-  const categoryPosts = posts.filter((p) =>
-    p.categories.includes(category.slug)
+export function categoryPage(category, articles, context) {
+  const categoryArticles = articles.filter((a) =>
+    a.categories.includes(category.slug)
   );
 
-  const postsHtml = categoryPosts.length
+  const articlesHtml = categoryArticles.length
     ? `<div class="card-grid">
-      ${categoryPosts.map((post) => postCard(post, context)).join("")}
+      ${categoryArticles.map((article) => articleCard(article, context)).join("")}
     </div>`
     : `<div class="empty-state">
-      <p>No posts in this category yet.</p>
+      <p>No articles in this category yet.</p>
       <p>Check back soon for new content!</p>
     </div>`;
 
@@ -19,8 +19,8 @@ export function categoryPage(category, posts, context) {
     <h1>${category.name}</h1>
     <p class="category-description">${category.description}</p>
   </header>
-  <section class="posts-grid">
-    ${postsHtml}
+  <section class="articles-grid">
+    ${articlesHtml}
   </section>
 </div>`;
 }

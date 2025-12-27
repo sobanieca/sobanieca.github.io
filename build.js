@@ -3,7 +3,7 @@ import { parse as parseYaml } from "yaml";
 import { createHighlighter } from "shiki";
 import { layout } from "./templates/layout.js";
 import { homePage } from "./templates/home-page.js";
-import { postPage } from "./templates/post-page.js";
+import { articlePage } from "./templates/article-page.js";
 import { categoryPage } from "./templates/category-page.js";
 
 const SITE_TITLE = "sobanieca";
@@ -74,14 +74,14 @@ async function copyDir(src, dest) {
   }
 }
 
-async function readPosts() {
-  const posts = [];
+async function readArticles() {
+  const articles = [];
 
-  for await (const dirEntry of Deno.readDir("_posts")) {
+  for await (const dirEntry of Deno.readDir("articles")) {
     if (!dirEntry.isDirectory) continue;
 
     const category = dirEntry.name;
-    const categoryPath = `_posts/${category}`;
+    const categoryPath = `articles/${category}`;
 
     for await (const file of Deno.readDir(categoryPath)) {
       if (!file.name.endsWith(".md")) continue;
@@ -93,19 +93,19 @@ async function readPosts() {
       const slug = getSlugFromFilename(file.name);
       const html = marked.parse(content);
 
-      posts.push({
+      articles.push({
         title: data.title || "Untitled",
         date: data.date,
         categories: data.categories || [category],
         excerpt: data.excerpt || "",
         content: html,
         slug,
-        url: `/blog/${slug}.html`,
+        url: `/articles/${slug}.html`,
       });
     }
   }
 
-  return posts.sort((a, b) =>
+  return articles.sort((a, b) =>
     new Date(b.date).getTime() - new Date(a.date).getTime()
   );
 }
@@ -161,11 +161,11 @@ async function build() {
   } catch {
   }
   await Deno.mkdir("dist", { recursive: true });
-  await Deno.mkdir("dist/blog", { recursive: true });
+  await Deno.mkdir("dist/articles", { recursive: true });
   await Deno.mkdir("dist/category", { recursive: true });
 
-  const posts = await readPosts();
-  console.log(`Found ${posts.length} posts`);
+  const articles = await readArticles();
+  console.log(`Found ${articles.length} articles`);
 
   const context = {
     siteTitle: SITE_TITLE,
@@ -174,20 +174,20 @@ async function build() {
     formatDate,
   };
 
-  const homeContent = homePage(posts, context);
+  const homeContent = homePage(articles, context);
   const homeHtml = layout(homeContent, "", undefined, context);
   await Deno.writeTextFile("dist/index.html", homeHtml);
   console.log("Generated index.html");
 
-  for (const post of posts) {
-    const postContent = postPage(post, context);
-    const postHtml = layout(postContent, post.title, undefined, context);
-    await Deno.writeTextFile(`dist/blog/${post.slug}.html`, postHtml);
+  for (const article of articles) {
+    const articleContent = articlePage(article, context);
+    const articleHtml = layout(articleContent, article.title, undefined, context);
+    await Deno.writeTextFile(`dist/articles/${article.slug}.html`, articleHtml);
   }
-  console.log(`Generated ${posts.length} post pages`);
+  console.log(`Generated ${articles.length} article pages`);
 
   for (const category of Object.values(CATEGORIES)) {
-    const catContent = categoryPage(category, posts, context);
+    const catContent = categoryPage(category, articles, context);
     const catHtml = layout(catContent, category.name, category.slug, context);
     await Deno.writeTextFile(`dist/category/${category.slug}.html`, catHtml);
   }
