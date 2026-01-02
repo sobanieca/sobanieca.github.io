@@ -324,6 +324,12 @@ nav a svg {
   border-radius: 1rem;
   font-size: 0.8125rem;
   font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.category-tag:hover {
+  background-color: rgba(217, 70, 239, 0.2);
 }
 
 .read-time {

@@ -14,13 +14,15 @@ export function articleCard(article, { siteAuthor, categories, formatDate }) {
     ? `background-image: url('${article.image.dest}'); background-size: cover; background-position: center;`
     : '';
 
+  const titleBg = article.image ? '' : `<span class="article-card-title-bg">${article.title}</span>`;
+
   return `<article class="article-card">
   <div class="article-card-header category-${categoryNumber}" style="${headerStyle}">
-    <span class="article-card-title-bg">${article.title}</span>
+    ${titleBg}
   </div>
   <div class="article-card-content">
     <div class="article-card-meta">
-      <span class="category-tag">${categoryData?.name || category}</span>
+      <a href="/category/${categoryData?.slug || category}.html" class="category-tag">${categoryData?.name || category}</a>
       <span class="read-time">5 min read</span>
     </div>
     <h2 class="article-title">
