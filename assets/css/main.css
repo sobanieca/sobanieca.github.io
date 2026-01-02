@@ -473,6 +473,20 @@ nav a svg {
   line-height: 1.75;
 }
 
+.article-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.article-footer .btn {
+  max-width: 45%;
+}
+
 footer {
   margin-top: 3rem;
   padding-top: 2rem;

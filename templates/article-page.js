@@ -1,11 +1,22 @@
-export function articlePage(article, context) {
+export function articlePage(article, context, navigation = {}) {
   const category = article.categorySlug;
   const categoryData = context.categories[category];
+  const { olderArticle, newerArticle } = navigation;
 
   const heroImage = article.image
     ? `<div class="article-hero">
         <img src="${article.image.dest}" alt="${article.title}" />
       </div>`
+    : '';
+
+  // Older link: points to older article, or category page if this is the oldest
+  const olderLink = olderArticle
+    ? `<a href="${olderArticle.url}" class="btn btn-secondary">← ${olderArticle.title}</a>`
+    : `<a href="/category/${category}.html" class="btn btn-secondary">← Back to ${categoryData?.name || category}</a>`;
+
+  // Newer link: only show if there's a newer article
+  const newerLink = newerArticle
+    ? `<a href="${newerArticle.url}" class="btn btn-secondary">${newerArticle.title} →</a>`
     : '';
 
   return `<article class="article-page">
@@ -29,9 +40,8 @@ export function articlePage(article, context) {
   </div>
 
   <div class="article-footer">
-    <a href="/category/${category}.html" class="btn btn-secondary">
-      ← Back to ${categoryData?.name || category}
-    </a>
+    ${olderLink}
+    ${newerLink}
   </div>
 </article>`;
 }

@@ -238,8 +238,30 @@ async function build() {
   await Deno.writeTextFile("dist/about-me.html", aboutHtml);
   console.log("Generated about-me.html");
 
+  // Group articles by category for prev/next navigation
+  const articlesByCategory = {};
   for (const article of articles) {
-    const articleContent = articlePage(article, context);
+    if (!articlesByCategory[article.categorySlug]) {
+      articlesByCategory[article.categorySlug] = [];
+    }
+    articlesByCategory[article.categorySlug].push(article);
+  }
+
+  for (const article of articles) {
+    const categoryArticles = articlesByCategory[article.categorySlug];
+    const currentIndex = categoryArticles.findIndex(a => a.slug === article.slug);
+
+    // Articles are sorted newest first, so:
+    // - "older" = next in array (higher index)
+    // - "newer" = previous in array (lower index)
+    const olderArticle = currentIndex < categoryArticles.length - 1
+      ? categoryArticles[currentIndex + 1]
+      : null;
+    const newerArticle = currentIndex > 0
+      ? categoryArticles[currentIndex - 1]
+      : null;
+
+    const articleContent = articlePage(article, context, { olderArticle, newerArticle });
     const articleHtml = layout(articleContent, article.title, undefined, context);
     await Deno.writeTextFile(`dist/articles/${article.slug}.html`, articleHtml);
   }
