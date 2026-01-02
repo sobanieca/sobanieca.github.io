@@ -13,31 +13,31 @@ const CATEGORIES = {
   general: {
     name: "General",
     icon: "general",
-    description: "General development topics and thoughts",
+    description: "Articles about general development topics and thoughts",
     slug: "general",
   },
   "build-anywhere": {
     name: "Build Anywhere",
     icon: "build-anywhere",
-    description: "Cross-platform development strategies",
+    description: "Articles about building on remote servers",
     slug: "build-anywhere",
   },
   "build-on-the-go": {
     name: "Build on the Go",
     icon: "build-on-the-go",
-    description: "Mobile and on-the-go development workflows",
+    description: "Articles about building on the go - directly on mobile phone!",
     slug: "build-on-the-go",
   },
   "terminal-dev": {
-    name: "Terminal Dev",
+    name: "Build in terminal",
     icon: "terminal-dev",
-    description: "Terminal-based development workflows, IDEs, and editors",
-    slug: "terminal-dev",
+    description: "Articles about tools for building in terminal - Neovim, tmux",
+    slug: "build-in-terminal",
   },
   tools: {
     name: "Tools",
     icon: "tools",
-    description: "Development tools, utilities, and productivity enhancers",
+    description: "Articles about various development tools",
     slug: "tools",
   },
 };
