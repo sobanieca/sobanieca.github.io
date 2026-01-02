@@ -28,9 +28,9 @@ const CATEGORIES = {
     description: "Articles about building on the go - directly on mobile phone!",
     slug: "build-on-the-go",
   },
-  "terminal-dev": {
+  "build-in-terminal": {
     name: "Build in terminal",
-    icon: "terminal-dev",
+    icon: "build-in-terminal",
     description: "Articles about tools for building in terminal - Neovim, tmux",
     slug: "build-in-terminal",
   },
