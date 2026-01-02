@@ -5,6 +5,7 @@ import { layout } from "./templates/layout.js";
 import { homePage } from "./templates/home-page.js";
 import { articlePage } from "./templates/article-page.js";
 import { categoryPage } from "./templates/category-page.js";
+import { aboutPage } from "./templates/about-page.js";
 
 const SITE_TITLE = "Adam Sobaniec - Software Developer";
 const SITE_AUTHOR = "Adam Sobaniec";
@@ -181,9 +182,18 @@ async function build() {
   };
 
   const homeContent = homePage(articles, context);
-  const homeHtml = layout(homeContent, "", undefined, context);
+  const homeHtml = layout(homeContent, "", null, context);
   await Deno.writeTextFile("dist/index.html", homeHtml);
   console.log("Generated index.html");
+
+  // Generate about page
+  const aboutMd = await Deno.readTextFile("about.md");
+  const { data: aboutData, content: aboutMarkdown } = parseFrontMatter(aboutMd);
+  const aboutHtmlContent = marked.parse(aboutMarkdown);
+  const aboutContent = aboutPage(aboutHtmlContent, context);
+  const aboutHtml = layout(aboutContent, aboutData.title || "About", "about", context);
+  await Deno.writeTextFile("dist/about-me.html", aboutHtml);
+  console.log("Generated about-me.html");
 
   for (const article of articles) {
     const articleContent = articlePage(article, context);
