@@ -76,7 +76,7 @@ export function layout(content, title, activeCategory, { siteTitle, siteAuthor, 
   <main class="main-content">
     ${content}
     <footer>
-      <p>&copy; ${new Date().getFullYear()} ${siteAuthor}. Built with Deno.</p>
+      <p>&copy; ${new Date().getFullYear()} ${siteAuthor}. Built with Deno and Claude.</p>
     </footer>
   </main>
 
