@@ -16,6 +16,10 @@ export function articleCard(article, { siteAuthor, categories, formatDate }) {
 
   const titleBg = article.image ? '' : `<span class="article-card-title-bg">${article.title}</span>`;
 
+  // Format date as dd.mm.yyyy
+  const [year, month, day] = article.date.split('-');
+  const formattedDate = `${day}.${month}.${year}`;
+
   return `<article class="article-card">
   <div class="article-card-header category-${categoryNumber}" style="${headerStyle}">
     ${titleBg}
@@ -23,7 +27,7 @@ export function articleCard(article, { siteAuthor, categories, formatDate }) {
   <div class="article-card-content">
     <div class="article-card-meta">
       <a href="/category/${categoryData?.slug || category}.html" class="category-tag">${categoryData?.name || category}</a>
-      <span class="read-time">5 min read</span>
+      <span class="article-date">${formattedDate}</span>
     </div>
     <h2 class="article-title">
       <a href="${article.url}">${article.title}</a>

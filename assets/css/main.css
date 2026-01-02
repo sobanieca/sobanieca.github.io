@@ -332,7 +332,7 @@ nav a svg {
   background-color: rgba(217, 70, 239, 0.2);
 }
 
-.read-time {
+.article-date {
   color: var(--main-text-secondary);
   font-size: 0.875rem;
 }
