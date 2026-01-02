@@ -56,7 +56,7 @@ excerpt: Short description
 
 Categories: `general`, `build-anywhere`, `build-on-the-go`, `build-in-terminal`, `tools`
 
-Article images are auto-detected: if an image exists with the same base name as the article (e.g., `2025-01-15-my-article.png` for `2025-01-15-my-article.md`), it's used automatically.
+Inline images: place images in `articles/{category}/images/` folder and reference as `images/filename.jpg` in markdown.
 
 ### Deployment
 

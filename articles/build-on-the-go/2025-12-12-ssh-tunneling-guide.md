@@ -18,6 +18,8 @@ ssh -L 8080:localhost:80 user@remote-server
 
 Nam libero tempore, cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus.
 
+![Image sample](images/ssh-tunneling.jpg)
+
 ### Local Port Forwarding
 
 Omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet.

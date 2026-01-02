@@ -245,6 +245,19 @@ async function build() {
   }
   console.log(`Generated ${articles.length} article pages`);
 
+  // Copy images folders from each category to dist/articles/images
+  await Deno.mkdir("dist/articles/images", { recursive: true });
+  for (const category of Object.keys(CATEGORIES)) {
+    const imagesPath = `articles/${category}/images`;
+    try {
+      await Deno.stat(imagesPath);
+      await copyDir(imagesPath, "dist/articles/images");
+    } catch {
+      // No images folder for this category
+    }
+  }
+  console.log("Copied category images");
+
   for (const category of Object.values(CATEGORIES)) {
     const catContent = categoryPage(category, articles, context);
     const catHtml = layout(catContent, category.name, category.slug, context);

@@ -415,6 +415,10 @@ nav a svg {
   opacity: 0.9;
 }
 
+.category-page {
+  max-width: 1200px;
+}
+
 .category-header {
   margin-bottom: 3rem;
 }
