@@ -1,8 +1,6 @@
 ---
-layout: post
 title: "My Remote Development Setup for Maximum Productivity"
-date: 2025-12-18 09:00:00 +0000
-categories: [build-remotely]
+categorySlug: build-on-the-go
 excerpt: "Discover the tools and workflows that make remote development efficient and enjoyable."
 ---
 

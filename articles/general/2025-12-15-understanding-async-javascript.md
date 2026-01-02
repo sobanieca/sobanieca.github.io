@@ -1,8 +1,6 @@
 ---
-layout: post
 title: "Understanding Async JavaScript: Promises and Async/Await"
-date: 2025-12-15 14:30:00 +0000
-categories: [general]
+categorySlug: general
 excerpt: "Master asynchronous programming in JavaScript with this deep dive into Promises and async/await patterns."
 ---
 

@@ -1,8 +1,6 @@
 ---
-layout: post
 title: "Boost Your Terminal Productivity with These Tools"
-date: 2025-12-14 09:45:00 +0000
-categories: [tools]
+categorySlug: tools
 excerpt: "Transform your terminal into a productivity powerhouse with these essential tools and configurations."
 ---
 

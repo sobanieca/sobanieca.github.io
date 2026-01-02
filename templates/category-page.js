@@ -2,7 +2,7 @@ import { articleCard } from "./article-card.js";
 
 export function categoryPage(category, articles, context) {
   const categoryArticles = articles
-    .filter((a) => a.categories.includes(category.slug))
+    .filter((a) => a.categorySlug === category.slug)
     .reverse();
 
   const articlesHtml = categoryArticles.length

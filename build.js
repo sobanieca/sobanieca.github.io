@@ -57,6 +57,11 @@ function getSlugFromFilename(filename) {
   return filename.replace(/^\d{4}-\d{2}-\d{2}-/, "").replace(/\.md$/, "");
 }
 
+function getDateFromFilename(filename) {
+  const match = filename.match(/^(\d{4}-\d{2}-\d{2})/);
+  return match ? match[1] : null;
+}
+
 function formatDate(dateStr) {
   const date = new Date(dateStr);
   return date.toLocaleDateString("en-US", {
@@ -127,8 +132,8 @@ async function readArticles() {
 
       articles.push({
         title: data.title || "Untitled",
-        date: data.date,
-        categories: data.categories || [category],
+        date: getDateFromFilename(file.name),
+        categorySlug: data.categorySlug,
         excerpt: data.excerpt || "",
         content: html,
         slug,

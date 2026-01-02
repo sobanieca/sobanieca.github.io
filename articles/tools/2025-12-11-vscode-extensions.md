@@ -1,8 +1,6 @@
 ---
-layout: post
 title: "10 Essential VS Code Extensions for Web Developers"
-date: 2025-12-11 14:20:00 +0000
-categories: [tools]
+categorySlug: tools
 excerpt: "Supercharge your VS Code setup with these must-have extensions for web development."
 ---
 

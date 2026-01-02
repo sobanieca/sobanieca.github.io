@@ -1,8 +1,6 @@
 ---
-layout: post
 title: "Essential Developer Tools for 2025"
-date: 2025-01-02 10:00:00 +0000
-categories: [tools]
+categorySlug: tools
 excerpt: "A curated list of must-have tools that every developer should have in their toolkit to boost productivity and efficiency."
 ---
 

@@ -1,5 +1,5 @@
 export function articleCard(article, { siteAuthor, categories, formatDate }) {
-  const category = article.categories[0];
+  const category = article.categorySlug;
   const categoryData = categories[category];
 
   const categoryColors = {

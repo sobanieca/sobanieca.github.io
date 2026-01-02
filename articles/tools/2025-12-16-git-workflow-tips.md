@@ -1,8 +1,6 @@
 ---
-layout: post
 title: "Advanced Git Workflow Tips for Teams"
-date: 2025-12-16 12:00:00 +0000
-categories: [tools]
+categorySlug: tools
 excerpt: "Improve your team's Git workflow with these advanced tips and best practices."
 ---
 

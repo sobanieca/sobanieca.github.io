@@ -1,5 +1,5 @@
 export function articlePage(article, context) {
-  const category = article.categories[0];
+  const category = article.categorySlug;
   const categoryData = context.categories[category];
 
   const heroImage = article.image

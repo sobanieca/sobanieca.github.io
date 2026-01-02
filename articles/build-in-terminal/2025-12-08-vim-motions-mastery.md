@@ -1,8 +1,6 @@
 ---
-layout: post
 title: "Mastering Vim Motions: From Beginner to Expert"
-date: 2025-12-08 15:00:00 +0000
-categories: [neovim]
+categorySlug: build-in-terminal
 excerpt: "Level up your text editing speed by mastering Vim motions and becoming keyboard-first."
 ---
 
