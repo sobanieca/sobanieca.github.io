@@ -217,11 +217,14 @@ async function build() {
     console.log(`Copied ${articlesWithImages} article images`);
   }
 
+  const isLocal = Deno.env.get("LOCAL") === "1";
+
   const context = {
     siteTitle: SITE_TITLE,
     siteAuthor: SITE_AUTHOR,
     categories: CATEGORIES,
     formatDate,
+    isLocal,
   };
 
   const homeContent = homePage(articles, context);

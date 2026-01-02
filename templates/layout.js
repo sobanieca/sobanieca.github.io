@@ -1,4 +1,4 @@
-export function layout(content, title, activeCategory, { siteTitle, siteAuthor, categories }) {
+export function layout(content, title, activeCategory, { siteTitle, siteAuthor, categories, isLocal }) {
   const categoryIcons = {
     general: '<svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"/></svg>',
     'build-anywhere': '<svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor"><path d="M5.5 16a3.5 3.5 0 01-.369-6.98 4 4 0 117.753-1.977A4.5 4.5 0 1113.5 16h-8z"/></svg>',
@@ -108,8 +108,8 @@ export function layout(content, title, activeCategory, { siteTitle, siteAuthor, 
       localStorage.setItem('theme', newTheme);
     });
   </script>
-  <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
-  <script>eruda.init();</script>
+${isLocal ? `  <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
+  <script>eruda.init();</script>` : ''}
 </body>
 </html>`;
 }
