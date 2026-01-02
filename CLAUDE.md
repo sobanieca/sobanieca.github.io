@@ -43,20 +43,25 @@ Dark/light mode via CSS variables with `[data-theme="dark"]` selector. Toggle pe
 
 ### Content Structure
 
-Article filenames must follow the pattern `YYYY-MM-DD-slug.md` (date is extracted from filename).
-
-YAML frontmatter:
-```yaml
----
-title: Article Title
-categorySlug: category-name
-excerpt: Short description
----
+Directory structure:
+```
+articles/{category-slug}/
+  YYYY-MM-DD-article-slug.md
+  YYYY-MM-DD-article-slug.jpg  # optional hero image (matches article filename)
+  images/                       # inline images referenced in markdown
 ```
 
 Categories: `general`, `build-anywhere`, `build-on-the-go`, `build-in-terminal`, `tools`
 
-Inline images: place images in `articles/{category}/images/` folder and reference as `images/filename.jpg` in markdown.
+YAML frontmatter (only title and excerpt):
+```yaml
+---
+title: Article Title
+excerpt: Short description
+---
+```
+
+Inline images: reference as `images/filename.jpg` in markdown.
 
 ### Deployment
 

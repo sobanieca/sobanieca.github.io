@@ -1,6 +1,5 @@
 ---
 title: "Understanding Async JavaScript: Promises and Async/Await"
-categorySlug: general
 excerpt: "Master asynchronous programming in JavaScript with this deep dive into Promises and async/await patterns."
 ---
 

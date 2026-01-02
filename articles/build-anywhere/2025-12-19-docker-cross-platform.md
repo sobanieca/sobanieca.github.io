@@ -1,6 +1,5 @@
 ---
 title: "Building Cross-Platform Applications with Docker"
-categorySlug: build-anywhere
 excerpt: "How to use Docker to create applications that run seamlessly across different operating systems."
 ---
 

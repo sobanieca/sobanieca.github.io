@@ -1,6 +1,5 @@
 ---
 title: "My Remote Development Setup for Maximum Productivity"
-categorySlug: build-on-the-go
 excerpt: "Discover the tools and workflows that make remote development efficient and enjoyable."
 ---
 

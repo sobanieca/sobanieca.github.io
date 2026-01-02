@@ -1,6 +1,5 @@
 ---
 title: "Essential Developer Tools for 2025"
-categorySlug: tools
 excerpt: "A curated list of must-have tools that every developer should have in their toolkit to boost productivity and efficiency."
 ---
 

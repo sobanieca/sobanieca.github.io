@@ -1,6 +1,5 @@
 ---
 title: "WSL2: The Ultimate Windows Development Environment"
-categorySlug: build-anywhere
 excerpt: "Transform your Windows machine into a powerful Linux development environment with WSL2."
 ---
 

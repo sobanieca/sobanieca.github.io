@@ -133,7 +133,7 @@ async function readArticles() {
       articles.push({
         title: data.title || "Untitled",
         date: getDateFromFilename(file.name),
-        categorySlug: data.categorySlug,
+        categorySlug: category,
         excerpt: data.excerpt || "",
         content: html,
         slug,

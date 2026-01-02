@@ -1,6 +1,5 @@
 ---
 title: "Getting Started with Web Development in 2025"
-categorySlug: general
 excerpt: "A comprehensive guide for beginners who want to start their journey in web development this year."
 ---
 

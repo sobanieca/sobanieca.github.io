@@ -1,6 +1,5 @@
 ---
 title: "Boost Your Terminal Productivity with These Tools"
-categorySlug: tools
 excerpt: "Transform your terminal into a productivity powerhouse with these essential tools and configurations."
 ---
 

@@ -1,6 +1,5 @@
 ---
 title: "Advanced Git Workflow Tips for Teams"
-categorySlug: tools
 excerpt: "Improve your team's Git workflow with these advanced tips and best practices."
 ---
 

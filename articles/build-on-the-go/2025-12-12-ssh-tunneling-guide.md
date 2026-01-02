@@ -1,6 +1,5 @@
 ---
 title: "SSH Tunneling: A Complete Guide for Remote Developers"
-categorySlug: build-on-the-go
 excerpt: "Learn how to use SSH tunneling to securely access remote services and databases."
 ---
 

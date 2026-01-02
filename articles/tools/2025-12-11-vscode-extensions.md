@@ -1,6 +1,5 @@
 ---
 title: "10 Essential VS Code Extensions for Web Developers"
-categorySlug: tools
 excerpt: "Supercharge your VS Code setup with these must-have extensions for web development."
 ---
 

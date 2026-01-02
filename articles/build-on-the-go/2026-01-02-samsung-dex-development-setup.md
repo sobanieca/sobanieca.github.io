@@ -1,6 +1,5 @@
 ---
 title: "Samsung Dex as a Mobile Development Workstation"
-categorySlug: build-on-the-go
 excerpt: "Turn your Samsung phone into a portable development environment using Samsung Dex and Termux."
 ---
 

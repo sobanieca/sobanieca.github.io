@@ -1,6 +1,5 @@
 ---
 title: "Mastering Vim Motions: From Beginner to Expert"
-categorySlug: build-in-terminal
 excerpt: "Level up your text editing speed by mastering Vim motions and becoming keyboard-first."
 ---
 
