@@ -81,6 +81,20 @@ async function copyDir(src, dest) {
   }
 }
 
+async function findArticleImage(categoryPath, baseName) {
+  const imageExtensions = [".jpg", ".jpeg", ".png", ".webp", ".gif"];
+  for (const ext of imageExtensions) {
+    const imagePath = `${categoryPath}/${baseName}${ext}`;
+    try {
+      await Deno.stat(imagePath);
+      return { path: imagePath, ext };
+    } catch {
+      // File doesn't exist, try next extension
+    }
+  }
+  return null;
+}
+
 async function readArticles() {
   const articles = [];
 
@@ -98,7 +112,18 @@ async function readArticles() {
       const { data, content } = parseFrontMatter(fileContent);
 
       const slug = getSlugFromFilename(file.name);
+      const baseName = file.name.replace(/\.md$/, "");
       const html = marked.parse(content);
+
+      // Check for article image
+      const imageInfo = await findArticleImage(categoryPath, baseName);
+      let image = null;
+      if (imageInfo) {
+        image = {
+          src: imageInfo.path,
+          dest: `/assets/images/articles/${slug}${imageInfo.ext}`,
+        };
+      }
 
       articles.push({
         title: data.title || "Untitled",
@@ -108,6 +133,7 @@ async function readArticles() {
         content: html,
         slug,
         url: `/articles/${slug}.html`,
+        image,
       });
     }
   }
@@ -173,6 +199,18 @@ async function build() {
 
   const articles = await readArticles();
   console.log(`Found ${articles.length} articles`);
+
+  // Copy article images
+  await Deno.mkdir("dist/assets/images/articles", { recursive: true });
+  for (const article of articles) {
+    if (article.image) {
+      await Deno.copyFile(article.image.src, `dist${article.image.dest}`);
+    }
+  }
+  const articlesWithImages = articles.filter((a) => a.image).length;
+  if (articlesWithImages > 0) {
+    console.log(`Copied ${articlesWithImages} article images`);
+  }
 
   const context = {
     siteTitle: SITE_TITLE,

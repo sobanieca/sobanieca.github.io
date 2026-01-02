@@ -10,8 +10,12 @@ export function articleCard(article, { siteAuthor, categories, formatDate }) {
   };
   const categoryNumber = categoryColors[category] || 1;
 
+  const headerStyle = article.image
+    ? `background-image: url('${article.image.dest}'); background-size: cover; background-position: center;`
+    : '';
+
   return `<article class="article-card">
-  <div class="article-card-header category-${categoryNumber}">
+  <div class="article-card-header category-${categoryNumber}" style="${headerStyle}">
     <span class="article-card-title-bg">${article.title}</span>
   </div>
   <div class="article-card-content">
