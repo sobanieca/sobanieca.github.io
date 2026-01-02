@@ -2,6 +2,12 @@ export function articlePage(article, context) {
   const category = article.categories[0];
   const categoryData = context.categories[category];
 
+  const heroImage = article.image
+    ? `<div class="article-hero">
+        <img src="${article.image.dest}" alt="${article.title}" />
+      </div>`
+    : '';
+
   return `<article class="article-page">
   <div class="article-top">
     <a href="/category/${category}.html" class="article-category-tag">${categoryData?.name || category}</a>
@@ -15,6 +21,8 @@ export function articlePage(article, context) {
       <time datetime="${article.date}">${context.formatDate(article.date)}</time>
     </div>
   </header>
+
+  ${heroImage}
 
   <div class="article-content">
     ${article.content}

@@ -431,6 +431,25 @@ nav a svg {
   background-color: rgba(217, 70, 239, 0.2);
 }
 
+.article-page {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.article-hero {
+  max-width: 512px;
+  height: 280px;
+  margin: 0 auto 2rem;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+.article-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .article-content {
   font-size: 1.125rem;
   line-height: 1.75;
