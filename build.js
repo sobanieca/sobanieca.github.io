@@ -21,17 +21,23 @@ const CATEGORIES = {
     description: "Cross-platform development strategies",
     slug: "build-anywhere",
   },
-  neovim: {
-    name: "Neovim",
-    icon: "neovim",
-    description: "Neovim tips, tricks, and configurations",
-    slug: "neovim",
-  },
   "build-on-the-go": {
     name: "Build on the Go",
     icon: "build-on-the-go",
     description: "Mobile and on-the-go development workflows",
     slug: "build-on-the-go",
+  },
+  "terminal-dev": {
+    name: "Terminal Dev",
+    icon: "terminal-dev",
+    description: "Terminal-based development workflows, IDEs, and editors",
+    slug: "terminal-dev",
+  },
+  tools: {
+    name: "Tools",
+    icon: "tools",
+    description: "Development tools, utilities, and productivity enhancers",
+    slug: "tools",
   },
 };
 
