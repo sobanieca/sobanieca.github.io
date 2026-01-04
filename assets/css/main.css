@@ -487,6 +487,22 @@ nav a svg {
   max-width: 45%;
 }
 
+.article-comments {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.article-comments h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--main-text);
+}
+
+.giscus {
+  margin-top: 1rem;
+}
+
 footer {
   margin-top: 3rem;
   padding-top: 2rem;
@@ -591,11 +607,11 @@ footer {
 }
 
 .about-page {
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 1200px;
 }
 
 .about-content {
+  max-width: 800px;
   font-size: 1.125rem;
   line-height: 1.75;
   color: var(--main-text);

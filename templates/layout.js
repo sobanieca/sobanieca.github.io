@@ -101,11 +101,22 @@ export function layout(content, title, activeCategory, { siteTitle, siteAuthor, 
     const currentTheme = localStorage.getItem('theme') || 'dark';
     html.setAttribute('data-theme', currentTheme);
 
+    function setGiscusTheme(theme) {
+      const iframe = document.querySelector('iframe.giscus-frame');
+      if (iframe) {
+        iframe.contentWindow.postMessage(
+          { giscus: { setConfig: { theme: theme === 'dark' ? 'dark' : 'light' } } },
+          'https://giscus.app'
+        );
+      }
+    }
+
     darkModeToggle.addEventListener('click', () => {
       const theme = html.getAttribute('data-theme');
       const newTheme = theme === 'light' ? 'dark' : 'light';
       html.setAttribute('data-theme', newTheme);
       localStorage.setItem('theme', newTheme);
+      setGiscusTheme(newTheme);
     });
   </script>
 ${isLocal ? `  <script src="https://cdn.jsdelivr.net/npm/eruda"></script>

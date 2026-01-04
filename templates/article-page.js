@@ -43,5 +43,35 @@ export function articlePage(article, context, navigation = {}) {
     ${olderLink}
     ${newerLink}
   </div>
+
+  <div class="article-comments">
+    <h2>Comments</h2>
+    <div id="giscus-container"></div>
+    <script>
+      (function() {
+        const theme = localStorage.getItem('theme') || 'dark';
+        const giscusTheme = theme === 'dark' ? 'dark' : 'light';
+
+        const script = document.createElement('script');
+        script.src = 'https://giscus.app/client.js';
+        script.setAttribute('data-repo', 'OWNER/REPO');
+        script.setAttribute('data-repo-id', 'YOUR_REPO_ID');
+        script.setAttribute('data-category', 'General');
+        script.setAttribute('data-category-id', 'YOUR_CATEGORY_ID');
+        script.setAttribute('data-mapping', 'pathname');
+        script.setAttribute('data-strict', '0');
+        script.setAttribute('data-reactions-enabled', '1');
+        script.setAttribute('data-emit-metadata', '0');
+        script.setAttribute('data-input-position', 'top');
+        script.setAttribute('data-theme', giscusTheme);
+        script.setAttribute('data-lang', 'en');
+        script.setAttribute('data-loading', 'lazy');
+        script.crossOrigin = 'anonymous';
+        script.async = true;
+
+        document.getElementById('giscus-container').appendChild(script);
+      })();
+    </script>
+  </div>
 </article>`;
 }
