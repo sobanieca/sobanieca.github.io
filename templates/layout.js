@@ -104,8 +104,10 @@ export function layout(content, title, activeCategory, { siteTitle, siteAuthor, 
     function setGiscusTheme(theme) {
       const iframe = document.querySelector('iframe.giscus-frame');
       if (iframe) {
+        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        const lightTheme = isLocal ? 'light' : window.location.origin + '/assets/css/giscus-light.css';
         iframe.contentWindow.postMessage(
-          { giscus: { setConfig: { theme: theme === 'dark' ? 'purple_dark' : 'light' } } },
+          { giscus: { setConfig: { theme: theme === 'dark' ? 'purple_dark' : lightTheme } } },
           'https://giscus.app'
         );
       }
