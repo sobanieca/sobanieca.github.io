@@ -6,7 +6,9 @@
 
 ## About This Repo
 
-This repository hosts my personal development blog built with Deno. Visit the site to read my latest posts about web development, JavaScript, Deno, and serverless architectures.
+This repository hosts my personal development blog built with Deno. Visit the
+site to read my latest posts about web development, JavaScript, Deno, and
+serverless architectures.
 
 ## Local Development
 
@@ -53,12 +55,15 @@ To run this blog locally:
 
 ## Writing Posts
 
-Create new posts in the appropriate category subdirectory under `_posts/` with the naming convention:
+Create new posts in the appropriate category subdirectory under `_posts/` with
+the naming convention:
+
 ```
 _posts/{category}/YYYY-MM-DD-title-of-post.md
 ```
 
 Each post should have front matter:
+
 ```yaml
 ---
 title: "Your Post Title"
@@ -68,7 +73,8 @@ excerpt: "Short description for previews"
 ---
 ```
 
-Available categories: `general`, `build-remotely`, `build-anywhere`, `neovim`, `tools`
+Available categories: `general`, `build-remotely`, `build-anywhere`, `neovim`,
+`tools`
 
 ## Technology Stack
 
@@ -80,6 +86,7 @@ Available categories: `general`, `build-remotely`, `build-anywhere`, `neovim`, `
 
 ## Deployment
 
-The site is automatically built and deployed to GitHub Pages when changes are pushed to the `main` branch using GitHub Actions.
+The site is automatically built and deployed to GitHub Pages when changes are
+pushed to the `main` branch using GitHub Actions.
 
 **Live site**: https://sobanieca.github.io

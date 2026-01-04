@@ -3,11 +3,14 @@ title: "My Remote Development Setup for Maximum Productivity"
 excerpt: "Discover the tools and workflows that make remote development efficient and enjoyable."
 ---
 
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis.
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore
+veritatis.
 
 ## Essential Tools
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+incididunt ut labore et dolore magna aliqua.
 
 ### Communication
 
@@ -18,16 +21,22 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 ### Development Environment
 
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+voluptate velit esse cillum dolore eu fugiat nulla pariatur.
 
 ## Workflow Optimization
 
-Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia
+deserunt mollit anim id est laborum.
 
 ### Time Management
 
-Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed
+quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
 
 ## Staying Connected
 
-Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.
+Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur,
+adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et
+dolore magnam aliquam quaerat voluptatem.

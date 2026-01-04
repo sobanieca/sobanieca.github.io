@@ -25,7 +25,8 @@ const CATEGORIES = {
   "build-on-the-go": {
     name: "Build on the Go",
     icon: "build-on-the-go",
-    description: "Articles about building on the go - directly on mobile phone!",
+    description:
+      "Articles about building on the go - directly on mobile phone!",
     slug: "build-on-the-go",
   },
   "build-in-terminal": {
@@ -237,7 +238,12 @@ async function build() {
   const { data: aboutData, content: aboutMarkdown } = parseFrontMatter(aboutMd);
   const aboutHtmlContent = marked.parse(aboutMarkdown);
   const aboutContent = aboutPage(aboutHtmlContent, context);
-  const aboutHtml = layout(aboutContent, aboutData.title || "About", "about", context);
+  const aboutHtml = layout(
+    aboutContent,
+    aboutData.title || "About",
+    "about",
+    context,
+  );
   await Deno.writeTextFile("dist/about-me.html", aboutHtml);
   console.log("Generated about-me.html");
 
@@ -252,7 +258,9 @@ async function build() {
 
   for (const article of articles) {
     const categoryArticles = articlesByCategory[article.categorySlug];
-    const currentIndex = categoryArticles.findIndex(a => a.slug === article.slug);
+    const currentIndex = categoryArticles.findIndex((a) =>
+      a.slug === article.slug
+    );
 
     // Articles are sorted newest first, so:
     // - "older" = next in array (higher index)
@@ -264,8 +272,16 @@ async function build() {
       ? categoryArticles[currentIndex - 1]
       : null;
 
-    const articleContent = articlePage(article, context, { olderArticle, newerArticle });
-    const articleHtml = layout(articleContent, article.title, undefined, context);
+    const articleContent = articlePage(article, context, {
+      olderArticle,
+      newerArticle,
+    });
+    const articleHtml = layout(
+      articleContent,
+      article.title,
+      undefined,
+      context,
+    );
     await Deno.writeTextFile(`dist/articles/${article.slug}.html`, articleHtml);
   }
   console.log(`Generated ${articles.length} article pages`);

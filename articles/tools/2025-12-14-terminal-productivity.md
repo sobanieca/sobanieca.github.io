@@ -3,11 +3,14 @@ title: "Boost Your Terminal Productivity with These Tools"
 excerpt: "Transform your terminal into a productivity powerhouse with these essential tools and configurations."
 ---
 
-Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet, wisi.
+Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper
+pharetra. Vestibulum erat wisi, condimentum sed, commodo vitae, ornare sit amet,
+wisi.
 
 ## Modern Terminal Emulators
 
-Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui.
+Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci,
+sagittis tempus lacus enim ac dui.
 
 ### Popular Choices
 
@@ -18,7 +21,8 @@ Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagit
 
 ## Shell Configuration
 
-Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque id cursus faucibus, tortor neque egestas augue.
+Donec non enim in turpis pulvinar facilisis. Ut felis. Praesent dapibus, neque
+id cursus faucibus, tortor neque egestas augue.
 
 ```bash
 # .zshrc
@@ -29,7 +33,8 @@ alias gco='git checkout'
 
 ## Essential CLI Tools
 
-Eu sem. Pellentesque libero tortor, tincidunt et, tincidunt eget, semper nec, quam. Sed hendrerit.
+Eu sem. Pellentesque libero tortor, tincidunt et, tincidunt eget, semper nec,
+quam. Sed hendrerit.
 
 ### Must-Have Tools
 
@@ -41,12 +46,15 @@ Eu sem. Pellentesque libero tortor, tincidunt et, tincidunt eget, semper nec, qu
 
 ## Multiplexer: tmux
 
-Morbi ac felis. Nunc egestas, augue at pellentesque laoreet, felis eros vehicula leo, at malesuada velit leo quis pede.
+Morbi ac felis. Nunc egestas, augue at pellentesque laoreet, felis eros vehicula
+leo, at malesuada velit leo quis pede.
 
 ### Key Features
 
-Donec interdum, metus et hendrerit aliquet, dolor diam sagittis ligula, eget egestas libero turpis vel mi.
+Donec interdum, metus et hendrerit aliquet, dolor diam sagittis ligula, eget
+egestas libero turpis vel mi.
 
 ## Productivity Tips
 
-Nunc eleifend leo vitae magna. In id erat non orci commodo lobortis. Proin neque massa, cursus ut, gravida ut, lobortis eget, lacus.
+Nunc eleifend leo vitae magna. In id erat non orci commodo lobortis. Proin neque
+massa, cursus ut, gravida ut, lobortis eget, lacus.

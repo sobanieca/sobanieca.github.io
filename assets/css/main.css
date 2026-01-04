@@ -26,7 +26,8 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif;
   color: var(--main-text);
   background-color: var(--main-bg);
   transition: background-color 0.3s, color 0.3s;

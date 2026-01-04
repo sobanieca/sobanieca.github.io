@@ -7,21 +7,25 @@ export function articlePage(article, context, navigation = {}) {
     ? `<div class="article-hero">
         <img src="${article.image.dest}" alt="${article.title}" />
       </div>`
-    : '';
+    : "";
 
   // Older link: points to older article, or category page if this is the oldest
   const olderLink = olderArticle
     ? `<a href="${olderArticle.url}" class="btn btn-secondary">← ${olderArticle.title}</a>`
-    : `<a href="/category/${category}.html" class="btn btn-secondary">← Back to ${categoryData?.name || category}</a>`;
+    : `<a href="/category/${category}.html" class="btn btn-secondary">← Back to ${
+      categoryData?.name || category
+    }</a>`;
 
   // Newer link: only show if there's a newer article
   const newerLink = newerArticle
     ? `<a href="${newerArticle.url}" class="btn btn-secondary">${newerArticle.title} →</a>`
-    : '';
+    : "";
 
   return `<article class="article-page">
   <div class="article-top">
-    <a href="/category/${category}.html" class="article-category-tag">${categoryData?.name || category}</a>
+    <a href="/category/${category}.html" class="article-category-tag">${
+    categoryData?.name || category
+  }</a>
   </div>
 
   <header>
@@ -29,7 +33,9 @@ export function articlePage(article, context, navigation = {}) {
     <div class="article-meta">
       <span>${context.siteAuthor}</span>
       <span>•</span>
-      <time datetime="${article.date}">${context.formatDate(article.date)}</time>
+      <time datetime="${article.date}">${
+    context.formatDate(article.date)
+  }</time>
     </div>
   </header>
 

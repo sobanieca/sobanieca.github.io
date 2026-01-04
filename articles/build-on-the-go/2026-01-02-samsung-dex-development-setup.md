@@ -3,11 +3,14 @@ title: "Samsung Dex as a Mobile Development Workstation"
 excerpt: "Turn your Samsung phone into a portable development environment using Samsung Dex and Termux."
 ---
 
-Samsung Dex transforms your phone into a desktop-like experience, making it surprisingly capable for software development on the go.
+Samsung Dex transforms your phone into a desktop-like experience, making it
+surprisingly capable for software development on the go.
 
 ## What is Samsung Dex?
 
-Samsung Dex is a feature available on Samsung Galaxy devices that provides a desktop interface when connected to an external monitor. You can use it wirelessly or with a USB-C hub.
+Samsung Dex is a feature available on Samsung Galaxy devices that provides a
+desktop interface when connected to an external monitor. You can use it
+wirelessly or with a USB-C hub.
 
 ## Setting Up Your Development Environment
 
@@ -20,7 +23,8 @@ Samsung Dex is a feature available on Samsung Galaxy devices that provides a des
 
 ### Software Stack
 
-The core of mobile development on Dex relies on Termux - a terminal emulator that provides a Linux environment:
+The core of mobile development on Dex relies on Termux - a terminal emulator
+that provides a Linux environment:
 
 ```bash
 # Install Termux from F-Droid (recommended)
@@ -52,4 +56,6 @@ While Samsung Dex is impressive, there are some limitations:
 
 ## Conclusion
 
-Samsung Dex won't replace your primary development machine, but it's a viable option for quick fixes, code reviews, and light development work when you're away from your desk.
+Samsung Dex won't replace your primary development machine, but it's a viable
+option for quick fixes, code reviews, and light development work when you're
+away from your desk.

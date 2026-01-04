@@ -3,21 +3,23 @@ export function articleCard(article, { siteAuthor, categories, formatDate }) {
   const categoryData = categories[category];
 
   const categoryColors = {
-    'general': 1,
-    'build-anywhere': 2,
-    'neovim': 3,
-    'build-on-the-go': 4
+    "general": 1,
+    "build-anywhere": 2,
+    "neovim": 3,
+    "build-on-the-go": 4,
   };
   const categoryNumber = categoryColors[category] || 1;
 
   const headerStyle = article.image
     ? `background-image: url('${article.image.dest}'); background-size: cover; background-position: center;`
-    : '';
+    : "";
 
-  const titleBg = article.image ? '' : `<span class="article-card-title-bg">${article.title}</span>`;
+  const titleBg = article.image
+    ? ""
+    : `<span class="article-card-title-bg">${article.title}</span>`;
 
   // Format date as dd.mm.yyyy
-  const [year, month, day] = article.date.split('-');
+  const [year, month, day] = article.date.split("-");
   const formattedDate = `${day}.${month}.${year}`;
 
   return `<article class="article-card">
@@ -26,7 +28,9 @@ export function articleCard(article, { siteAuthor, categories, formatDate }) {
   </div>
   <div class="article-card-content">
     <div class="article-card-meta">
-      <a href="/category/${categoryData?.slug || category}.html" class="category-tag">${categoryData?.name || category}</a>
+      <a href="/category/${
+    categoryData?.slug || category
+  }.html" class="category-tag">${categoryData?.name || category}</a>
       <span class="article-date">${formattedDate}</span>
     </div>
     <h2 class="article-title">
