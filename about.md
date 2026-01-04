@@ -2,7 +2,7 @@
 title: "About Me"
 ---
 
-Hey there! I work as a software developer [@Redocly](https://www.redocly.com).
+Hey there! I work as a software developer at [Redocly](https://www.redocly.com).
 
 Since I remember I was fascinated with all devices that allowed me to write code
 and that could fit in my pocket. I remember I've dreamed about
