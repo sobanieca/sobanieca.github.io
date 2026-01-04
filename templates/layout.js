@@ -101,16 +101,33 @@ export function layout(content, title, activeCategory, { siteTitle, siteAuthor, 
     const currentTheme = localStorage.getItem('theme') || 'dark';
     html.setAttribute('data-theme', currentTheme);
 
-    function setGiscusTheme(theme) {
-      const iframe = document.querySelector('iframe.giscus-frame');
-      if (iframe) {
-        const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-        const lightTheme = isLocal ? 'light' : window.location.origin + '/assets/css/giscus-light.css';
-        iframe.contentWindow.postMessage(
-          { giscus: { setConfig: { theme: theme === 'dark' ? 'purple_dark' : lightTheme } } },
-          'https://giscus.app'
-        );
-      }
+    // Giscus theme helper
+    function getGiscusTheme(theme) {
+      const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+      const lightTheme = isLocal ? 'light' : window.location.origin + '/assets/css/giscus-light.css';
+      return theme === 'dark' ? 'purple_dark' : lightTheme;
+    }
+
+    // Initialize Giscus if container exists
+    const giscusContainer = document.getElementById('giscus-container');
+    if (giscusContainer) {
+      const script = document.createElement('script');
+      script.src = 'https://giscus.app/client.js';
+      script.setAttribute('data-repo', 'sobanieca/sobanieca.github.io');
+      script.setAttribute('data-repo-id', 'R_kgDOQmdbKA');
+      script.setAttribute('data-category', 'Giscuss Comments');
+      script.setAttribute('data-category-id', 'DIC_kwDOQmdbKM4C0kgc');
+      script.setAttribute('data-mapping', 'pathname');
+      script.setAttribute('data-strict', '0');
+      script.setAttribute('data-reactions-enabled', '1');
+      script.setAttribute('data-emit-metadata', '0');
+      script.setAttribute('data-input-position', 'bottom');
+      script.setAttribute('data-theme', getGiscusTheme(currentTheme));
+      script.setAttribute('data-lang', 'en');
+      script.setAttribute('data-loading', 'lazy');
+      script.crossOrigin = 'anonymous';
+      script.async = true;
+      giscusContainer.appendChild(script);
     }
 
     darkModeToggle.addEventListener('click', () => {
@@ -118,7 +135,15 @@ export function layout(content, title, activeCategory, { siteTitle, siteAuthor, 
       const newTheme = theme === 'light' ? 'dark' : 'light';
       html.setAttribute('data-theme', newTheme);
       localStorage.setItem('theme', newTheme);
-      setGiscusTheme(newTheme);
+
+      // Update Giscus theme if loaded
+      const iframe = document.querySelector('iframe.giscus-frame');
+      if (iframe) {
+        iframe.contentWindow.postMessage(
+          { giscus: { setConfig: { theme: getGiscusTheme(newTheme) } } },
+          'https://giscus.app'
+        );
+      }
     });
   </script>
 ${isLocal ? `  <script src="https://cdn.jsdelivr.net/npm/eruda"></script>
