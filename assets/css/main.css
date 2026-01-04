@@ -372,6 +372,45 @@ nav a svg {
   color: var(--main-text-secondary);
 }
 
+.category-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sort-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  color: var(--main-text-secondary);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.sort-toggle:hover {
+  background-color: var(--card-bg-hover);
+  color: var(--main-text);
+}
+
+.sort-toggle .sort-icon {
+  transition: transform 0.2s;
+}
+
+.sort-toggle.desc .sort-icon {
+  transform: scaleY(-1);
+}
+
+.article-wrapper {
+  display: contents;
+}
+
 .article-top {
   text-align: right;
   margin-bottom: 1rem;
