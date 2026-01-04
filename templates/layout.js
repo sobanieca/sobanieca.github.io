@@ -105,7 +105,7 @@ export function layout(content, title, activeCategory, { siteTitle, siteAuthor, 
       const iframe = document.querySelector('iframe.giscus-frame');
       if (iframe) {
         iframe.contentWindow.postMessage(
-          { giscus: { setConfig: { theme: theme === 'dark' ? 'dark' : 'light' } } },
+          { giscus: { setConfig: { theme: theme === 'dark' ? 'purple_dark' : 'light' } } },
           'https://giscus.app'
         );
       }

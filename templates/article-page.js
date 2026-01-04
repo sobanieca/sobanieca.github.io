@@ -50,7 +50,7 @@ export function articlePage(article, context, navigation = {}) {
     <script>
       (function() {
         const theme = localStorage.getItem('theme') || 'dark';
-        const giscusTheme = theme === 'dark' ? 'dark' : 'light';
+        const giscusTheme = theme === 'dark' ? 'purple_dark' : 'light';
 
         const script = document.createElement('script');
         script.src = 'https://giscus.app/client.js';
