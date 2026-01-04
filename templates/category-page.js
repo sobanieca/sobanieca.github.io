@@ -20,7 +20,7 @@ export function categoryPage(category, articles, context) {
       <svg class="sort-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M11 5h10M11 9h7M11 13h4M3 17l3 3 3-3M6 18V4"/>
       </svg>
-      <span id="sortLabel">Oldest first</span>
+      <span id="sortLabel">Oldest</span>
     </button>
   ` : '';
 
@@ -47,7 +47,7 @@ export function categoryPage(category, articles, context) {
 
       toggle.addEventListener('click', () => {
         newestFirst = !newestFirst;
-        label.textContent = newestFirst ? 'Newest first' : 'Oldest first';
+        label.textContent = newestFirst ? 'Newest' : 'Oldest';
         toggle.classList.toggle('desc', newestFirst);
 
         const items = Array.from(grid.children);
