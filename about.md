@@ -2,8 +2,6 @@
 title: "About Me"
 ---
 
-Hey there! I work as a software developer at [Redocly](https://www.redocly.com).
-
 Since I remember I was fascinated with all devices that allowed me to write code
 and that could fit in my pocket. I remember I've dreamed about
 [Casio Cassiopeia](https://en.wikipedia.org/wiki/Casio_Cassiopeia). I've had a

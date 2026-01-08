@@ -590,6 +590,70 @@ footer {
   max-width: 1200px;
 }
 
+.about-intro {
+  max-width: 800px;
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.about-intro p {
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--main-text);
+  margin-bottom: 1.25rem;
+}
+
+.about-intro a {
+  color: var(--accent-primary);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.about-intro a:hover {
+  text-decoration: underline;
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.625rem 1.25rem;
+  background-color: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  color: var(--main-text);
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.9375rem;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+  perspective: 500px;
+}
+
+.social-link svg {
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.social-link:hover {
+  background-color: var(--accent-primary);
+  border-color: var(--accent-primary);
+  color: white;
+  transform: translateY(-3px) rotateX(10deg) rotateY(-5deg);
+  box-shadow:
+    0 10px 20px rgba(217, 70, 239, 0.3),
+    0 6px 6px rgba(217, 70, 239, 0.2);
+}
+
+.social-link:hover svg {
+  transform: rotateY(360deg);
+}
+
 .about-content {
   max-width: 800px;
   font-size: 1.125rem;
