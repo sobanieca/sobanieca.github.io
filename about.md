@@ -1,5 +1,9 @@
 ---
 title: "About Me"
+intro: "Hey there! I work as a software developer at"
+company:
+  name: "Redocly"
+  url: "https://www.redocly.com"
 ---
 
 Since I remember I was fascinated with all devices that allowed me to write code

@@ -255,7 +255,7 @@ async function build() {
   const aboutMd = await Deno.readTextFile("about.md");
   const { data: aboutData, content: aboutMarkdown } = parseFrontMatter(aboutMd);
   const aboutHtmlContent = marked.parse(aboutMarkdown);
-  const aboutContent = aboutPage(aboutHtmlContent, context);
+  const aboutContent = aboutPage(aboutHtmlContent, aboutData, context);
   const aboutHtml = layout(
     aboutContent,
     aboutData.title || "About",
