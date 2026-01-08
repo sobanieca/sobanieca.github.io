@@ -38,3 +38,12 @@ The site is automatically built and deployed to GitHub Pages when changes are
 pushed to the `main` branch using GitHub Actions.
 
 **Live site**: https://sobanieca.github.io
+
+## Acknowledgments
+
+This project uses the following open source libraries:
+
+- [Deno](https://deno.com) - JavaScript/TypeScript runtime
+- [marked](https://github.com/markedjs/marked) - Markdown parser
+- [Shiki](https://github.com/shikijs/shiki) - Syntax highlighting
+- [yaml](https://github.com/eemeli/yaml) - YAML parser

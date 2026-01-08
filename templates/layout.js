@@ -78,7 +78,7 @@ export function layout(
     <footer>
       <p>&copy; ${
     new Date().getFullYear()
-  } ${siteAuthor}. Built with Deno and Claude.</p>
+  } ${siteAuthor}. Built with <a href="https://deno.com" target="_blank" rel="noopener">Deno</a> and <a href="https://claude.ai" target="_blank" rel="noopener">Claude</a>.</p>
     </footer>
   </main>
 
