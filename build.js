@@ -10,39 +10,53 @@ import { aboutPage } from "./templates/about-page.js";
 const SITE_AUTHOR = "Adam Sobaniec";
 const SITE_TITLE = `${SITE_AUTHOR} - Software Developer`;
 
-const CATEGORIES = {
-  general: {
-    name: "General",
-    icon: "general",
-    description: "Articles about general development topics and thoughts",
-    slug: "general",
-  },
-  "build-anywhere": {
-    name: "Build Anywhere",
-    icon: "build-anywhere",
-    description: "Articles about building on remote servers",
-    slug: "build-anywhere",
-  },
-  "build-on-the-go": {
-    name: "Build on the Go",
-    icon: "build-on-the-go",
-    description:
-      "Articles about building on the go - directly on mobile phone!",
-    slug: "build-on-the-go",
-  },
-  "build-in-terminal": {
-    name: "Build in terminal",
-    icon: "build-in-terminal",
-    description: "Articles about tools for building in terminal - Neovim, tmux",
-    slug: "build-in-terminal",
-  },
-  tools: {
-    name: "Tools",
-    icon: "tools",
-    description: "Articles about various development tools",
-    slug: "tools",
-  },
-};
+async function readCategories() {
+  const categoryList = [];
+
+  for await (const dirEntry of Deno.readDir("articles")) {
+    if (!dirEntry.isDirectory) continue;
+
+    const slug = dirEntry.name;
+    const categoryPath = `articles/${slug}`;
+
+    try {
+      const yamlContent = await Deno.readTextFile(
+        `${categoryPath}/category.yaml`,
+      );
+      const categoryData = parseYaml(yamlContent);
+
+      let icon = "";
+      try {
+        icon = await Deno.readTextFile(`${categoryPath}/category-icon.svg`);
+        icon = icon.trim();
+      } catch {
+        // No icon file, use empty string
+      }
+
+      categoryList.push({
+        name: categoryData.name || slug,
+        description: categoryData.description || "",
+        order: categoryData.order ?? 999,
+        slug,
+        icon,
+      });
+    } catch {
+      // No category.yaml, skip this directory
+      console.warn(`Warning: No category.yaml found in ${categoryPath}`);
+    }
+  }
+
+  // Sort by order (lower number = first)
+  categoryList.sort((a, b) => a.order - b.order);
+
+  // Convert to object preserving sort order
+  const categories = {};
+  for (const cat of categoryList) {
+    categories[cat.slug] = cat;
+  }
+
+  return categories;
+}
 
 function parseFrontMatter(content) {
   const match = content.match(/^---\n([\s\S]+?)\n---\n([\s\S]*)$/);
@@ -204,6 +218,9 @@ async function build() {
   await Deno.mkdir("dist/articles", { recursive: true });
   await Deno.mkdir("dist/category", { recursive: true });
 
+  const categories = await readCategories();
+  console.log(`Found ${Object.keys(categories).length} categories`);
+
   const articles = await readArticles();
   console.log(`Found ${articles.length} articles`);
 
@@ -224,7 +241,7 @@ async function build() {
   const context = {
     siteTitle: SITE_TITLE,
     siteAuthor: SITE_AUTHOR,
-    categories: CATEGORIES,
+    categories,
     formatDate,
     isLocal,
   };
@@ -289,7 +306,7 @@ async function build() {
 
   // Copy images folders from each category to dist/articles/images
   await Deno.mkdir("dist/articles/images", { recursive: true });
-  for (const category of Object.keys(CATEGORIES)) {
+  for (const category of Object.keys(categories)) {
     const imagesPath = `articles/${category}/images`;
     try {
       await Deno.stat(imagesPath);
@@ -300,12 +317,12 @@ async function build() {
   }
   console.log("Copied category images");
 
-  for (const category of Object.values(CATEGORIES)) {
+  for (const category of Object.values(categories)) {
     const catContent = categoryPage(category, articles, context);
     const catHtml = layout(catContent, category.name, category.slug, context);
     await Deno.writeTextFile(`dist/category/${category.slug}.html`, catHtml);
   }
-  console.log(`Generated ${Object.keys(CATEGORIES).length} category pages`);
+  console.log(`Generated ${Object.keys(categories).length} category pages`);
 
   await copyDir("assets", "dist/assets");
   console.log("Copied assets");
