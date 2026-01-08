@@ -7,8 +7,9 @@ import { articlePage } from "./templates/article-page.js";
 import { categoryPage } from "./templates/category-page.js";
 import { aboutPage } from "./templates/about-page.js";
 
-const SITE_TITLE = "Adam Sobaniec - Software Developer";
 const SITE_AUTHOR = "Adam Sobaniec";
+const SITE_TITLE = `${SITE_AUTHOR} - Software Developer`;
+
 const CATEGORIES = {
   general: {
     name: "General",
