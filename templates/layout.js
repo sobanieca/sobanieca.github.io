@@ -1,3 +1,5 @@
+const ANALYTICS_URL = "https://analytics-api.sobanieca.deno.net";
+
 export function layout(
   content,
   title,
@@ -154,6 +156,24 @@ ${
   <script>eruda.init();</script>`
       : ""
   }
+  <script>
+    (function() {
+      var host = window.location.hostname;
+      var forceAnalytics = new URLSearchParams(window.location.search).get('analytics') === 'true';
+      if ((host === 'localhost' || host === '127.0.0.1') && !forceAnalytics) return;
+
+      var page = window.location.pathname.split('/').pop() || 'index.html';
+      var ref = document.referrer || 'direct';
+      var url = '${ANALYTICS_URL}/track?page=' + encodeURIComponent(page) + '&ref=' + encodeURIComponent(ref);
+
+      function track(attempt) {
+        fetch(url)
+          .then(function(r) { if (!r.ok && attempt < 3) setTimeout(function() { track(attempt + 1); }, 2000); })
+          .catch(function() { if (attempt < 3) setTimeout(function() { track(attempt + 1); }, 2000); });
+      }
+      track(1);
+    })();
+  </script>
 </body>
 </html>`;
 }
