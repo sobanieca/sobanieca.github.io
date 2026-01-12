@@ -452,9 +452,14 @@ nav a svg {
   object-fit: cover;
 }
 
+.article-meta {
+  color: var(--main-text-secondary);
+}
+
 .article-content {
   font-size: 1.125rem;
   line-height: 1.75;
+  margin-top: 2rem;
 }
 
 .article-footer {
