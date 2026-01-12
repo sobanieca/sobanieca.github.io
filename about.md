@@ -21,17 +21,17 @@ agents (like Claude Code) allows one to stay productive truly anywhere. For many
 this may sound ridiculous (coding on mobile phone?) but it's really possible.
 Personally, I was able to make some significant contributions to some of my open
 source projects being in various places where I would not have the possibility
-to open a laptop. Some may say that we are moving towards direction where
-software developers will only keep reviewing pull requests. I don't agree with
-this. In my opinion there will be always a need to have some IDE and terminal at
-hand to double check few things or give some more detailed instructions to LLMs.
+to open a laptop. Even with AI agents doing much of the heavy lifting, there
+will always be a need to have an IDE and terminal at hand to verify changes or
+give more detailed instructions.
 
-That's why I have decided to create this page. I've spent a lot of time and
+All this led me to create this page. I've spent a lot of time and
 effort on fine-tuning my mobile/remote setup. I've even changed my career to be
 able to code on my mobile phone! For many years I was a .NET developer and I was
 working with regular Visual Studio (not to be confused with Visual Studio
 Code!). This was heavy technology and not terminal friendly (although back in
 the day it was very valuable). I will try to share my experience and inspire
 some more people to try a similar path. I can see that people on various
-developer groups keep asking about some way of synchronizing with their AI
-agents. Hopefully I will be able to share some ways to do this.
+developer groups keep asking how to interact with AI coding agents while away
+from their computer. Hopefully I will be able to share some ways to do
+this.
