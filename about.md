@@ -1,37 +1,37 @@
 ---
 title: "About Me"
-intro: "Hey there! I work as a software developer at"
+intro: "Hey there! I work as a software developer @"
 company:
   name: "Redocly"
   url: "https://www.redocly.com"
 ---
 
-Since I remember I was fascinated with all devices that allowed me to write code
-and that could fit in my pocket. I remember I've dreamed about
-[Casio Cassiopeia](https://en.wikipedia.org/wiki/Casio_Cassiopeia). I've had a
-chance to use some of the [Palmtops](https://pl.wikipedia.org/wiki/Palmtop) with
-Windows Mobile. On my Computer Science studies I've had a chance to play with
-Nokia's Symbian OS phones. There, indeed I was able to SSH to my server and
-write some simple scripts. It was rather awkward to write proper code on these
-devices - it was more about some experimenting and playing.
+Since I remember I was fascinated with all kinds of pocket PC's. I remember
+dreaming about
+[Casio Cassiopeia](https://en.wikipedia.org/wiki/Casio_Cassiopeia) as a kid.
+I've had a chance to use some of the
+[Palmtops](https://en.wikipedia.org/wiki/Palmtop) with Windows Mobile. During my
+Computer Science studies I've had a chance to play with Nokia's Symbian OS
+phones. They were pretty capable and gave me a chance to SSH into some Unix
+servers and write some simple scripts.
 
-It has all changed with modern smartphones. I use Android phones, so I've
-installed [Termux](https://termux.dev) and there I could build anything (for
-more heavy development remote server with Unix OS is needed).
+It has all evolved greatly with modern smartphones. One can install terminal
+emulator and use regular Linux tools - including Neovim(!). This, mixed with AI
+agents (like Claude Code) allows to stay productive truly anywhere. For many
+this may sound ridiculous (coding on mobile phone??) but it's really possible.
+Personally, I was able to make some significant to some of my open source
+projects being in various places where I would not have possibility to open
+laptop. Some may say that We are moving towards direction where software
+developers will only keep reviewing pull requests. I don't agree with this. In
+my opinion there will be always a need to have some IDE and terminal by hand to
+double check few things or give some more detailed instructions to LLM's.
 
-This _hobby_ resulted in significant switch in my career. Instead of relying
-heavily on Windows and extra heavy Visual Studio (do not confuse with Visual
-Studio Code) I started to utilize more lightweight techologies - I've switched
-to Debian OS (I still use Windows + WSL2), I've started using Neovim and Tmux.
-All this to make 100% use of small screen of mobile phone. It took me a long way
-to get here and that's why I've decided that it makes sense to share some
-knowledge about this. I can see some interest from people when they hear about
-option of using mobile phone as a development machine.
-
-Nowadays, with AI, coding on mobile devices is closer than ever. It really feels
-like superpowers and I can already see big interest in this in various places.
-Some may say that we will reach a point where developers will only review PR's
-written by AI. I don't agree with this. I still think we need proper tools to
-navigate across code, check the structure created by AI etc. For this, still
-some IDE will be needed. And if one wants to do it on mobile device - there is no
-better way to make a full use of terminal.
+That's why I have decided to create this page. I've spent a lot of time on
+fine-tuning my setup. I've even changed my career to be able to code on my
+mobile phone! For many years I was .NET developer and I was working with regular
+Visual Studio (not to be confused with Visual Studio Code!). This was heavy
+technology and not terminal friendly (although back in the days it was very
+valuable). I will try to share my experience and inspire some more people to try
+similar path. I can see that people on various developer groups keep asking
+about some way of synchronizing with their AI agents. Hopefully I will be able
+to share some ways to do this.

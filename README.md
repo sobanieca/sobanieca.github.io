@@ -4,15 +4,15 @@
 
 ## About This Repo
 
-This repository hosts my personal development blog built with Deno and Claude. Visit the
-site to read my latest posts about web development, JavaScript, Deno, and
-serverless architectures.
+This repository hosts my personal development blog built with Deno and Claude.
+Visit the site to read my latest posts about web development, JavaScript, Deno,
+and serverless architectures.
 
 ## Local Development
 
 To run this blog locally:
 
-1. Install [Deno](https://deno.land/) 
+1. Install [Deno](https://deno.land/)
 2. Clone this repository
 3. Build the site:
    ```bash
