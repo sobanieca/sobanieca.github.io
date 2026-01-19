@@ -1,4 +1,4 @@
-export function articleCard(article, { siteAuthor, categories, formatDate }) {
+export function articleCard(article, { categories }) {
   const category = article.categorySlug;
   const categoryData = categories[category];
 

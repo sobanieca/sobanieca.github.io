@@ -8,7 +8,7 @@ export function layout(
 ) {
   const categoriesNav = Object.entries(categories)
     .map(
-      ([key, cat]) =>
+      ([_key, cat]) =>
         `<a href="/category/${cat.slug}.html" class="${
           activeCategory === cat.slug ? "active" : ""
         }">

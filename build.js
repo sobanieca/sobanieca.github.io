@@ -213,6 +213,7 @@ async function build() {
   try {
     await Deno.remove("dist", { recursive: true });
   } catch {
+    // Directory doesn't exist, ignore
   }
   await Deno.mkdir("dist", { recursive: true });
   await Deno.mkdir("dist/articles", { recursive: true });
