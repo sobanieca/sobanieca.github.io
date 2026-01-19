@@ -328,6 +328,9 @@ async function build() {
   await copyDir("assets", "dist/assets");
   console.log("Copied assets");
 
+  await Deno.copyFile("stats.html", "dist/stats.html");
+  console.log("Copied stats.html");
+
   console.log("\n✓ Build complete! Output in dist/");
 }
 

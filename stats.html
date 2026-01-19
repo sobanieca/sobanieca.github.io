@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Analytics Stats</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      background: #1a1a2e;
+      color: #eee;
+      min-height: 100vh;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    .api-key-section {
+      background: #16213e;
+      padding: 20px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .api-key-section label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .api-key-section input {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #333;
+      border-radius: 4px;
+      background: #0f0f23;
+      color: #eee;
+      font-size: 14px;
+    }
+
+    .api-key-section button {
+      margin-top: 10px;
+      padding: 10px 20px;
+      background: #e94560;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .api-key-section button:hover {
+      background: #ff6b6b;
+    }
+
+    .header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .logout-btn {
+      padding: 8px 16px;
+      background: transparent;
+      color: #aaa;
+      border: 1px solid #333;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 13px;
+      transition: all 0.2s;
+    }
+
+    .logout-btn:hover {
+      background: #4a1a2e;
+      color: #ff6b6b;
+      border-color: #ff6b6b;
+    }
+
+    .toggle-section {
+      display: flex;
+      gap: 10px;
+    }
+
+    .toggle-btn {
+      padding: 10px 20px;
+      background: #16213e;
+      color: #aaa;
+      border: 1px solid #333;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+
+    .toggle-btn.active {
+      background: #e94560;
+      color: #fff;
+      border-color: #e94560;
+    }
+
+    .toggle-btn:hover:not(.active) {
+      background: #1f2b4a;
+    }
+
+    .stats-container {
+      background: #16213e;
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .day-group, .month-group {
+      margin-bottom: 25px;
+    }
+
+    .day-group:last-child, .month-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .date-header {
+      font-size: 14px;
+      font-weight: 600;
+      color: #e94560;
+      margin-bottom: 10px;
+      padding-bottom: 5px;
+      border-bottom: 1px solid #333;
+    }
+
+    .bar-row {
+      display: flex;
+      align-items: center;
+      margin-bottom: 8px;
+      gap: 10px;
+    }
+
+    .page-name {
+      width: 180px;
+      font-size: 13px;
+      color: #ccc;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+
+    .bar-container {
+      flex: 1;
+      height: 24px;
+      background: #0f0f23;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .bar {
+      height: 100%;
+      background: linear-gradient(90deg, #e94560, #ff6b6b);
+      border-radius: 4px;
+      transition: width 0.3s ease;
+      min-width: 2px;
+    }
+
+    .visit-count {
+      width: 50px;
+      text-align: right;
+      font-size: 13px;
+      color: #aaa;
+      flex-shrink: 0;
+    }
+
+    .loading {
+      text-align: center;
+      padding: 40px;
+      color: #aaa;
+    }
+
+    .error {
+      background: #4a1a2e;
+      color: #ff6b6b;
+      padding: 15px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .total-summary {
+      font-size: 12px;
+      color: #888;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Analytics Stats</h1>
+
+    <div id="apiKeySection" class="api-key-section">
+      <label for="apiKeyInput">API Key</label>
+      <input type="text" id="apiKeyInput" placeholder="Enter your API key...">
+      <button onclick="saveApiKey()">Save & Load Stats</button>
+    </div>
+
+    <div id="errorSection" class="error hidden"></div>
+
+    <div id="mainContent" class="hidden">
+      <div class="header-row">
+        <div class="toggle-section">
+          <button class="toggle-btn active" data-view="daily" onclick="switchView('daily')">Daily</button>
+          <button class="toggle-btn" data-view="monthly" onclick="switchView('monthly')">Monthly</button>
+          <button class="toggle-btn" data-view="total" onclick="switchView('total')">Total</button>
+        </div>
+        <button class="logout-btn" onclick="logout()">Logout</button>
+      </div>
+
+      <div class="stats-container">
+        <div id="statsContent">
+          <div class="loading">Loading stats...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let statsData = null;
+    let currentView = 'daily';
+
+    function init() {
+      const apiKey = localStorage.getItem('analyticsApiKey');
+      if (apiKey) {
+        document.getElementById('apiKeyInput').value = apiKey;
+        document.getElementById('apiKeySection').classList.add('hidden');
+        document.getElementById('mainContent').classList.remove('hidden');
+        loadStats(apiKey);
+      }
+    }
+
+    function saveApiKey() {
+      const apiKey = document.getElementById('apiKeyInput').value.trim();
+      if (!apiKey) {
+        showError('Please enter an API key');
+        return;
+      }
+      // Don't store yet - validate first
+      loadStats(apiKey, true);
+    }
+
+    function logout() {
+      localStorage.removeItem('analyticsApiKey');
+      statsData = null;
+      document.getElementById('apiKeyInput').value = '';
+      document.getElementById('mainContent').classList.add('hidden');
+      document.getElementById('apiKeySection').classList.remove('hidden');
+      document.getElementById('statsContent').innerHTML = '';
+      hideError();
+    }
+
+    async function loadStats(apiKey, isNewKey = false) {
+      document.getElementById('statsContent').innerHTML = '<div class="loading">Loading stats...</div>';
+      hideError();
+
+      // Show main content while loading
+      document.getElementById('apiKeySection').classList.add('hidden');
+      document.getElementById('mainContent').classList.remove('hidden');
+
+      try {
+        const response = await fetch('https://analytics-api.sobanieca.deno.net/stats', {
+          headers: {
+            'Authorization': `ApiKey ${apiKey}`
+          }
+        });
+
+        if (response.status === 401) {
+          // Invalid API key - don't store, show error and return to login
+          showError('Invalid API key. Please check your key and try again.');
+          document.getElementById('mainContent').classList.add('hidden');
+          document.getElementById('apiKeySection').classList.remove('hidden');
+          return;
+        }
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+        }
+
+        // API key is valid - store it now
+        if (isNewKey) {
+          localStorage.setItem('analyticsApiKey', apiKey);
+        }
+
+        statsData = await response.json();
+        renderStats();
+      } catch (error) {
+        showError(`Failed to load stats: ${error.message}`);
+        document.getElementById('statsContent').innerHTML = '';
+
+        // If it was a new key attempt, go back to login screen
+        if (isNewKey) {
+          document.getElementById('mainContent').classList.add('hidden');
+          document.getElementById('apiKeySection').classList.remove('hidden');
+        }
+      }
+    }
+
+    function switchView(view) {
+      currentView = view;
+      document.querySelectorAll('.toggle-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.view === view);
+      });
+      renderStats();
+    }
+
+    function renderStats() {
+      if (!statsData) return;
+
+      const container = document.getElementById('statsContent');
+
+      switch (currentView) {
+        case 'daily':
+          renderDailyStats(container);
+          break;
+        case 'monthly':
+          renderMonthlyStats(container);
+          break;
+        case 'total':
+          renderTotalStats(container);
+          break;
+      }
+    }
+
+    function getPages() {
+      return Object.keys(statsData).filter(key => key !== 'returning_users' && key.endsWith('.html'));
+    }
+
+    function renderDailyStats(container) {
+      const pages = getPages();
+
+      // Collect all dates across all pages
+      const allDates = new Set();
+      pages.forEach(page => {
+        if (statsData[page].daily) {
+          Object.keys(statsData[page].daily).forEach(date => allDates.add(date));
+        }
+      });
+
+      // Sort dates descending and limit to 50
+      const sortedDates = Array.from(allDates).sort().reverse().slice(0, 50);
+
+      if (sortedDates.length === 0) {
+        container.innerHTML = '<div class="loading">No daily data available</div>';
+        return;
+      }
+
+      // Find max value for scaling
+      let maxValue = 0;
+      sortedDates.forEach(date => {
+        pages.forEach(page => {
+          const value = statsData[page].daily?.[date] || 0;
+          if (value > maxValue) maxValue = value;
+        });
+      });
+
+      let html = '';
+      sortedDates.forEach(date => {
+        const pageData = pages.map(page => ({
+          page,
+          count: statsData[page].daily?.[date] || 0
+        })).filter(p => p.count > 0).sort((a, b) => b.count - a.count);
+
+        if (pageData.length === 0) return;
+
+        const totalForDay = pageData.reduce((sum, p) => sum + p.count, 0);
+
+        html += `<div class="day-group">`;
+        html += `<div class="date-header">${formatDate(date)} <span class="total-summary">(${totalForDay} total)</span></div>`;
+
+        pageData.forEach(({ page, count }) => {
+          const width = maxValue > 0 ? (count / maxValue) * 100 : 0;
+          html += `
+            <div class="bar-row">
+              <span class="page-name">${page}</span>
+              <div class="bar-container">
+                <div class="bar" style="width: ${width}%"></div>
+              </div>
+              <span class="visit-count">${count}</span>
+            </div>
+          `;
+        });
+
+        html += `</div>`;
+      });
+
+      container.innerHTML = html || '<div class="loading">No data to display</div>';
+    }
+
+    function renderMonthlyStats(container) {
+      const pages = getPages();
+
+      // Collect all months across all pages
+      const allMonths = new Set();
+      pages.forEach(page => {
+        if (statsData[page].monthly) {
+          Object.keys(statsData[page].monthly).forEach(month => allMonths.add(month));
+        }
+      });
+
+      // Calculate totals per month and sort by total descending
+      const monthTotals = Array.from(allMonths).map(month => {
+        const total = pages.reduce((sum, page) => {
+          return sum + (statsData[page].monthly?.[month] || 0);
+        }, 0);
+        return { month, total };
+      }).sort((a, b) => b.total - a.total);
+
+      if (monthTotals.length === 0) {
+        container.innerHTML = '<div class="loading">No monthly data available</div>';
+        return;
+      }
+
+      // Find max value for scaling
+      let maxValue = 0;
+      monthTotals.forEach(({ month }) => {
+        pages.forEach(page => {
+          const value = statsData[page].monthly?.[month] || 0;
+          if (value > maxValue) maxValue = value;
+        });
+      });
+
+      let html = '';
+      monthTotals.forEach(({ month, total }) => {
+        const pageData = pages.map(page => ({
+          page,
+          count: statsData[page].monthly?.[month] || 0
+        })).filter(p => p.count > 0).sort((a, b) => b.count - a.count);
+
+        if (pageData.length === 0) return;
+
+        html += `<div class="month-group">`;
+        html += `<div class="date-header">${formatMonth(month)} <span class="total-summary">(${total} total)</span></div>`;
+
+        pageData.forEach(({ page, count }) => {
+          const width = maxValue > 0 ? (count / maxValue) * 100 : 0;
+          html += `
+            <div class="bar-row">
+              <span class="page-name">${page}</span>
+              <div class="bar-container">
+                <div class="bar" style="width: ${width}%"></div>
+              </div>
+              <span class="visit-count">${count}</span>
+            </div>
+          `;
+        });
+
+        html += `</div>`;
+      });
+
+      container.innerHTML = html || '<div class="loading">No data to display</div>';
+    }
+
+    function renderTotalStats(container) {
+      const pages = getPages();
+
+      // Get totals and sort descending
+      const pageData = pages.map(page => ({
+        page,
+        count: statsData[page].total || 0
+      })).sort((a, b) => b.count - a.count);
+
+      if (pageData.length === 0) {
+        container.innerHTML = '<div class="loading">No total data available</div>';
+        return;
+      }
+
+      const maxValue = Math.max(...pageData.map(p => p.count));
+      const grandTotal = pageData.reduce((sum, p) => sum + p.count, 0);
+
+      let html = `<div class="day-group">`;
+      html += `<div class="date-header">All Time <span class="total-summary">(${grandTotal} total visits)</span></div>`;
+
+      pageData.forEach(({ page, count }) => {
+        const width = maxValue > 0 ? (count / maxValue) * 100 : 0;
+        html += `
+          <div class="bar-row">
+            <span class="page-name">${page}</span>
+            <div class="bar-container">
+              <div class="bar" style="width: ${width}%"></div>
+            </div>
+            <span class="visit-count">${count}</span>
+          </div>
+        `;
+      });
+
+      html += `</div>`;
+      container.innerHTML = html;
+    }
+
+    function formatDate(dateStr) {
+      const date = new Date(dateStr);
+      return date.toLocaleDateString('en-US', {
+        weekday: 'short',
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric'
+      });
+    }
+
+    function formatMonth(monthStr) {
+      const [year, month] = monthStr.split('-');
+      const date = new Date(year, parseInt(month) - 1);
+      return date.toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long'
+      });
+    }
+
+    function showError(message) {
+      const errorSection = document.getElementById('errorSection');
+      errorSection.textContent = message;
+      errorSection.classList.remove('hidden');
+    }
+
+    function hideError() {
+      document.getElementById('errorSection').classList.add('hidden');
+    }
+
+    init();
+  </script>
+</body>
+</html>
