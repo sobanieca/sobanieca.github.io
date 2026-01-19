@@ -1,4 +1,7 @@
 {
+  "fmt": {
+    "exclude": ["dist"]
+  },
   "tasks": {
     "build": "deno run --allow-read --allow-write --allow-env build.js",
     "build:local": "LOCAL=1 deno run --allow-read --allow-write --allow-env build.js"
