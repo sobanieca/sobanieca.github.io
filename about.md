@@ -25,13 +25,15 @@ to open a laptop. Even with AI agents doing much of the heavy lifting, there
 will always be a need to have an IDE and terminal at hand to verify changes or
 give more detailed instructions.
 
-All this led me to create this page. I've spent a lot of time and
-effort on fine-tuning my mobile/remote setup. I've even changed my career to be
-able to code on my mobile phone! For many years I was a .NET developer and I was
-working with regular Visual Studio (not to be confused with Visual Studio
-Code!). This was heavy technology and not terminal friendly (although back in
-the day it was very valuable). I will try to share my experience and inspire
-some more people to try a similar path. I can see that people on various
-developer groups keep asking how to interact with AI coding agents while away
-from their computer. Hopefully I will be able to share some ways to do
-this.
+All this led me to create this page. I've spent a lot of time and effort
+fine-tuning my mobile/remote setup. Even before the AI revolution, I felt this
+was a great way to work — so much that I've changed my career. For many years I
+was a .NET developer working with Visual Studio (not to be confused with Visual
+Studio Code!). It was a great technology back in the day, but things have
+changed. Now, with AI coding assistants, all that knowledge feels like
+superpowers, and it's worth sharing. I can see that people on various developer
+groups keep asking how to interact with AI coding agents while away from their
+computer. Hopefully I will be able to help with that. And even if you can't
+imagine using your mobile phone for development, there are other related topics
+that might interest you — like coding on remote servers or using the terminal as
+your primary development environment.
