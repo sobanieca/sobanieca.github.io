@@ -230,9 +230,15 @@ async function build() {
   for (const article of articles) {
     if (slugMap.has(article.slug)) {
       const existing = slugMap.get(article.slug);
-      console.error(`\n✗ Build failed: Duplicate article slug "${article.slug}"`);
-      console.error(`  - ${existing.categorySlug}/${existing.slug} (${existing.date})`);
-      console.error(`  - ${article.categorySlug}/${article.slug} (${article.date})`);
+      console.error(
+        `\n✗ Build failed: Duplicate article slug "${article.slug}"`,
+      );
+      console.error(
+        `  - ${existing.categorySlug}/${existing.slug} (${existing.date})`,
+      );
+      console.error(
+        `  - ${article.categorySlug}/${article.slug} (${article.date})`,
+      );
       Deno.exit(1);
     }
     slugMap.set(article.slug, article);
@@ -346,17 +352,21 @@ async function build() {
 
   // Generate site.json with list of trackable pages (filename only, deduplicated)
   // Note: analytics script sends only the filename, not the full path
-  const trackablePages = [...new Set([
-    "index.html",
-    "about-me.html",
-    ...articles.map((a) => `${a.slug}.html`),
-    ...Object.keys(categories).map((slug) => `${slug}.html`),
-  ])];
+  const trackablePages = [
+    ...new Set([
+      "index.html",
+      "about-me.html",
+      ...articles.map((a) => `${a.slug}.html`),
+      ...Object.keys(categories).map((slug) => `${slug}.html`),
+    ]),
+  ];
   await Deno.writeTextFile(
     "dist/site.json",
     JSON.stringify({ pages: trackablePages }, null, 2),
   );
-  console.log(`Generated site.json with ${trackablePages.length} trackable pages`);
+  console.log(
+    `Generated site.json with ${trackablePages.length} trackable pages`,
+  );
 
   console.log("\n✓ Build complete! Output in dist/");
 }
