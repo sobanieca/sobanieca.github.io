@@ -225,6 +225,19 @@ async function build() {
   const articles = await readArticles();
   console.log(`Found ${articles.length} articles`);
 
+  // Check for duplicate article slugs
+  const slugMap = new Map();
+  for (const article of articles) {
+    if (slugMap.has(article.slug)) {
+      const existing = slugMap.get(article.slug);
+      console.error(`\n✗ Build failed: Duplicate article slug "${article.slug}"`);
+      console.error(`  - ${existing.categorySlug}/${existing.slug} (${existing.date})`);
+      console.error(`  - ${article.categorySlug}/${article.slug} (${article.date})`);
+      Deno.exit(1);
+    }
+    slugMap.set(article.slug, article);
+  }
+
   // Copy article images
   await Deno.mkdir("dist/assets/images/articles", { recursive: true });
   for (const article of articles) {
@@ -330,6 +343,20 @@ async function build() {
 
   await Deno.copyFile("stats.html", "dist/stats.html");
   console.log("Copied stats.html");
+
+  // Generate site.json with list of trackable pages (filename only, deduplicated)
+  // Note: analytics script sends only the filename, not the full path
+  const trackablePages = [...new Set([
+    "index.html",
+    "about-me.html",
+    ...articles.map((a) => `${a.slug}.html`),
+    ...Object.keys(categories).map((slug) => `${slug}.html`),
+  ])];
+  await Deno.writeTextFile(
+    "dist/site.json",
+    JSON.stringify({ pages: trackablePages }, null, 2),
+  );
+  console.log(`Generated site.json with ${trackablePages.length} trackable pages`);
 
   console.log("\n✓ Build complete! Output in dist/");
 }
