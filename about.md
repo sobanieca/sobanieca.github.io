@@ -29,8 +29,7 @@ All this led me to create this page. I've spent a lot of time and effort
 fine-tuning my mobile/remote setup. Even before the AI revolution, I felt this
 was a great way to work — so much that I've changed my career. For many years I
 was a .NET developer working in Visual Studio (not to be confused with Visual
-Studio Code!). It was a great technology back in the day, but many things have
-changed.
+Studio Code!). By the way - It was a great technology back in the day!
 
 Now, with AI coding assistants, ability to code on mobile phone feels like
 superpowers. It's worth sharing! I can see that people on various developer

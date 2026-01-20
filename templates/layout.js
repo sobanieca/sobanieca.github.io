@@ -108,8 +108,8 @@ export function layout(
     // Giscus theme helper
     function getGiscusTheme(theme) {
       const isLocal = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
-      const lightTheme = isLocal ? 'light' : window.location.origin + '/assets/css/giscus-light.css';
-      return theme === 'dark' ? 'purple_dark' : lightTheme;
+      const origin = isLocal ? 'https://adam.sobaniec.com' : window.location.origin;
+      return theme === 'dark' ? 'purple_dark' : origin + '/assets/css/giscus-light.css';
     }
 
     // Initialize Giscus if container exists
