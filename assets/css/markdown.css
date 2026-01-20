@@ -88,7 +88,7 @@ hr {
 }
 
 code {
-  background: #f8f8f8;
+  background: var(--card-bg);
   padding: 2px 6px;
   border-radius: 3px;
   font-family: "Courier New", monospace;
@@ -97,7 +97,7 @@ code {
 }
 
 pre {
-  background: #f8f8f8;
+  background: var(--card-bg);
   padding: 1.5rem;
   border-radius: 0.5rem;
   overflow-x: auto;
