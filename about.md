@@ -38,3 +38,6 @@ computer. Hopefully I will be able to help with that. And even if you can't
 imagine using your mobile phone for development, there are other related topics
 that might interest you — like coding on remote servers or using the terminal as
 your primary development environment.
+
+> NOTE: Engine of this page was "vibe-coded" with Claude, articles are also
+> fine-tuned using AI (Gemini).

@@ -5,8 +5,8 @@
 ## About This Repo
 
 This repository hosts my personal development blog built with Deno and Claude.
-Visit the site to read my latest posts about web development, JavaScript, Deno,
-and serverless architectures.
+Visit the site to read my latest posts about web development, JavaScript and
+Deno.
 
 ## Local Development
 
@@ -37,7 +37,7 @@ To run this blog locally:
 The site is automatically built and deployed to GitHub Pages when changes are
 pushed to the `main` branch using GitHub Actions.
 
-**Live site**: https://sobanieca.github.io
+**Live site**: https://adam.sobaniec.com
 
 ## Acknowledgments
 

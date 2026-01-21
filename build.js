@@ -256,7 +256,7 @@ async function build() {
     console.log(`Copied ${articlesWithImages} article images`);
   }
 
-  const isLocal = Deno.env.get("LOCAL") === "1";
+  const isLocal = Deno.env.get("DEBUG") === "1";
 
   const context = {
     siteTitle: SITE_TITLE,
