@@ -10,6 +10,9 @@ import { aboutPage } from "./templates/about-page.js";
 const SITE_AUTHOR = "Adam Sobaniec";
 const SITE_TITLE = `${SITE_AUTHOR} - Software Developer`;
 
+// Set to false to restore normal site build
+const UNDER_CONSTRUCTION = true;
+
 async function readCategories() {
   const categoryList = [];
 
@@ -166,6 +169,46 @@ async function readArticles() {
 
 async function build() {
   console.log("Building site...");
+
+  if (UNDER_CONSTRUCTION) {
+    console.log("Under construction mode enabled");
+    try {
+      await Deno.remove("dist", { recursive: true });
+    } catch {
+      // Directory doesn't exist, ignore
+    }
+    await Deno.mkdir("dist", { recursive: true });
+
+    const html = `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Under Construction</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background: #f5f5f5;
+      color: #333;
+    }
+    h1 { font-size: 2rem; }
+  </style>
+</head>
+<body>
+  <h1>Under construction</h1>
+</body>
+</html>`;
+
+    await Deno.writeTextFile("dist/index.html", html);
+    console.log("\n✓ Under construction page generated in dist/");
+    return;
+  }
 
   console.log("Initializing Shiki...");
   const highlighter = await createHighlighter({
