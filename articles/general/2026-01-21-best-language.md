@@ -43,13 +43,13 @@ There is a velocity in JavaScript that is hard to beat. It removes the ceremony.
 Of course, the old adage remains: _with great power comes great responsibility._
 You must be disciplined.
 
-### Where TypeScript Fits In
+### TypeScript
 
 Here we cannot talk about JavaScript without addressing TypeScript. It has taken
 the industry by storm, and for good reason.
 
 I use TypeScript daily in my professional work. In large-scale enterprise
-projects with dozens of contributors, it is invaluable. It serves as living
+projects with dozens of contributors, it is valuable. It serves as living
 documentation and helps navigate massive codebases.
 
 However, when you are building your personal projects, you have limited time.
@@ -70,15 +70,3 @@ In an AI-assisted world, the "safety layer" provided by static typing is no
 longer the _only_ way to write correct code. The AI helps bridge that gap,
 allowing you to focus on building features.
 
-### Summary
-
-If you are currently studying or looking to pivot into tech:
-
-1. **Start with plain JavaScript.** Embrace the speed and flexibility.
-2. **Learn the Web APIs.** Understand what the browser offers out of the box.
-3. **Master the Runtimes.** Experiment with Node.js or Deno to see how JS runs
-   outside the browser.
-
-Build your foundation here. You can always add TypeScript to your toolbelt
-later, but understanding the raw power of JavaScript is a skill that will pay
-off for your entire career.
