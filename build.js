@@ -11,7 +11,8 @@ const SITE_AUTHOR = "Adam Sobaniec";
 const SITE_TITLE = `${SITE_AUTHOR} - Software Developer`;
 
 // Set to false to restore normal site build
-const UNDER_CONSTRUCTION = Deno.env.get("SOBANIECA_PAGE_REPO_DEVELOP") === "true" ? false : true;
+const UNDER_CONSTRUCTION =
+  Deno.env.get("SOBANIECA_PAGE_REPO_DEVELOP") === "true" ? false : true;
 
 async function readCategories() {
   const categoryList = [];
