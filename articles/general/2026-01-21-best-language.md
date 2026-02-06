@@ -69,4 +69,3 @@ cases, and suggest refactors.
 In an AI-assisted world, the "safety layer" provided by static typing is no
 longer the _only_ way to write correct code. The AI helps bridge that gap,
 allowing you to focus on building features.
-
