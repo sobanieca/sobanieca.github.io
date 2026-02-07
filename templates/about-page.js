@@ -12,7 +12,7 @@ export function aboutPage(content, aboutData) {
 
   return `<div class="about-page">
   <header class="category-header">
-    <h1>About</h1>
+    <h1>About Me</h1>
   </header>
   <section class="about-intro">
     <p>${intro} <a href="${company.url}" target="_blank" rel="noopener">${company.name}</a>.</p>
