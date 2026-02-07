@@ -5,10 +5,10 @@ excerpt: "Laptops are distraction machines; mobile interfaces force focus. Unloc
 
 # Leave the laptop: coding in the age of AI agents
 
-Imagine this: You wake up, get ready, jump on your motorcycle, and head to your
-favorite café in the city center. You order your beloved cappuccino, find a
-comfortable spot, and instead of lugging out a heavy backpack, you simply slide
-your phone out of your pocket.
+Imagine this: You wake up, get ready, jump on your bicycle/motorcycle, and head
+to your favorite café in the city center. You order your beloved cappuccino,
+find a comfortable spot, and instead of lugging out a heavy backpack, you simply
+slide your phone out of your pocket.
 
 You open a terminal emulator. You tap `git pull`. You launch **Claude Code**.
 
