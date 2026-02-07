@@ -1,4 +1,5 @@
-- build-in-terminal - setup your terminal emulator (Termux, Windows Terminal - Nerd font)
+- build-in-terminal - setup your terminal emulator (Termux, Windows Terminal -
+  Nerd font)
 - tools - `jsonr`
 - tools - Why Deno?
 - build anywhere - setup new remote connection (contabo, hetzner, secure ports
