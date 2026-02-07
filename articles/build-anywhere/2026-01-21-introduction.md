@@ -13,25 +13,17 @@ For more complex tasks, you need raw power. But buying a more powerful laptop is
 
 In this series, I want to explore a different approach: **making the remote machine your primary development foundation.**
 
-This shift wasn't just a philosophical choice for me; it was a necessity. When I decided to turn my Android phone into a development device (as discussed in the *Build on the Go* series), I hit a wall. I needed to run specific x86 architectures and heavy workloads that my mobile processor simply couldn't handle.
+This shift wasn't just a philosophical choice for me; it was a necessity for my professional work. While I still comfortably build hobby apps and pet projects directly on my Android phone (as discussed in the *Build on the Go* series), professional requirements often demand more. I needed to run specific x86 architectures and heavy workloads that my mobile processor simply couldn't handle.
 
 I needed the cloud.
 
-## The Ultimate Backup
-
-There is another massive, often overlooked advantage: **instant recovery**.
-
-If your physical laptop is stolen or crashes today, you lose time. You have to buy a new machine, reinstall your IDEs, clone your repos, and configure your environment.
-
-When your development environment is remote, your physical device becomes a disposable "thin client." Drop it in a lake? Lose it on a train? It doesn't matter. You can grab any cheap laptop, install an SSH client, and be back at work in minutes—exactly where you left off.
-
 ## The GUI Trap
 
-My initial attempt was predictable. I had Azure credits, so I spun up a powerful Windows VM and connected via Remote Desktop.
+My initial attempt was predictable. I still had some valid Azure credits from a previous company I worked for, so I decided to use them to spin up a powerful Windows VM in the cloud.
 
-It was a nightmare.
+I really tried my best to make it work. I wanted that familiar desktop experience, but it turned into a struggle.
 
-Streaming a full graphical user interface over the internet is inherently laggy. Latency makes every mouse click feel sluggish. On Android, the experience was even worse, with the OS fighting for control over system keys (like the `Windows` button). The more I tried to replicate my desktop experience in the cloud, the more frustrating it became.
+Streaming a full graphical user interface over the internet is inherently laggy. Latency makes every mouse click feel sluggish. On Android, it was even worse. The Remote Desktop application struggled to interpret inputs correctly, and the host Android OS kept intercepting system keys (like the `Windows` button) instead of passing them to the VM. The more I tried to replicate my desktop experience in the cloud, the more frustrating it became.
 
 ## Embracing the Terminal
 
@@ -42,3 +34,11 @@ I abandoned the GUI and switched entirely to a **terminal-based workflow**. Inst
 This is the foundation of the *Build in Terminal* philosophy. By decoupling the interface (your lightweight local device) from the compute (the heavy remote server), you get the best of both worlds: infinite portability and infinite power.
 
 In this section, I will guide you through setting up a proper remote development environment, securing it with SSH, and making it feel just as responsive as `localhost`.
+
+## The Ultimate Backup
+
+There is another massive, often overlooked advantage: **instant recovery**.
+
+If your physical laptop is stolen or crashes today, you lose time. You have to buy a new machine, reinstall your IDEs, clone your repos, and configure your environment.
+
+When your development environment is remote, your physical device becomes a disposable "thin client." Drop it in a lake? Lose it on a train? It doesn't matter. You can grab any cheap laptop, install an SSH client, and be back at work in minutes—exactly where you left off.
