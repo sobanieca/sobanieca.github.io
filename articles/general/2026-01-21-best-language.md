@@ -54,7 +54,9 @@ documentation and helps navigate massive codebases.
 
 However, when you are building your personal projects, you have limited time.
 You want to see results. Adding a compilation step and complex type definitions
-can sometimes slow down the "feedback loop."
+can sometimes slow down the "feedback loop." Nonetheless, investing in JavaScript
+first is a strategic move, as it provides a direct pathway to leveraging TypeScript
+when your projects or professional needs demand it.
 
 ### The AI Factor
 
