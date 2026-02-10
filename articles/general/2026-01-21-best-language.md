@@ -1,6 +1,6 @@
 ---
 title: "Put a bet on JavaScript!"
-excerpt: "Why JavaScript should be your first bet?"
+excerpt: "JavaScript: The ultimate language for modern development, accelerating your career in an AI-powered world."
 ---
 
 "Which programming language should I bet my career on?"
