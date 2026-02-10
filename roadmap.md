@@ -1,6 +1,5 @@
-- build-in-terminal - setup your terminal emulator (Termux, Windows Terminal -
-  Nerd font)
 - tools - `jsonr`
+- terminal - `tmux`
 - tools - Why Deno?
 - build anywhere - setup new remote connection (contabo, hetzner, secure ports
   and generate ssh key)
