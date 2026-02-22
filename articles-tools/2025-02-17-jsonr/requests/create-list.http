@@ -1,0 +1,5 @@
+POST @@baseUrl@@/lists
+
+{
+  "name": "Shopping"
+}

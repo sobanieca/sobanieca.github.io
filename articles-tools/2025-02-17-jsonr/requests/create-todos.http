@@ -1,0 +1,10 @@
+POST @@baseUrl@@/lists/@@listId@@/todos
+
+[
+  {
+    "content": "Buy milk"
+  },
+  {
+    "content": "But eggs"
+  }
+]
