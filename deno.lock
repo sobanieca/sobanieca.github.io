@@ -3,7 +3,7 @@
   "specifiers": {
     "npm:marked@12": "12.0.2",
     "npm:shiki@^1.24.2": "1.29.2",
-    "npm:yaml@^2.3.4": "2.8.0"
+    "npm:yaml@^2.3.4": "2.8.2"
   },
   "npm": {
     "@shikijs/core@1.29.2": {
@@ -241,8 +241,8 @@
         "unist-util-is"
       ]
     },
-    "unist-util-visit@5.0.0": {
-      "integrity": "sha512-MR04uvD+07cwl/yhVuVWAtw+3GOR/knlL55Nd/wAdblk27GCVt3lqpTivy/tkJcZoNPzTwS1Y+KMojlLDhoTzg==",
+    "unist-util-visit@5.1.0": {
+      "integrity": "sha512-m+vIdyeCOpdr/QeQCu2EzxX/ohgS8KbnPDgFni4dQsfSCtpz8UqDyY5GjRru8PDKuYn7Fq19j1CQ+nJSsGKOzg==",
       "dependencies": [
         "@types/unist",
         "unist-util-is",
@@ -263,8 +263,8 @@
         "vfile-message"
       ]
     },
-    "yaml@2.8.0": {
-      "integrity": "sha512-4lLa/EcQCB0cJkyts+FpIRx5G/llPxfP6VQU5KByHEhLxY3IJCH0f0Hy1MHI8sClTvsIb8qwRJ6R/ZdlDJ/leQ==",
+    "yaml@2.8.2": {
+      "integrity": "sha512-mplynKqc1C2hTVYxd0PU2xQAc22TI1vShAYGksCCfxbn/dFwnHTNi1bvYsBTkhdUNtGIf5xNOg938rrSSYvS9A==",
       "bin": true
     },
     "zwitch@2.0.4": {
