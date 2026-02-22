@@ -1,7 +1,6 @@
 add screenshot, gif with terminal workflow for development add screenshot, gif
 for mobile dev
 
-- tools - `jsonr`
 - tools - `sqlr`
 - terminal - `tmux`
 - tools - Why Deno?
