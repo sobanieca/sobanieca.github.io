@@ -1,17 +1,20 @@
 # API Endpoints
 
-All endpoints require the `Authorization: ApiKey ****` header. Requests without a valid key receive `401 Unauthorized`.
+All endpoints require the `Authorization: ApiKey ****` header. Requests without
+a valid key receive `401 Unauthorized`.
 
 ## POST /lists
 
 Create a new list.
 
 **Request body:**
+
 ```json
 { "name": "Shopping" }
 ```
 
 **Response:** `201 Created`
+
 ```json
 { "id": "1" }
 ```
@@ -21,6 +24,7 @@ Create a new list.
 Add todos to a list.
 
 **Request body:**
+
 ```json
 [
   { "content": "Buy milk" },
@@ -35,6 +39,7 @@ Add todos to a list.
 Get all todos for a list.
 
 **Response:** `200 OK`
+
 ```json
 [
   { "id": "1", "content": "Buy milk", "status": "pending" },
@@ -47,11 +52,13 @@ Get all todos for a list.
 Update a todo's status.
 
 **Request body:**
+
 ```json
 { "status": "completed" }
 ```
 
 **Response:** `200 OK`
+
 ```json
 { "id": "1", "content": "Buy milk", "status": "completed" }
 ```

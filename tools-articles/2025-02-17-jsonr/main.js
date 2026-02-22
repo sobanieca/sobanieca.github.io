@@ -45,7 +45,7 @@ app.get("/lists/:listId/todos", (c) => {
   if (!list) return c.json({ error: "List not found" }, 404);
 
   return c.json(
-    list.todos.map(({ id, content, status }) => ({ id, content, status }))
+    list.todos.map(({ id, content, status }) => ({ id, content, status })),
   );
 });
 
