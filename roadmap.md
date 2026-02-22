@@ -1,4 +1,5 @@
 - tools - `jsonr`
+- tools - `sqlr`
 - terminal - `tmux`
 - tools - Why Deno?
 - build anywhere - setup new remote connection (contabo, hetzner, secure ports
