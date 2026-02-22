@@ -1,6 +1,15 @@
 import { Hono } from "hono";
 
+const API_KEY = "391495ab-3540-47fd-b420-c654489a1a39";
+
 const app = new Hono();
+
+app.use("*", async (c, next) => {
+  if (c.req.header("Authorization") !== `ApiKey ${API_KEY}`) {
+    return c.json({ error: "Unauthorized" }, 401);
+  }
+  await next();
+});
 
 const lists = new Map();
 let listCounter = 0;

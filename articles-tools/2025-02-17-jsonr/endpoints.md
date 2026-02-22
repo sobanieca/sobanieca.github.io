@@ -1,5 +1,7 @@
 # API Endpoints
 
+All endpoints require the `Authorization: ApiKey ****` header. Requests without a valid key receive `401 Unauthorized`.
+
 ## POST /lists
 
 Create a new list.
