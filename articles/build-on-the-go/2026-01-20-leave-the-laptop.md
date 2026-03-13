@@ -3,6 +3,8 @@ title: "Leave the laptop: coding in the age of AI agents"
 excerpt: "Laptops are distraction machines; mobile interfaces force focus. Unlock the magic of turning the device in your pocket from a passive screen into a powerful creation engine"
 ---
 
+TODO: add screenshot of termux and gboard running on Android
+
 # Leave the laptop: coding in the age of AI agents
 
 Imagine this: You wake up, get ready, jump on your bicycle/motorcycle, and head

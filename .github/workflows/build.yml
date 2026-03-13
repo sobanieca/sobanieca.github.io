@@ -32,6 +32,13 @@ jobs:
       - name: Lint
         run: deno lint
 
+      - name: Check for TODOs in articles
+        run: |
+          if grep -r 'TODO:' --include='*.md' articles/; then
+            echo "Found TODO: markers in markdown files. Please resolve them before merging."
+            exit 1
+          fi
+
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v4

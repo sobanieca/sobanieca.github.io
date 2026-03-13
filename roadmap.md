@@ -1,11 +1,30 @@
-add screenshot, gif with terminal workflow for development add screenshot, gif
-for mobile dev add screenshot of full terminal
+build-anywhere:
 
-- tools - `sqlr`
-- terminal - `tmux`
-- tools - Why Deno?
-- build anywhere - setup new remote connection (contabo, hetzner, secure ports
-  and generate ssh key)
-- build anywhere - `env-setup` script
-- build anywhere - `remote file manager` explain project and it's advantages
-- build on mobile - `eruda`, kiwi browser
+- Setup new VPS - which provider to choose (AWS/Azure/Contabo/Hetzner), what are
+  benefits of it?
+- Secure connection to your VPS (ssh key, create user, block IP)
+- `remote-file-manager` to easily operate on remote files
+
+build-in-terminal:
+
+- Start with foundation - `tmux` (include plugins like `gitmux`)
+- Your terminal IDE - `neovim`
+- Most useful Neovim plugins
+- AI in terminal - `Claude Code` (git diff to review local changes, github PR to
+  view bigger refatoring, adjust `notify` script to get notification in
+  terminal)
+
+build-on-the-go:
+
+- Setup `Termux` to start building, you will most likely need a separate VPS
+  (link to build-anywhere)
+- Offline development with `proot-distro`
+- `eruda`, Kiwi browser, desktop view and zoom in Chrome
+
+general:
+
+- Headache of Javascript runtimes (which runtime to choose?)
+
+tools:
+
+- `sqlr`

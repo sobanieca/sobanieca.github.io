@@ -3,6 +3,8 @@ title: "Taming the Terminal: Building a Keyboard-First Workflow"
 excerpt: "Stop chasing the mouse and start building like a pro. Why moving your development workflow into the terminal is the ultimate productivity hack."
 ---
 
+TODO: add screenshot/recording of the terminal setup
+
 Have you ever envied those "hackers" in movies who seem to achieve impossible
 things just by typing into a black screen? While Hollywood dramatizes it, there
 is a profound truth beneath the surface: the terminal is the most efficient
