@@ -14,15 +14,19 @@ To run this blog locally:
 
 1. Install [Deno](https://deno.land/)
 2. Clone this repository
-3. Build the site:
+3. Set up git hooks:
+   ```bash
+   ./git-hooks/setup.sh
+   ```
+4. Build the site:
    ```bash
    deno task build
    ```
-4. Serve the `dist/` directory with any static file server:
+5. Serve the `dist/` directory with any static file server:
    ```bash
    deno run --allow-net --allow-read https://deno.land/std/http/file_server.ts dist
    ```
-5. Open your browser to `http://localhost:4000`
+6. Open your browser to `http://localhost:4000`
 
 ## Technology Stack
 

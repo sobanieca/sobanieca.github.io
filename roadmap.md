@@ -1,6 +1,5 @@
 add screenshot, gif with terminal workflow for development add screenshot, gif
-for mobile dev
-add screenshot of full terminal
+for mobile dev add screenshot of full terminal
 
 - tools - `sqlr`
 - terminal - `tmux`
