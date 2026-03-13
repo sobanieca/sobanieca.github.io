@@ -50,8 +50,7 @@ status lines, and prompt themes.
 
 #### Installation
 
-**On Windows Terminal:** Install your preferred Nerd Font (I personally
-recommend **Inconsolata Go**) in your OS settings. Then, in the Windows Terminal
+**On Windows Terminal:** Install your preferred Nerd Font (in my case it's **Inconsolata Go**) in your OS settings. Then, in the Windows Terminal
 settings, navigate to your profile's "Appearance" section and select the font.
 
 **On Termux (Android):** You need to manually place the font file at
@@ -64,7 +63,5 @@ mv InconsolataGoNerdFontMono-Regular.ttf ~/.termux/font.ttf
 # Then run: termux-reload-settings
 ```
 
-I personally recommend
-[Inconsolata Go](https://www.programmingfonts.org/#inconsolata-go) for its
-clarity and balance. Once you have your font set up, you're ready to start
-building your environment.
+Once you have your font set up, you're ready to start
+configuring your environment.
