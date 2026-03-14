@@ -21,8 +21,8 @@ In this series, I want to explore a different approach: **making the remote
 machine your primary development foundation.**
 
 This shift wasn't just a philosophical choice for me; it was a necessity for my
-professional work. While I still comfortably build hobby apps and pet projects
-directly on my Android phone (as discussed in the _Build on the Go_ series),
+work. While it's technicall possible to build hobby apps and pet projects
+directly on Android phone (as presented in the _Build on the Go_ series),
 professional requirements often demand more. I needed to run specific x86
 architectures and heavy workloads that my mobile processor simply couldn't
 handle.
@@ -31,9 +31,8 @@ I needed the cloud.
 
 ## The GUI Trap
 
-My initial attempt was predictable. I still had some valid Azure credits from a
-previous company I worked for, so I decided to use them to spin up a powerful
-Windows VM in the cloud.
+My initial attempt was predictable. Back in the days I've had some Azure credits
+so I decided to spin up a powerful Windows VM in the cloud.
 
 I really tried my best to make it work. I wanted that familiar desktop
 experience, but it turned into a struggle.
