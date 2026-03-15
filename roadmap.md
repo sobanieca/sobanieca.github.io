@@ -7,6 +7,7 @@ build-anywhere:
 - Setup new machine on Contabot how-to
 - Secure connection to your VPS (ssh key, create user, block IP)
 - `remote-file-manager` to easily operate on remote files
+- Limiting costs of a remote machine (auto shutdown)
 
 build-in-terminal:
 
