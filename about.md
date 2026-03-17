@@ -32,4 +32,4 @@ that might interest you — like coding on remote servers or using the terminal 
 your primary development environment.
 
 > NOTE: Engine of this page was "vibe-coded" with Claude, articles are also
-> fine-tuned using AI (Gemini).
+> fine-tuned (not generated!) using AI (Gemini).
