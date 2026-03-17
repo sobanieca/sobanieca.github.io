@@ -233,6 +233,19 @@ async function build() {
   marked.use({
     async: false,
     renderer: {
+      image(href, title, text) {
+        const videoExts = [".mp4", ".webm", ".ogg"];
+        if (videoExts.some((ext) => href.endsWith(ext))) {
+          return `<video controls playsinline preload="metadata"${
+            title ? ` title="${title}"` : ""
+          }><source src="${href}" type="video/${
+            href.split(".").pop()
+          }">Your browser does not support the video tag.</video>`;
+        }
+        return `<img src="${href}" alt="${text}"${
+          title ? ` title="${title}"` : ""
+        }>`;
+      },
       code(code, lang) {
         if (!lang) {
           return `<pre><code>${code}</code></pre>`;

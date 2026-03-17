@@ -3,8 +3,6 @@ title: "Leave the laptop: coding in the age of AI agents"
 excerpt: "Laptops are distraction machines; mobile interfaces force focus. Unlock the magic of turning the device in your pocket from a passive screen into a powerful creation engine"
 ---
 
-TODO: add screenshot of termux and gboard running on Android
-
 # Leave the laptop: coding in the age of AI agents
 
 Imagine this: You wake up, get ready, jump on your bicycle/motorcycle, and head
@@ -37,6 +35,10 @@ longer the typist; you are the architect. Your job is to describe _what_ you
 want, and the AI Agent handles the _how_. Mobile keyboards are terrible for
 code, but they are excellent for natural language. If you can text a friend, you
 can deploy a feature.
+
+![code-on-mobile](images/code-on-mobile.mp4)
+
+> Coding on mobile phone was possible before, but AI took it to the next level
 
 ## The "Found Time"
 

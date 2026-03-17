@@ -139,3 +139,17 @@ img {
   display: block;
   margin: 1.5rem 0;
 }
+
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 1.5rem auto;
+  border-radius: 0.5rem;
+}
+
+@media (min-width: 769px) {
+  video {
+    max-width: 40%;
+  }
+}
