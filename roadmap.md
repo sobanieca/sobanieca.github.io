@@ -1,7 +1,5 @@
 build-anywhere:
 
-- Setup new VPS - which provider to choose (AWS/Azure/Contabo/Hetzner), what are
-  benefits of it?
 - Setup new machine on AWS how-to
 - Setup new machine on Azure how-to
 - Setup new machine on Contabot how-to
