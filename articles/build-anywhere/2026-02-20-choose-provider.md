@@ -3,8 +3,6 @@ title: "Choosing the right provider for VPS"
 excerpt: "You've decided that you want to move your computing power to the cloud. But which provider should you choose from the many options available?"
 ---
 
-TODO: add cover image
-
 So you've decided to use a remote machine as your primary workhorse? But where
 to start? There are many options, and while I can't list all of them, I will
 focus on those I've personally tried or considered.
