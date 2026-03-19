@@ -31,7 +31,7 @@ export function articlePage(article, context, navigation = {}) {
   <header>
     <h1>${article.title}</h1>
     <div class="article-meta">
-      <time datetime="${article.date}">${
+      Updated at: <time datetime="${article.date}">${
     context.formatDate(article.date)
   }</time>
     </div>

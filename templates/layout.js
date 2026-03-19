@@ -58,7 +58,7 @@ export function layout(
           <path d="M3 3v5h5"/>
           <path d="M12 7v5l4 2"/>
         </svg>
-        <span>Recent</span>
+        <span>Recently updated</span>
       </a>
       ${categoriesNav}
     </nav>
