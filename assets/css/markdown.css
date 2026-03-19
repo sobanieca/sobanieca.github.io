@@ -148,8 +148,16 @@ video {
   border-radius: 0.5rem;
 }
 
+video.horizontal-video {
+  width: 100%;
+}
+
 @media (min-width: 769px) {
   video {
     max-width: 40%;
+  }
+
+  video.horizontal-video {
+    max-width: 100%;
   }
 }

@@ -80,7 +80,7 @@ export function layout(
     <footer>
       <p>&copy; ${
     new Date().getFullYear()
-  } ${siteAuthor}. Vibe coded with <a href="https://deno.com" target="_blank" rel="noopener">Deno</a> and <a href="https://claude.ai" target="_blank" rel="noopener">Claude</a>.</p>
+  } ${siteAuthor}. Coded with <a href="https://deno.com" target="_blank" rel="noopener">Deno</a> and <a href="https://claude.ai" target="_blank" rel="noopener">Claude</a>.</p>
     </footer>
   </main>
 
@@ -156,6 +156,15 @@ ${
   <script>eruda.init();</script>`
       : ""
   }
+  <script>
+    document.querySelectorAll('video').forEach(function(video) {
+      video.addEventListener('loadedmetadata', function() {
+        if (video.videoWidth > video.videoHeight) {
+          video.classList.add('horizontal-video');
+        }
+      });
+    });
+  </script>
   <script>
     (function() {
       var host = window.location.hostname;
