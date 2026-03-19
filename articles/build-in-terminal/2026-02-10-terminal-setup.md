@@ -69,5 +69,5 @@ environment.
 
 ![coding-in-terminal](./images/coding-in-terminal.mp4)
 
-> Once you've everything configured - coding in terminal is great! No need to
+> Once you've everything configured - coding in terminal is great. No need to
 > touch mouse, pure focus!

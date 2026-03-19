@@ -27,6 +27,7 @@ export function layout(
   <link rel="stylesheet" href="/assets/css/main.css">
   <link rel="stylesheet" href="/assets/css/markdown.css">
   <link rel="stylesheet" href="/assets/css/shiki.css">
+  <script>document.documentElement.setAttribute('data-theme', localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'));</script>
 </head>
 <body>
   <button id="menu-toggle" aria-label="Toggle menu">
@@ -102,7 +103,7 @@ export function layout(
       }
     });
 
-    const currentTheme = localStorage.getItem('theme') || 'dark';
+    const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
     html.setAttribute('data-theme', currentTheme);
 
     // Giscus theme helper
