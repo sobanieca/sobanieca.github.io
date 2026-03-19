@@ -3,8 +3,6 @@ title: "Taming the Terminal: Building a Keyboard-First Workflow"
 excerpt: "Stop chasing the mouse and start building like a pro. Why moving your development workflow into the terminal is the ultimate productivity hack."
 ---
 
-TODO: add screenshot/recording of the terminal setup
-
 Have you ever envied those "hackers" in movies who seem to achieve impossible
 things just by typing into a black screen? While Hollywood dramatizes it, there
 is a profound truth beneath the surface: the terminal is the most efficient
@@ -68,3 +66,8 @@ mv InconsolataGoNerdFontMono-Regular.ttf ~/.termux/font.ttf
 
 Once you have your font set up, you're ready to start configuring your
 environment.
+
+![coding-in-terminal](./images/coding-in-terminal.mp4)
+
+> Once you've everything configured - coding in terminal is great! No need to
+> touch mouse, pure focus!
