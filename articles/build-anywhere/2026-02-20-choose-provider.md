@@ -56,11 +56,12 @@ So, what's the catch?
   quirks.
 - **Compliance:** Smaller providers may not have the same extensive compliance
   certifications (although Contabo, for example, does maintain several).
-- **Security by default:** You should expect your machine to lack a default
+- **No security by default:** You should expect your machine to lack a default
   firewall. Often, your server will be exposed to the internet unless you
   manually configure a virtual network. This means that if you're running a
   local dev server on port 3000, it's accessible to anyone by default. Don't let
-  this deter you! It's easily secured with a bit of manual configuration.
+  this deter you! It's easily secured with a bit of manual configuration. I will
+  try to show it - stay tuned!
 
 ## Self-hosting
 

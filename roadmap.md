@@ -2,7 +2,7 @@ build-anywhere:
 
 - Setup new machine on AWS how-to
 - Setup new machine on Azure how-to
-- Setup new machine on Contabot how-to
+- Setup new machine on Contabo how-to
 - Secure connection to your VPS (ssh key, create user, block IP)
 - `remote-file-manager` to easily operate on remote files
 - Limiting costs of a remote machine (auto shutdown)
