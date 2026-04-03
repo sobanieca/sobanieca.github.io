@@ -10,11 +10,6 @@ TODO: write
 
 TODO: remove points below
 
-- There are lots of machine types on AWS. Compute oriented, memory, disk,
-  workload spikes, etc. Which one to choose?
-- Step-by-step on what to configure. Mostly about configuring security group,
-  then add new ec2 instance
-
 If you want to configure remote machine with AWS, you can go with EC2 service.
 Now, the first tricky part is - what machine to choose? There are tons of
 options and it's very easy to get lost there. It really depends on the projects
@@ -39,3 +34,6 @@ Follow these steps to configure your machine:
   ![EC2 Launch Instance](./images/aws-ec2-launch-instance.jpg)
 
 - Now select `Debian` as OS
+- Setup security group, add a target ssh port that we need to unblock
+- Keep in mind that aftet finishing secure of our server we need to remove
+  default ssh port from security group
