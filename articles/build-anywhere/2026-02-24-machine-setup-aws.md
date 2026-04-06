@@ -20,10 +20,13 @@ purpose I suggest `m8i` or `m8g` machines (or newer generations if they are
 available). These are intel (x86 architecture) and graviton (ARM architecture)
 based machines with balanced parameters (cpu and memory) that for me seem very
 well suited for the specific of software engineering workloads. The only thing
-that you need to figure out is how much RAM and CPU do you need. I believe for
-most cases machine like `m8i.2xlarge` is more than sufficient (32gb ram, 8 vCPU,
-256 gb disk space). Since we will code in terminal RAM won't be occupied by any
-GUI which already allows to get even more out of your machine.
+that you need to figure out is how much RAM and CPU do you need. To give you
+brief idea about possible cost - machine like `m8i.2xlarge` (32gb ram, 8 vCPU,
+256 gb disk space) for ~160 hours usage per month costs ~60 USD monthly. I
+believe you can expect that lower params like `m8i.xlarge` (16gb ram, 4 vCPU)
+will cost ~30 USD. Respectively `m8i.large` (8 gb ram, 2 vCPU). Since we will
+code in terminal RAM won't be occupied by any GUI which already allows to get
+even more out of your machine.
 
 Follow these steps to configure your machine:
 
