@@ -32,6 +32,11 @@ If your company already hosts its products with a major provider, it's often a
 simple request for "one more" machine for internal development, assuming your
 needs are reasonable.
 
+Cloud providers offer also one amazing feature - you can change type of your
+machine depending on the situation. If you need to make some demo and want your
+project to build/run as fast as possible - you can double your CPU power and RAM
+with couple clicks.
+
 So what are the drawbacks? Primarily, price. As of this writing, a 32GB RAM
 machine with 8 vCPUs costs around 60 USD for 160 hours per month. You can get a
 similar specification much cheaper from a budget provider like Contabo or
