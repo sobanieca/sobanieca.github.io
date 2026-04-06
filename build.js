@@ -233,6 +233,17 @@ async function build() {
   marked.use({
     async: false,
     renderer: {
+      link(href, title, text) {
+        const articleMatch = href.match(
+          /^\.\/\d{4}-\d{2}-\d{2}-(.+)\.md$/,
+        );
+        if (articleMatch) {
+          href = `/articles/${articleMatch[1]}.html`;
+        }
+        return `<a href="${href}"${
+          title ? ` title="${title}"` : ""
+        }>${text}</a>`;
+      },
       image(href, title, text) {
         const videoExts = [".mp4", ".webm", ".ogg"];
         if (videoExts.some((ext) => href.endsWith(ext))) {

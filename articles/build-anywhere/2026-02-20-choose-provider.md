@@ -121,6 +121,7 @@ anywhere in the world with a lightweight device.
 
 ---
 
-Next 3 articles will be about how to setup VPS on AWS/Azure/Contabo. If you want
-to use other provider, configure your VPS and jump to [TODO: link] to read about
-how you can secure your machine.
+Next articles will briefly explain how to setup VPS with AWS/Contabo. If you use
+some other provider, provision your VPS and jump to
+[Connect and Secure your VPS](./2026-03-02-connect-and-secure-vps.md) article to
+read about how you can connect and secure your machine.
