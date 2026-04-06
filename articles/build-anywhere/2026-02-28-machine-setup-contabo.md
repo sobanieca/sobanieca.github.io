@@ -32,10 +32,13 @@ source code is secure on external GIT servers anyway. It's not a big deal to
 recreate machine anytime (especially once you have some scripts for it).
 
 When you scroll down you will see `Additional Features`. In my case I don't use
-private networking. This would require additional VPN setup which I don't need.
-Also, I use `stop` functionality to turn the VPS off when I don't use it. I will
-also show in [Connect and Secure VPS](./2026-03-02-connect-and-secure-vps.md)
-how to secure your VPS to improve security.
+private networking. This would require additional VPN setup which sounds like an
+overkill for this specific purpose.. Also, I use `stop` functionality to turn
+the VPS off when I don't use it (as additional layer of security). I will more
+on improving security in
+[Connect and Secure VPS](./2026-03-02-connect-and-secure-vps.md) which should
+give some more details on how you can secure your VPS and let you decide if you
+should or shouldn't use private networking.
 
 ![Additional Features](./images/contabo-step3.png)
 
@@ -46,9 +49,12 @@ should gain access to [Contabo customer panel](https://new.contabo.com):
 
 ![Customer Panel](./images/contabo-step4.png)
 
-Notice that you can stop your machine there. That's what I recommend doing -
-this will increase security of your VPS. When it's not running no one can access
-it.
+Note two important thing here:
+
+- You can stop your machine whenever you're not using it. That's what I
+  recommend doing - this will increase security of your VPS. When it's not
+  running no one can access it.
+- You need to note it's IP address - it will be needed for SSH connection.
 
 > Keep in mind that with setup presented here you VPS can be reached from any
 > location. If you don't secure it properly and run some application that
