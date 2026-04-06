@@ -121,5 +121,6 @@ anywhere in the world with a lightweight device.
 
 ---
 
-In my next articles, I'll walk you through the process of configuring a cloud
-VPS with several different providers. Stay tuned!
+Next 3 articles will be about how to setup VPS on AWS/Azure/Contabo. If you want
+to use other provider, configure your VPS and jump to [TODO: link] to read about
+how you can secure your machine.
