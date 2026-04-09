@@ -462,6 +462,27 @@ nav a svg {
   margin-top: 2rem;
 }
 
+.article-top-nav {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: baseline;
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+  gap: 1rem;
+}
+
+.article-top-nav-link {
+  color: var(--accent-primary);
+  text-decoration: none;
+  max-width: 45%;
+}
+
+.article-top-nav-link:hover {
+  text-decoration: underline;
+}
+
 .article-footer {
   display: flex;
   justify-content: space-between;

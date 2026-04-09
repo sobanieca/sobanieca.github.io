@@ -21,12 +21,24 @@ export function articlePage(article, context, navigation = {}) {
     ? `<a href="${nextArticle.url}" class="btn btn-secondary">${nextArticle.title} →</a>`
     : "";
 
+  // Top navigation: minimal prev/next links
+  const topPrevLink = prevArticle
+    ? `<a href="${prevArticle.url}" class="article-top-nav-link">← ${prevArticle.title}</a>`
+    : "";
+  const topNextLink = nextArticle
+    ? `<a href="${nextArticle.url}" class="article-top-nav-link">${nextArticle.title} →</a>`
+    : "";
+  const topNav = (topPrevLink || topNextLink)
+    ? `<nav class="article-top-nav">${topPrevLink}${topNextLink}</nav>`
+    : "";
+
   return `<article class="article-page">
   <div class="article-top">
     <a href="/category/${category}.html" class="article-category-tag">${
     categoryData?.name || category
   }</a>
   </div>
+  ${topNav}
 
   <header>
     <h1>${article.title}</h1>
