@@ -74,12 +74,12 @@ function parseFrontMatter(content) {
 }
 
 function getSlugFromFilename(filename) {
-  return filename.replace(/^\d{4}-\d{2}-\d{2}-/, "").replace(/\.md$/, "");
+  return filename.replace(/^\d+-/, "").replace(/\.md$/, "");
 }
 
-function getDateFromFilename(filename) {
-  const match = filename.match(/^(\d{4}-\d{2}-\d{2})/);
-  return match ? match[1] : null;
+function getOrderFromFilename(filename) {
+  const match = filename.match(/^(\d+)/);
+  return match ? parseInt(match[1], 10) : 0;
 }
 
 function formatDate(dateStr) {
@@ -152,7 +152,8 @@ async function readArticles() {
 
       articles.push({
         title: data.title || "Untitled",
-        date: getDateFromFilename(file.name),
+        date: data.date || null,
+        order: getOrderFromFilename(file.name),
         categorySlug: category,
         excerpt: data.excerpt || "",
         content: html,
@@ -163,9 +164,13 @@ async function readArticles() {
     }
   }
 
-  return articles.sort((a, b) =>
-    new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
+  return articles.sort((a, b) => {
+    // Sort by date descending (most recently updated first)
+    const dateCompare = new Date(b.date).getTime() - new Date(a.date).getTime();
+    if (dateCompare !== 0) return dateCompare;
+    // Tie-break by order descending
+    return b.order - a.order;
+  });
 }
 
 async function build() {
@@ -235,7 +240,7 @@ async function build() {
     renderer: {
       link(href, title, text) {
         const articleMatch = href.match(
-          /^\.\/\d{4}-\d{2}-\d{2}-(.+)\.md$/,
+          /^\.\/\d+-(.+)\.md$/,
         );
         if (articleMatch) {
           href = `/articles/${articleMatch[1]}.html`;
@@ -353,13 +358,17 @@ async function build() {
   await Deno.writeTextFile("dist/about-me.html", aboutHtml);
   console.log("Generated about-me.html");
 
-  // Group articles by category for prev/next navigation
+  // Group articles by category for prev/next navigation, sorted by order
   const articlesByCategory = {};
   for (const article of articles) {
     if (!articlesByCategory[article.categorySlug]) {
       articlesByCategory[article.categorySlug] = [];
     }
     articlesByCategory[article.categorySlug].push(article);
+  }
+  // Sort each category by order ascending (lowest order = first article)
+  for (const cat of Object.keys(articlesByCategory)) {
+    articlesByCategory[cat].sort((a, b) => a.order - b.order);
   }
 
   for (const article of articles) {
@@ -368,14 +377,14 @@ async function build() {
       a.slug === article.slug
     );
 
-    // Articles are sorted newest first, so:
-    // - "older" = next in array (higher index)
-    // - "newer" = previous in array (lower index)
-    const olderArticle = currentIndex < categoryArticles.length - 1
-      ? categoryArticles[currentIndex + 1]
-      : null;
-    const newerArticle = currentIndex > 0
+    // Articles are sorted by order ascending, so:
+    // - "prev" (←) = previous in array (lower index / lower order)
+    // - "next" (→) = next in array (higher index / higher order)
+    const olderArticle = currentIndex > 0
       ? categoryArticles[currentIndex - 1]
+      : null;
+    const newerArticle = currentIndex < categoryArticles.length - 1
+      ? categoryArticles[currentIndex + 1]
       : null;
 
     const articleContent = articlePage(article, context, {

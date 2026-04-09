@@ -1,7 +1,7 @@
 export function articlePage(article, context, navigation = {}) {
   const category = article.categorySlug;
   const categoryData = context.categories[category];
-  const { olderArticle, newerArticle } = navigation;
+  const { olderArticle: prevArticle, newerArticle: nextArticle } = navigation;
 
   const heroImage = article.image
     ? `<div class="article-hero">
@@ -9,16 +9,16 @@ export function articlePage(article, context, navigation = {}) {
       </div>`
     : "";
 
-  // Older link: points to older article, or category page if this is the oldest
-  const olderLink = olderArticle
-    ? `<a href="${olderArticle.url}" class="btn btn-secondary">← ${olderArticle.title}</a>`
+  // Previous link: points to previous article (lower order), or category page if first
+  const prevLink = prevArticle
+    ? `<a href="${prevArticle.url}" class="btn btn-secondary">← ${prevArticle.title}</a>`
     : `<a href="/category/${category}.html" class="btn btn-secondary">← Back to ${
       categoryData?.name || category
     }</a>`;
 
-  // Newer link: only show if there's a newer article
-  const newerLink = newerArticle
-    ? `<a href="${newerArticle.url}" class="btn btn-secondary">${newerArticle.title} →</a>`
+  // Next link: only show if there's a next article (higher order)
+  const nextLink = nextArticle
+    ? `<a href="${nextArticle.url}" class="btn btn-secondary">${nextArticle.title} →</a>`
     : "";
 
   return `<article class="article-page">
@@ -44,8 +44,8 @@ export function articlePage(article, context, navigation = {}) {
   </div>
 
   <div class="article-footer">
-    ${olderLink}
-    ${newerLink}
+    ${prevLink}
+    ${nextLink}
   </div>
 
   <div class="article-comments">

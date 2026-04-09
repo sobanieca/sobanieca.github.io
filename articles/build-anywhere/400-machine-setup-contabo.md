@@ -1,6 +1,7 @@
 ---
 title: "Setting Up a Virtual Machine on Contabo"
 excerpt: "Want to set up a budget-friendly VPS but aren't sure where to start?"
+date: 2026-02-28
 ---
 
 > **Note:** This article covers configuring a machine on Contabo. If you prefer
@@ -38,9 +39,8 @@ networking for this setup; it would require an additional VPN configuration,
 which feels like overkill for a basic dev server. Instead, I rely on the
 **stop** functionality to simply turn off the VPS when it's not in use, adding a
 simple but effective layer of security. I will cover this more in
-[Connecting and Securing Your VPS](./2026-03-02-connect-and-secure-vps.md),
-which should help you decide whether or not you actually need private
-networking.
+[Connecting and Securing Your VPS](./500-connect-and-secure-vps.md), which
+should help you decide whether or not you actually need private networking.
 
 ![Additional Features](./images/contabo-step3.png)
 

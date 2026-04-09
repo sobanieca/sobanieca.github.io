@@ -1,16 +1,16 @@
 import { articleCard } from "./article-card.js";
 
 export function categoryPage(category, articles, context) {
-  // Default: oldest to newest
+  // Default: by order (lowest first)
   const categoryArticles = articles
     .filter((a) => a.categorySlug === category.slug)
-    .sort((a, b) => a.date.localeCompare(b.date));
+    .sort((a, b) => a.order - b.order);
 
   const articlesHtml = categoryArticles.length
     ? `<div class="card-grid" id="articles-grid">
       ${
       categoryArticles.map((article) =>
-        `<div class="article-wrapper" data-date="${article.date}">${
+        `<div class="article-wrapper" data-order="${article.order}">${
           articleCard(article, context)
         }</div>`
       ).join("")
@@ -27,7 +27,7 @@ export function categoryPage(category, articles, context) {
       <svg class="sort-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <path d="M11 5h10M11 9h7M11 13h4M3 17l3 3 3-3M6 18V4"/>
       </svg>
-      <span id="sortLabel">Oldest</span>
+      <span id="sortLabel">First first</span>
     </button>
   `
     : "";
@@ -53,18 +53,18 @@ export function categoryPage(category, articles, context) {
       const label = document.getElementById('sortLabel');
       if (!toggle || !grid) return;
 
-      let newestFirst = false;
+      let reversed = false;
 
       toggle.addEventListener('click', () => {
-        newestFirst = !newestFirst;
-        label.textContent = newestFirst ? 'Newest' : 'Oldest';
-        toggle.classList.toggle('desc', newestFirst);
+        reversed = !reversed;
+        label.textContent = reversed ? 'Last first' : 'First first';
+        toggle.classList.toggle('desc', reversed);
 
         const items = Array.from(grid.children);
         items.sort((a, b) => {
-          const dateA = a.dataset.date;
-          const dateB = b.dataset.date;
-          return newestFirst ? dateB.localeCompare(dateA) : dateA.localeCompare(dateB);
+          const orderA = parseInt(a.dataset.order, 10);
+          const orderB = parseInt(b.dataset.order, 10);
+          return reversed ? orderB - orderA : orderA - orderB;
         });
         items.forEach(item => grid.appendChild(item));
       });

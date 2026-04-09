@@ -53,22 +53,28 @@ Directory structure:
 
 ```
 articles/{category-slug}/
-  YYYY-MM-DD-article-slug.md
-  YYYY-MM-DD-article-slug.jpg  # optional hero image (matches article filename)
+  NNN-article-slug.md          # NNN = order index (100, 200, 300...)
+  NNN-article-slug.jpg         # optional hero image (matches article filename)
   images/                       # inline images referenced in markdown
 ```
 
 Categories: `general`, `build-anywhere`, `build-on-the-go`, `build-in-terminal`,
 `tools`
 
-YAML frontmatter (only title and excerpt):
+YAML frontmatter:
 
 ```yaml
 ---
 title: Article Title
 excerpt: Short description
+date: YYYY-MM-DD
 ---
 ```
+
+The numeric prefix (100, 200, 300...) controls article order within a category.
+Use gaps (100s) to allow inserting articles between existing ones. The `date`
+field in frontmatter tracks when the article was last updated and is used for
+"most recent" sorting on the home page.
 
 Inline images: reference as `images/filename.jpg` in markdown.
 

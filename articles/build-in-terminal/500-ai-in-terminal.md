@@ -1,6 +1,7 @@
 ---
 title: "How to use AI in terminal"
 excerpt: "How to use AI in terminal without headache?"
+date: 2026-03-10
 ---
 
 TODO: write

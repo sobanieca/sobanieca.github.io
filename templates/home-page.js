@@ -5,7 +5,7 @@ export function homePage(articles, context) {
 
   return `<div class="home-page">
   <header class="category-header">
-    <h1>Recent Articles</h1>
+    <h1>Recently Updated</h1>
     <p class="category-description">Latest updates to the collection</p>
   </header>
   <div class="card-grid">

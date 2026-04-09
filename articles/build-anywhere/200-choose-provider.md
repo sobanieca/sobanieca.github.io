@@ -1,6 +1,7 @@
 ---
 title: "Choosing the right provider for VPS"
 excerpt: "You've decided that you want to move your computing power to the cloud. But which provider should you choose from the many options available?"
+date: 2026-02-20
 ---
 
 So you've decided to use a remote machine as your primary workhorse? But where
@@ -128,5 +129,5 @@ anywhere in the world with a lightweight device.
 
 Next articles will briefly explain how to setup VPS with AWS/Contabo. If you use
 some other provider, provision your VPS and jump to
-[Connect and Secure your VPS](./2026-03-02-connect-and-secure-vps.md) article to
-read about how you can connect and secure your machine.
+[Connect and Secure your VPS](./500-connect-and-secure-vps.md) article to read
+about how you can connect and secure your machine.

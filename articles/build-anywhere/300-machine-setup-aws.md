@@ -1,6 +1,7 @@
 ---
 title: "Setup machine on AWS"
 excerpt: "You want to setup an AWS machine but you're not sure where to start? Check here!"
+date: 2026-02-24
 ---
 
 > **Note:** This article covers AWS machine configuration. If you don't have
@@ -83,5 +84,5 @@ Pay attention to three critical tabs and values on this screen:
   group. You will return here later to remove the default SSH port rule after
   adjusting your server settings.
 
-Proceed to the next article to find out how to establish a connection and
+Proceed to the next articles to find out how to establish a connection and
 configure your new server!

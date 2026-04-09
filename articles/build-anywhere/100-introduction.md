@@ -1,6 +1,7 @@
 ---
 title: "Remote machine as your development foundation"
 excerpt: "Your laptop is overheating and the fans are screaming. It's time to decouple your development environment from your physical hardware."
+date: 2026-02-06
 ---
 
 You are likely reading this on a physical device—a laptop, a tablet, or a phone.

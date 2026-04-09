@@ -1,6 +1,7 @@
 ---
 title: "jsonr: Mastering API Interactions in the Terminal"
 excerpt: "Ditch the heavy GUI clients. Discover a secure, scriptable, and terminal-first approach to interacting with JSON APIs."
+date: 2026-02-17
 ---
 
 A few years ago, after yet another Postman update resulted in a slower startup
