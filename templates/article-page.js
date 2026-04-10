@@ -24,13 +24,14 @@ export function articlePage(article, context, navigation = {}) {
   // Top navigation: minimal prev/next links
   const topPrevLink = prevArticle
     ? `<a href="${prevArticle.url}" class="article-top-nav-link">← ${prevArticle.title}</a>`
-    : "";
+    : `<a href="/category/${category}.html" class="article-top-nav-link">← Back to ${
+      categoryData?.name || category
+    }</a>`;
   const topNextLink = nextArticle
     ? `<a href="${nextArticle.url}" class="article-top-nav-link">${nextArticle.title} →</a>`
     : "";
-  const topNav = (topPrevLink || topNextLink)
-    ? `<nav class="article-top-nav">${topPrevLink}${topNextLink}</nav>`
-    : "";
+  const topNav =
+    `<nav class="article-top-nav">${topPrevLink}${topNextLink}</nav>`;
 
   return `<article class="article-page">
   <div class="article-top">
