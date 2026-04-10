@@ -477,10 +477,16 @@ nav a svg {
   color: var(--accent-primary);
   text-decoration: none;
   max-width: 45%;
+  display: inline;
+  padding: 0;
+  border-radius: 0;
+  background-color: transparent;
 }
 
 .article-top-nav-link:hover {
   text-decoration: underline;
+  background-color: transparent;
+  transform: none;
 }
 
 .article-footer {

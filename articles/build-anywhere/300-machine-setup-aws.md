@@ -29,13 +29,12 @@ Since we will be coding in the terminal, your RAM won't be weighed down by a
 graphical user interface (GUI), allowing you to get even more performance out of
 your machine.
 
-To give you a brief idea about costs — I currently use an `m8i.2xlarge` instance
-(8 vCPU, 32 GiB RAM) in the EU Central region with about 6–7 hours of daily
-usage, and my monthly bill including disk storage is around 60 USD. You can
-expect that `m8i.xlarge` (4 vCPU, 16 GiB) will cost roughly half of that (~30
-USD), and `m8i.large` (2 vCPU, 8 GiB) around ~15 USD. Graviton-based instances
-(`m8g`) are even more affordable if your projects don't require x86
-architecture.
+To give you a brief idea about costs — `m8i.2xlarge` instance (8 vCPU, 32 GiB
+RAM) with about 6–7 hours of daily usage during working days should cost around
+60 USD. You can expect that `m8i.xlarge` (4 vCPU, 16 GiB) will cost roughly half
+of that (~30 USD), and `m8i.large` (2 vCPU, 8 GiB) around ~15 USD.
+Graviton-based instances (`m8g`) are more affordable if your projects don't
+require x86 architecture.
 
 _Use the [AWS Pricing Calculator](https://calculator.aws/) to determine the
 exact total cost based on your specific needs._
