@@ -83,5 +83,8 @@ Pay attention to three critical tabs and values on this screen:
   group. You will return here later to remove the default SSH port rule after
   adjusting your server settings.
 
-Proceed to the next articles to find out how to establish a connection and
-configure your new server!
+---
+
+With your machine up and running, head over to
+[Connect and Secure your VPS](./500-connect-and-secure-vps.md) to learn how to
+establish a connection and properly configure your new server.
