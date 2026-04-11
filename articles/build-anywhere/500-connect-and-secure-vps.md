@@ -92,7 +92,7 @@ AllowTcpForwarding yes
 
 Save the file and reload SSH:
 
-```
+```bash
 sudo systemctl reload sshd.service
 ```
 
@@ -105,7 +105,7 @@ sudo systemctl reload sshd.service
 Now connect to the machine with the newly created user. Remember that SSH is no
 longer listening on the default port:
 
-```
+```bash
 ssh -p {port} {user}@{IP or DNS}
 ```
 
@@ -115,7 +115,7 @@ to use private key files.
 
 Create the `.ssh` directory if it doesn't exist:
 
-```
+```bash
 mkdir -p ~/.ssh
 chmod 700 ~/.ssh
 touch ~/.ssh/authorized_keys
@@ -129,7 +129,7 @@ there and then upload the public part to the VPS.
 
 On Debian (or any other Linux distribution with `openssh-client` installed) run:
 
-```
+```bash
 ssh-keygen -t rsa
 ```
 
@@ -142,32 +142,25 @@ hold of your private key file. The command produces two files:
 - `~/.ssh/id_rsa.pub` - your **public** key. This is the one that goes on the
   server.
 
-> **Windows users**: if you don't have `openssh-client` available (and don't
-> want to use WSL), you can generate a key with PuTTYgen instead. Click
-> `Generate`, move the mouse around to seed randomness, then save the private
-> key as a `.ppk` file. The box labeled "Public key for pasting into OpenSSH
-> authorized_keys file" at the top of the window holds the value you'll put on
-> the server in the next step.
-
 # Upload the public key
 
 The cleanest way to get the public key onto the VPS is `ssh-copy-id`. It takes
 care of appending the key to `~/.ssh/authorized_keys` on the server and making
 sure file permissions are correct:
 
-```
+```bash
 ssh-copy-id -i ~/.ssh/id_rsa.pub -p {port} {user}@{IP or DNS}
 ```
 
 You'll be asked for your VPS user password one last time.
 
-> If you generated the key with PuTTYgen (or `ssh-copy-id` is not available on
-> your client for some other reason), paste the public key string into
-> `~/.ssh/authorized_keys` on the server manually. You can do that from your
-> existing password-based session by running `nano ~/.ssh/authorized_keys` and
-> pasting the key as a single line.
-
 # Disable password authentication
+
+Now connect to your server using ssh key this time:
+
+```bash
+ssh -i ~/.ssh/id_rsa -p {port} {user}@{IP or DNS}
+```
 
 Run `sudo nano /etc/ssh/sshd_config` again and set:
 
