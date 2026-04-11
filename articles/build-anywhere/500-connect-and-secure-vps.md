@@ -71,3 +71,24 @@ supports long lived SSH connections. For this reason you need to check for
 `ClientAliveInterval` setting. Run `sudo nano /etc/ssh/sshd_config` and search
 for it. If found set it to `0`. Then save the file and either restart server or
 run `sudo systemctl reload sshd.service`
+
+# Connect as a newly added user
+
+Now let's connect to the machine with newly created user:
+
+```
+ssh {user}@{IP or DNS}
+```
+
+You will be asked to type password that you've configured for your desired user.
+We want to get rid of using passwords during SSH connections entirely. This is
+for security reasons. It's much safer to use private key files.
+
+Create `.ssh` directory if it doesn't exist.
+
+```
+mkdir -p ~/.ssh
+chmod 700 ~/.ssh
+touch ~/.ssh/authorized_keys
+chmod 600 ~/.ssh/authorized_keys
+```
