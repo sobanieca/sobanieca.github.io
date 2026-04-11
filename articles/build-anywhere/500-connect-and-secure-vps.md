@@ -77,7 +77,9 @@ AllowTcpForwarding yes
 ```
 
 - `Port` - changing the default port won't make your server bulletproof, but it
-  cuts down the noise from automated scanners hammering port 22.
+  cuts down the noise from automated scanners hammering port 22. If you have
+  already configured your firewall in providers like AWS or Azure change the
+  port to the one configured (allowed) there.
 - `PermitRootLogin no` - now that you have a regular user with sudo access,
   there is no reason to let `root` log in over SSH directly.
 - `ClientAliveInterval 0` - when using a remote machine as your primary
@@ -120,8 +122,50 @@ touch ~/.ssh/authorized_keys
 chmod 600 ~/.ssh/authorized_keys
 ```
 
-Append your public key (the contents of `~/.ssh/id_*.pub` from your client
-machine) to `~/.ssh/authorized_keys` on the VPS.
+# Generate an SSH key
+
+Open a new terminal on your client machine - we're going to generate a key pair
+there and then upload the public part to the VPS.
+
+On Debian (or any other Linux distribution with `openssh-client` installed) run:
+
+```
+ssh-keygen -t rsa
+```
+
+Press Enter to accept the default path (`~/.ssh/id_rsa`). You can optionally set
+a passphrase - it adds an extra layer of protection in case someone ever gets
+hold of your private key file. The command produces two files:
+
+- `~/.ssh/id_rsa` - your **private** key. Keep it secret, never share it and
+  never copy it anywhere outside of your client machine.
+- `~/.ssh/id_rsa.pub` - your **public** key. This is the one that goes on the
+  server.
+
+> **Windows users**: if you don't have `openssh-client` available (and don't
+> want to use WSL), you can generate a key with PuTTYgen instead. Click
+> `Generate`, move the mouse around to seed randomness, then save the private
+> key as a `.ppk` file. The box labeled "Public key for pasting into OpenSSH
+> authorized_keys file" at the top of the window holds the value you'll put on
+> the server in the next step.
+
+# Upload the public key
+
+The cleanest way to get the public key onto the VPS is `ssh-copy-id`. It takes
+care of appending the key to `~/.ssh/authorized_keys` on the server and making
+sure file permissions are correct:
+
+```
+ssh-copy-id -i ~/.ssh/id_rsa.pub -p {port} {user}@{IP or DNS}
+```
+
+You'll be asked for your VPS user password one last time.
+
+> If you generated the key with PuTTYgen (or `ssh-copy-id` is not available on
+> your client for some other reason), paste the public key string into
+> `~/.ssh/authorized_keys` on the server manually. You can do that from your
+> existing password-based session by running `nano ~/.ssh/authorized_keys` and
+> pasting the key as a single line.
 
 # Disable password authentication
 
