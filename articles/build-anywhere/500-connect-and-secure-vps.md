@@ -63,28 +63,55 @@ permissions:
 This will allow this user to run `sudo` command without being asked for password
 each time.
 
-# Adjust SSH Timeouts
+# Initial SSH server configuration
 
-When using remote machine as your primary development machine you need to take
-into account that majority of the servers are not configured in a way that
-supports long lived SSH connections. For this reason you need to check for
-`ClientAliveInterval` setting. Run `sudo nano /etc/ssh/sshd_config` and search
-for it. If found set it to `0`. Then save the file and either restart server or
-run `sudo systemctl reload sshd.service`
+The next step is to perform initial SSH configuration. Run
+`sudo nano /etc/ssh/sshd_config` and make sure the following settings are
+present and set as shown below:
+
+```
+Port {custom port, NOT 22}
+PermitRootLogin no
+ClientAliveInterval 0
+AllowTcpForwarding yes
+```
+
+- `Port` - changing the default port won't make your server bulletproof, but it
+  cuts down the noise from automated scanners hammering port 22.
+- `PermitRootLogin no` - now that you have a regular user with sudo access,
+  there is no reason to let `root` log in over SSH directly.
+- `ClientAliveInterval 0` - when using a remote machine as your primary
+  development machine you want long lived SSH connections. Most servers are not
+  configured this way by default, so setting it to `0` disables the server-side
+  timeout.
+- `AllowTcpForwarding yes` - this lets you tunnel ports over SSH, which is
+  essential if you want to use your server for development (more on this in next
+  article).
+
+Save the file and reload SSH:
+
+```
+sudo systemctl reload sshd.service
+```
+
+> On some servers you should check in `/etc/ssh/sshd_config.d` directory if
+> there are any files overriding configuration. If yes you may have to edit them
+> as well.
 
 # Connect as a newly added user
 
-Now let's connect to the machine with newly created user:
+Now connect to the machine with the newly created user. Remember that SSH is no
+longer listening on the default port:
 
 ```
-ssh {user}@{IP or DNS}
+ssh -p {port} {user}@{IP or DNS}
 ```
 
-You will be asked to type password that you've configured for your desired user.
-We want to get rid of using passwords during SSH connections entirely. This is
-for security reasons. It's much safer to use private key files.
+You will be asked to type the password that you've configured for your user. We
+want to get rid of passwords during SSH connections entirely - it's much safer
+to use private key files.
 
-Create `.ssh` directory if it doesn't exist.
+Create the `.ssh` directory if it doesn't exist:
 
 ```
 mkdir -p ~/.ssh
@@ -92,3 +119,27 @@ chmod 700 ~/.ssh
 touch ~/.ssh/authorized_keys
 chmod 600 ~/.ssh/authorized_keys
 ```
+
+Append your public key (the contents of `~/.ssh/id_*.pub` from your client
+machine) to `~/.ssh/authorized_keys` on the VPS.
+
+# Disable password authentication
+
+Run `sudo nano /etc/ssh/sshd_config` again and set:
+
+```
+PasswordAuthentication no
+ChallengeResponseAuthentication no
+```
+
+Save and reload:
+
+```
+sudo systemctl reload sshd.service
+```
+
+> On some servers you should check in `/etc/ssh/sshd_config.d` directory if
+> there are any files overriding configuration. If yes you may have to edit them
+> as well.
+
+From now on the only way to SSH into your VPS is with your private key.
