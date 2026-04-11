@@ -4,8 +4,6 @@ excerpt: "You have your machine. Now how to connect to it? How to secure your co
 date: 2026-03-02
 ---
 
-TODO: write and fine-tune
-
 # First connection
 
 I assume you already have following:
@@ -179,4 +177,5 @@ sudo systemctl reload sshd.service
 > there are any files overriding configuration. If yes you may have to edit them
 > as well.
 
-From now on the only way to SSH into your VPS is with your private key.
+That's it! From now on the only way to SSH into your VPS is with your private
+key.
