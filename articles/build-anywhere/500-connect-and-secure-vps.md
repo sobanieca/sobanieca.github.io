@@ -1,104 +1,113 @@
 ---
 title: "Connecting and securing your VPS"
-excerpt: "You have your machine. Now how to connect to it? How to secure your connection?"
+excerpt: "You have your machine. Now how do you connect to it? And more importantly, how do you secure that connection?"
 date: 2026-03-02
 ---
 
-# First connection
+# First Connection
 
-I assume you already have following:
+Before we begin, I assume you already have the following:
 
-- IP address (or DNS) of your remote machine
-- Credentials for it - username/password or PEM file with private key.
+- The IP address (or DNS hostname) of your remote machine.
+- Your initial credentials—either a username and password, or a `.pem` file
+  containing your private key.
 
-How to connect to your new machine? There are lots of SSH clients out there. I
-will focus on the most common one - `ssh` tool. It's installed on most OS
-nowadays. Since I use it on Debian (via WSL2 on Windows) or Termux (on Android)
-some details may differ if you use it on other OS.
+There are many SSH clients available, but this guide focuses on the most common
+one: the `ssh` command-line tool. It comes pre-installed on macOS, Linux, and
+modern versions of Windows. Since my primary environments are Debian (via WSL2
+on Windows) and Termux (on Android), some minor details might differ if you use
+a different OS.
 
-Let's start with very first connection:
+Let's start with your very first connection.
 
-For username/password credentials:
+**If you are using a username and password:**
 
 ```bash
 ssh {user}@{IP or DNS}
 ```
 
-For PEM file:
+**If you are using a private key (PEM) file:**
 
 ```bash
 ssh -i {path to PEM file} {user}@{IP or DNS}
 ```
 
-> When using private key file you need to ensure that it has limited permissions
-> set. You can do it by running `chmod 400 {path to PEM file}`.
+> **Note:** When using a private key file, you must ensure it has strict,
+> limited permissions. You can set this on Linux/macOS by running
+> `chmod 400 {path to PEM file}`.
 
-> There are other private key file types out there. For some providers you may
-> get for example `.key` file. It shouldn't differ much in usage though.
+> **Tip:** You might receive different private key file types depending on your
+> cloud provider (e.g., `.key`). The usage remains exactly the same. If you spun
+> up an AWS EC2 instance running Debian, your default `{user}` is usually
+> `admin`.
 
-> If you've configured AWS EC2 instance and selected Debian OS you need to use
-> `admin` as `{user}`.
+---
 
-# Add a new user
+# Add a New User
 
-Now when you've connected as a `root` user you need to finalize setup of your
-machine. In most cases you don't want to use your machine as a `root` or `admin`
-user. For this reason it makes sense to create a new user specifically for you.
-To do this run:
+Once connected as `root` (or the default admin user), you need to finalize your
+machine's setup. Running your server as `root` is a major security risk.
+Instead, you should create a dedicated user for your day-to-day operations.
+
+To create a new user, run:
 
 ```bash
 adduser {user}
 ```
 
-You need to give this user option to run commands with elevated privileges. For
-this reason you need to run `visudo` and add following entry below `root`
+Follow the prompts to set a password. Next, you need to give this user the
+ability to run commands with elevated privileges. Open the sudoers file by
+running `visudo` and add the following entry directly below the `root`
 permissions:
 
-```
+```text
 {user} ALL=(ALL) NOPASSWD:ALL
 ```
 
-This will allow this user to run `sudo` command without being asked for password
-each time.
+This configuration allows your new user to run `sudo` commands without being
+prompted for a password every time.
 
-# Initial SSH server configuration
+---
 
-The next step is to perform initial SSH configuration. Run
-`sudo nano /etc/ssh/sshd_config` and make sure the following settings are
-present and set as shown below:
+# Initial SSH Server Configuration
 
-```
+The next step is to lock down your SSH daemon. Run
+`sudo nano /etc/ssh/sshd_config` and ensure the following settings are present
+and set as shown:
+
+```text
 Port {custom port, NOT 22}
 PermitRootLogin no
 ClientAliveInterval 0
 AllowTcpForwarding yes
 ```
 
-- `Port` - changing the default port won't make your server bulletproof, but it
-  cuts down the noise from automated scanners hammering port 22. If you have
-  already configured your firewall in providers like AWS or Azure change the
-  port to the one configured (allowed) there.
-- `PermitRootLogin no` - now that you have a regular user with sudo access,
-  there is no reason to let `root` log in over SSH directly.
-- `ClientAliveInterval 0` - when using a remote machine as your primary
-  development machine you want long lived SSH connections. Most servers are not
-  configured this way by default, so setting it to `0` disables the server-side
-  timeout.
-- `AllowTcpForwarding yes` - this lets you tunnel ports over SSH, which is
-  essential if you want to use your server for development (more on this in next
-  article).
+- **`Port`**: Changing the default port won't make your server bulletproof, but
+  it drastically cuts down on log noise from automated botnets scanning port 22.
+  _Make sure you've opened this new port in your cloud provider's firewall (AWS
+  Security Groups, Azure NSG, etc.) before saving! (if you use 'budget' VPS
+  providers most likely there is no firewall so no need to adjust anything)_
+- **`PermitRootLogin no`**: Now that you have a regular user with `sudo` access,
+  there is zero reason to allow `root` to log in directly over SSH.
+- **`ClientAliveInterval 0`**: When using a remote server as your primary
+  development environment, you want long-lived SSH connections. Setting this to
+  `0` disables the server-side timeout.
+- **`AllowTcpForwarding yes`**: This allows you to tunnel ports over SSH, which
+  is essential for remote development (more on this in the next article).
 
-Save the file and reload SSH:
+Save the file and reload the SSH service to apply the changes:
 
 ```bash
 sudo systemctl reload sshd.service
 ```
 
-> On some servers you should check in `/etc/ssh/sshd_config.d` directory if
-> there are any files overriding configuration. If yes you may have to edit them
-> as well.
+> **Important:** On some servers check the `/etc/ssh/sshd_config.d/` directory.
+> Files in this folder can override your main configuration. If you see
+> conflicting settings there, edit them as well.
 
-# Connect as a newly added user
+---
+
+# Connect as a Newly Added User
 
 Now connect to the machine with the newly created user. Remember that SSH is no
 longer listening on the default port:
@@ -107,9 +116,9 @@ longer listening on the default port:
 ssh -p {port} {user}@{IP or DNS}
 ```
 
-You will be asked to type the password that you've configured for your user. We
-want to get rid of passwords during SSH connections entirely - it's much safer
-to use private key files.
+You will be asked to type the password that you configured for your user. We
+want to get rid of passwords during SSH connections entirely—it's much safer to
+use private key files.
 
 Create the `.ssh` directory if it doesn't exist:
 
@@ -120,27 +129,32 @@ touch ~/.ssh/authorized_keys
 chmod 600 ~/.ssh/authorized_keys
 ```
 
-# Generate an SSH key
+---
 
-Open a new terminal on your client machine - we're going to generate a key pair
-there and then upload the public part to the VPS.
+# Generate an SSH Key
 
-On Debian (or any other Linux distribution with `openssh-client` installed) run:
+Open a new terminal on your **local client machine**—we're going to generate a
+key pair there and then upload the public part to your VPS.
+
+On your local machine, run:
 
 ```bash
 ssh-keygen -t rsa
 ```
 
-Press Enter to accept the default path (`~/.ssh/id_rsa`). You can optionally set
-a passphrase - it adds an extra layer of protection in case someone ever gets
-hold of your private key file. The command produces two files:
+Press **Enter** to accept the default path (`~/.ssh/id_rsa`). You will be
+prompted to set an optional passphrase. A passphrase adds an extra layer of
+protection in case someone ever gets hold of your private key file. This command
+produces two files:
 
-- `~/.ssh/id_rsa` - your **private** key. Keep it secret, never share it and
+- `~/.ssh/id_rsa` — Your **private** key. Keep it secret, never share it, and
   never copy it anywhere outside of your client machine.
-- `~/.ssh/id_rsa.pub` - your **public** key. This is the one that goes on the
+- `~/.ssh/id_rsa.pub` — Your **public** key. This is the one that goes on the
   server.
 
-# Upload the public key
+---
+
+# Upload the Public Key
 
 The cleanest way to get the public key onto the VPS is `ssh-copy-id`. It takes
 care of appending the key to `~/.ssh/authorized_keys` on the server and making
@@ -150,11 +164,13 @@ sure file permissions are correct:
 ssh-copy-id -i ~/.ssh/id_rsa.pub -p {port} {user}@{IP or DNS}
 ```
 
-You'll be asked for your VPS user password one last time.
+You'll be asked for your VPS user's password one last time.
 
-# Disable password authentication
+---
 
-Now connect to your server using ssh key this time:
+# Disable Password Authentication
+
+Now connect to your server using the SSH key this time:
 
 ```bash
 ssh -i ~/.ssh/id_rsa -p {port} {user}@{IP or DNS}
@@ -162,20 +178,21 @@ ssh -i ~/.ssh/id_rsa -p {port} {user}@{IP or DNS}
 
 Run `sudo nano /etc/ssh/sshd_config` again and set:
 
-```
+```text
 PasswordAuthentication no
 ChallengeResponseAuthentication no
 ```
 
 Save and reload:
 
-```
+```bash
 sudo systemctl reload sshd.service
 ```
 
-> On some servers you should check in `/etc/ssh/sshd_config.d` directory if
-> there are any files overriding configuration. If yes you may have to edit them
-> as well.
+> **Important:** On some servers check the `/etc/ssh/sshd_config.d/` directory.
+> Files in this folder can override your main configuration. If you see
+> conflicting settings there, edit them as well.
 
-That's it! From now on the only way to SSH into your VPS is with your private
-key.
+That's it! From now on, the only way to SSH into your VPS is with your private
+key. Proceed to next article to find how you can actually work on such remote
+machine.
