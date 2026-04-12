@@ -4,6 +4,8 @@ excerpt: "You have your machine. Now how do you connect to it? And more importan
 date: 2026-03-02
 ---
 
+TODO: describe firewall settings to limit IP
+
 # First Connection
 
 Before we begin, I assume you already have the following:
