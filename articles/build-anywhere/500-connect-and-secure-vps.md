@@ -4,8 +4,6 @@ excerpt: "You have your machine. Now how do you connect to it? And more importan
 date: 2026-03-02
 ---
 
-TODO: describe firewall settings to limit IP
-
 # First Connection
 
 Before we begin, I assume you already have the following:
@@ -195,17 +193,17 @@ sudo systemctl reload sshd.service
 > Files in this folder can override your main configuration. If you see
 > conflicting settings there, edit them as well.
 
-That's it! From now on, the only way to SSH into your VPS is with your private
-key.
+From now on, the only way to SSH into your VPS is with your private key.
 
-# Setup firewall
+# Set Up a Firewall
 
-Follow this step especially when you are using budget VPS provider which doesn't
-offer any built-in firewall. Without it, your VPS is fully exposed to the
-external traffic. This means that if you run your project in some development
-mode it may be available to anyone (depending to which url it binds). To be on a
-safe side you need to set firewall. We will use `ufw` tool for this. Run
-following:
+This step is especially crucial if you are using a budget VPS provider that
+lacks a built-in cloud firewall. Without one, your VPS is fully exposed to
+external traffic. If you run a project in development mode, it might become
+accessible to the public depending on the IP and port it binds to.
+
+To stay on the safe side, we will set up a firewall using the `ufw`
+(Uncomplicated Firewall) tool. Run the following commands:
 
 ```bash
 sudo apt install ufw
@@ -216,16 +214,20 @@ sudo ufw enable
 sudo ufw status verbose
 ```
 
-> IMPORTANT! Make sure that you provide exactly the same SSH port that you used
-> in previous steps. Otherwise you will lock your server!
+> **Important:** Make sure you provide the exact SSH port you configured in the
+> previous steps. If you don't, you will lock yourself out of your server!
 
-There is an additional layer of security which I personally like to apply.
-Locking access to the machine to only currently connected IP (via SSH). Below
-script is quite harmless because it operates on `iptables` which are reset
-together with your server. So even if your connection drops (your ISP has some
-outage) and you switch to mobile connection, you can just restart your VPS.
+As an additional layer of security, I personally like to restrict SSH access so
+only the currently connected IP can log in.
 
-If you like this idea add following to `bashrc`:
+The script below is quite safe because it operates using `iptables` rules, which
+are non-persistent. This means they reset whenever your server reboots. If your
+connection drops (e.g., an ISP outage) and you need to connect from a mobile
+hotspot or a new IP, you can simply reboot your VPS via your hosting provider's
+control panel to clear the lock.
+
+If you like this idea, append the following snippet to your remote user's
+`~/.bashrc`:
 
 ```bash
 # Lock SSH to current IP (iptables - non-persistent, works alongside ufw)
@@ -241,20 +243,24 @@ if [ -n "$MY_IP" ]; then
 fi
 ```
 
-# Setup alias for SSH connection
+---
 
-That's all! Now you have your machine configured and ready to work on. The last
-step is to configure your client machine to properly connect to the server
-without having to deal with connection timeouts etc.
+# Set Up an SSH Connection Alias
 
-It makes sense to add alias for connection in `bashrc` file (adjust values
-accordingly):
+That's it! Your machine is now securely configured and ready for work. The final
+step is to configure your local client machine so you can connect effortlessly
+without dealing with idle connection timeouts.
+
+It makes sense to create a dedicated alias for this connection in your local
+`~/.bashrc` file. Be sure to adjust the placeholder values to match your setup:
 
 ```bash
-echo "alias my-connection='ssh -o TCPKeepAlive=yes -o ServerAliveCountMax=20 -o ServerAliveInterval=15 -q -p {ssh_port} -i ~/.ssh/id_rsa {user}@{IP or DNS}'" >>
-~/.bashrc
+echo "alias my-connection='ssh -o TCPKeepAlive=yes -o ServerAliveCountMax=20 -o ServerAliveInterval=15 -q -p {ssh_port} -i ~/.ssh/id_rsa {user}@{IP or DNS}'" >> ~/.bashrc
 ```
 
-Source `bashrc` with `source ~/.bashrc` and type `my-connection` to make long
-lived SSH connection to your new machine! Proceed to next article where I try to
-explain how to deal with specifics of remote server during software development.
+Apply the changes by running `source ~/.bashrc`. From now on, you can just type
+`my-connection` to establish a stable, long-lived SSH session to your new
+machine!
+
+Proceed to the next article, where we will cover how to navigate the specifics
+of using a remote server environment during software development.
