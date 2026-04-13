@@ -163,7 +163,7 @@ care of appending the key to `~/.ssh/authorized_keys` on the server and making
 sure file permissions are correct:
 
 ```bash
-ssh-copy-id -i ~/.ssh/id_rsa.pub -p {port} {user}@{IP or DNS}
+ssh-copy-id -i ~/.ssh/id_rsa.pub -p {ssh_port} {user}@{IP or DNS}
 ```
 
 You'll be asked for your VPS user's password one last time.
@@ -175,7 +175,7 @@ You'll be asked for your VPS user's password one last time.
 Now connect to your server using the SSH key this time:
 
 ```bash
-ssh -i ~/.ssh/id_rsa -p {port} {user}@{IP or DNS}
+ssh -i ~/.ssh/id_rsa -p {ssh_port} {user}@{IP or DNS}
 ```
 
 Run `sudo nano /etc/ssh/sshd_config` again and set:
@@ -196,5 +196,65 @@ sudo systemctl reload sshd.service
 > conflicting settings there, edit them as well.
 
 That's it! From now on, the only way to SSH into your VPS is with your private
-key. Proceed to next article to find how you can actually work on such remote
-machine.
+key.
+
+# Setup firewall
+
+Follow this step especially when you are using budget VPS provider which doesn't
+offer any built-in firewall. Without it, your VPS is fully exposed to the
+external traffic. This means that if you run your project in some development
+mode it may be available to anyone (depending to which url it binds). To be on a
+safe side you need to set firewall. We will use `ufw` tool for this. Run
+following:
+
+```bash
+sudo apt install ufw
+sudo ufw default deny incoming
+sudo ufw default allow outgoing
+sudo ufw allow {ssh_port}/tcp
+sudo ufw enable
+sudo ufw status verbose
+```
+
+> IMPORTANT! Make sure that you provide exactly the same SSH port that you used
+> in previous steps. Otherwise you will lock your server!
+
+There is an additional layer of security which I personally like to apply.
+Locking access to the machine to only currently connected IP (via SSH). Below
+script is quite harmless because it operates on `iptables` which are reset
+together with your server. So even if your connection drops (your ISP has some
+outage) and you switch to mobile connection, you can just restart your VPS.
+
+If you like this idea add following to `bashrc`:
+
+```bash
+# Lock SSH to current IP (iptables - non-persistent, works alongside ufw)
+MY_IP=$(echo "$SSH_CONNECTION" | awk '{print $1}')
+if [ -n "$MY_IP" ]; then
+    if ! sudo iptables -C INPUT -p tcp --dport {ssh_port} -s "$MY_IP" -j ACCEPT 2>/dev/null; then
+        sudo iptables -S INPUT | grep -E "\-\-dport {ssh_port}" | sed 's/^-A/-D/' | while read -r rule; do
+            sudo iptables $rule
+        done
+        sudo iptables -I INPUT 1 -p tcp --dport {ssh_port} -s "$MY_IP" -j ACCEPT
+        sudo iptables -I INPUT 2 -p tcp --dport {ssh_port} -j DROP
+    fi
+fi
+```
+
+# Setup alias for SSH connection
+
+That's all! Now you have your machine configured and ready to work on. The last
+step is to configure your client machine to properly connect to the server
+without having to deal with connection timeouts etc.
+
+It makes sense to add alias for connection in `bashrc` file (adjust values
+accordingly):
+
+```bash
+echo "alias my-connection='ssh -o TCPKeepAlive=yes -o ServerAliveCountMax=20 -o ServerAliveInterval=15 -q -p {ssh_port} -i ~/.ssh/id_rsa {user}@{IP or DNS}'" >>
+~/.bashrc
+```
+
+Source `bashrc` with `source ~/.bashrc` and type `my-connection` to make long
+lived SSH connection to your new machine! Proceed to next article where I try to
+explain how to deal with specifics of remote server during software development.
