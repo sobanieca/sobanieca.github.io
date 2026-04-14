@@ -1,14 +1,13 @@
 ---
 title: "Choosing the right provider for VPS"
-excerpt: "You've decided that you want to move your computing power to the cloud. But which provider should you choose from the many options available?"
+excerpt: "There are many VPS providers out there. Here's how I think about picking one."
 date: 2026-02-20
 ---
 
-So you've decided to use a remote machine as your primary workhorse? But where
-to start? There are many options, and while I can't list all of them, I will
-focus on those I've personally tried or considered.
+There are many options for hosting a remote development machine. I can't cover
+all of them, but I'll focus on the ones I've personally tried or considered.
 
-You can organize your selection into three categories:
+The providers roughly fall into three categories:
 
 - Major cloud providers (AWS, Azure, GCP)
 - Budget VPS providers (Contabo, Hetzner)
@@ -33,10 +32,9 @@ If your company already hosts its products with a major provider, it's often a
 simple request for "one more" machine for internal development, assuming your
 needs are reasonable.
 
-Cloud providers offer also one amazing feature - you can change type of your
-machine depending on the situation. If you need to make some demo and want your
-project to build/run as fast as possible - you can double your CPU power and RAM
-with couple clicks.
+Another useful feature is that you can resize your machine on the fly. If you
+need more power for a demo or a heavy build, you can double your CPU and RAM
+with a few clicks.
 
 So what are the drawbacks? Primarily, price. As of this writing, a 32GB RAM
 machine with 8 vCPUs costs around 60 USD for 160 hours per month. You can get a
@@ -50,9 +48,9 @@ Hetzner.
 
 ## Budget VPS providers
 
-If you want to cut costs or get a significantly more powerful machine for the
-same budget, I'd suggest looking at smaller VPS providers like
-[Contabo](https://www.contabo.com) and [Hetzner](https://www.hetzner.com).
+If you want to cut costs or get more power for the same budget, consider smaller
+VPS providers like [Contabo](https://www.contabo.com) and
+[Hetzner](https://www.hetzner.com).
 
 So, what's the catch?
 
@@ -65,13 +63,13 @@ So, what's the catch?
 - **No security by default:** You should expect your machine to lack a default
   firewall. Often, your server will be exposed to the internet unless you
   manually configure a virtual network. This means that if you're running a
-  local dev server on port 3000, it's accessible to anyone by default. Don't let
-  this deter you! It's easily secured with a bit of manual configuration. I will
-  try to show it - stay tuned!
+  local dev server on port 3000, it's accessible to anyone by default. This is
+  straightforward to fix with manual configuration, which I cover in a later
+  article.
 
 ## Self-hosting
 
-While I haven't tried this personally, it's a valid option to consider:
+I haven't tried this myself, but it's worth considering:
 
 - Buy a powerful machine and connect it to your home internet.
 - Use a smart plug to turn it on and off remotely as needed.
@@ -87,7 +85,7 @@ the most effort. I ultimately decided against it for several reasons:
   physical hardware issue would require my physical presence to fix.
 - **ROI:** The cost of electricity can reduce the return on investment.
 
-If these aren't concerns for you, it's definitely worth exploring.
+If these aren't concerns for you, it's worth exploring.
 
 ## What to choose?
 
@@ -116,7 +114,7 @@ If you're working on your own and don't have access to employer-provided
 infrastructure, go with a budget VPS provider. They're affordable and provide
 excellent performance for the price. For example, I'm writing this on a Contabo
 VPS with 12GB of RAM, 6 vCPUs, and a 100GB NVMe drive for around €5.60 per
-month. It's hard to beat that value!
+month.
 
 ### For hardware tinkerers
 
@@ -127,7 +125,7 @@ anywhere in the world with a lightweight device.
 
 ---
 
-Next articles will briefly explain how to setup VPS with AWS/Contabo. If you use
-some other provider, provision your VPS and jump to
-[Connect and Secure your VPS](./500-connect-and-secure-vps.md) article to read
-about how you can connect and secure your machine.
+The next articles walk through setting up a VPS with AWS and Contabo. If you use
+a different provider, provision your VPS and skip to
+[Connect and Secure your VPS](./500-connect-and-secure-vps.md) for the
+connection and security setup.

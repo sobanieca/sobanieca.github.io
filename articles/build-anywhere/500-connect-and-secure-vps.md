@@ -1,6 +1,6 @@
 ---
 title: "Connecting and securing your VPS"
-excerpt: "You have your machine. Now how do you connect to it? And more importantly, how do you secure that connection?"
+excerpt: "SSH setup, key-based authentication, firewall configuration, and connection aliases."
 date: 2026-03-02
 ---
 
@@ -9,7 +9,7 @@ date: 2026-03-02
 Before we begin, I assume you already have the following:
 
 - The IP address (or DNS hostname) of your remote machine.
-- Your initial credentials—either a username and password, or a `.pem` file
+- Your initial credentials - either a username and password, or a `.pem` file
   containing your private key.
 
 There are many SSH clients available, but this guide focuses on the most common
@@ -117,8 +117,8 @@ ssh -p {port} {user}@{IP or DNS}
 ```
 
 You will be asked to type the password that you configured for your user. We
-want to get rid of passwords during SSH connections entirely—it's much safer to
-use private key files.
+want to get rid of passwords during SSH connections entirely - it's much safer
+to use private key files.
 
 Create the `.ssh` directory if it doesn't exist:
 
@@ -133,7 +133,7 @@ chmod 600 ~/.ssh/authorized_keys
 
 # Generate an SSH Key
 
-Open a new terminal on your **local client machine**—we're going to generate a
+Open a new terminal on your **local client machine** - we're going to generate a
 key pair there and then upload the public part to your VPS.
 
 On your local machine, run:
@@ -147,9 +147,9 @@ prompted to set an optional passphrase. A passphrase adds an extra layer of
 protection in case someone ever gets hold of your private key file. This command
 produces two files:
 
-- `~/.ssh/id_rsa` — Your **private** key. Keep it secret, never share it, and
+- `~/.ssh/id_rsa` - Your **private** key. Keep it secret, never share it, and
   never copy it anywhere outside of your client machine.
-- `~/.ssh/id_rsa.pub` — Your **public** key. This is the one that goes on the
+- `~/.ssh/id_rsa.pub` - Your **public** key. This is the one that goes on the
   server.
 
 ---
@@ -247,9 +247,8 @@ fi
 
 # Set Up an SSH Connection Alias
 
-That's it! Your machine is now securely configured and ready for work. The final
-step is to configure your local client machine so you can connect effortlessly
-without dealing with idle connection timeouts.
+Your machine is now configured. The last step is to set up your local client so
+you can connect without dealing with idle connection timeouts.
 
 It makes sense to create a dedicated alias for this connection in your local
 `~/.bashrc` file. Be sure to adjust the placeholder values to match your setup:

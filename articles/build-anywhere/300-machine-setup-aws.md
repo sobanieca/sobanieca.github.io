@@ -1,6 +1,6 @@
 ---
 title: "Setup machine on AWS"
-excerpt: "You want to setup an AWS machine but you're not sure where to start? Check here!"
+excerpt: "A walkthrough for provisioning an EC2 instance as a development machine."
 date: 2026-02-24
 ---
 
@@ -8,10 +8,9 @@ date: 2026-02-24
 > access to an AWS account or prefer another provider, feel free to skip to the
 > next article.
 
-If you want to configure a remote development machine on AWS, the EC2 service is
-your best bet. The first tricky part is deciding which machine to choose. With
-tons of options available, it's easy to get lost, but it really comes down to
-the projects you plan to work on.
+If you want to configure a remote development machine on AWS, EC2 is the service
+to use. The first decision is which instance type to pick. There are many
+options, but it mostly comes down to the kind of work you plan to do.
 
 ## Choosing the Right EC2 Instance
 
@@ -19,17 +18,16 @@ EC2 offers various machine types tailored to specific workloads. For example,
 there are CPU-oriented machines for intensive processing and "burstable"
 machines for workloads that don't need to run at full capacity 100% of the time.
 
-For general programming purposes, I highly recommend the **`m8i`** (Intel/x86
-architecture) or **`m8g`** (Graviton/ARM architecture) machines, or their newer
-generations if available. They offer a great balance of CPU and memory, making
-them perfectly suited for typical software engineering workloads.
+For general programming, the **`m8i`** (Intel/x86) or **`m8g`** (Graviton/ARM)
+instances work well, as do their newer generations if available. They provide a
+good balance of CPU and memory for typical software engineering workloads.
 
 The only thing left to figure out is how much RAM and CPU you actually need.
 Since we will be coding in the terminal, your RAM won't be weighed down by a
 graphical user interface (GUI), allowing you to get even more performance out of
 your machine.
 
-To give you a brief idea about costs — `m8i.2xlarge` instance (8 vCPU, 32 GiB
+To give you a brief idea about costs - `m8i.2xlarge` instance (8 vCPU, 32 GiB
 RAM) with about 6–7 hours of daily usage during working days should cost around
 60 USD. You can expect that `m8i.xlarge` (4 vCPU, 16 GiB) will cost roughly half
 of that (~30 USD), and `m8i.large` (2 vCPU, 8 GiB) around ~15 USD.
@@ -78,7 +76,7 @@ Pay attention to three critical tabs and values on this screen:
   machine.
 - **Instance state:** This allows you to control your machine's lifecycle. Get
   into the habit of stopping it when you don't need it and starting it on
-  demand—this helps save significantly on costs!
+  demand - this helps keep costs down.
 - **Security:** This tab allows you to find and manage your associated security
   group. You will return here later to remove the default SSH port rule after
   adjusting your server settings.

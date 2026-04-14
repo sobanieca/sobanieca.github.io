@@ -1,15 +1,13 @@
 ---
 title: "Setting Up a Virtual Machine on Contabo"
-excerpt: "Want to set up a budget-friendly VPS but aren't sure where to start?"
+excerpt: "A walkthrough for provisioning a VPS on Contabo."
 date: 2026-02-28
 ---
 
 > **Note:** This article covers configuring a machine on Contabo. If you prefer
 > to use a different provider, feel free to skip ahead to the next guide.
 
-So, you've decided to set up a machine with a budget-friendly provider? In my
-honest opinion, Contabo is a great choice. In fact, I use it personally to write
-these articles.
+Contabo is a solid budget option. I use it myself to write these articles.
 
 To spin up your machine, head over to the
 [Contabo website](https://contabo.com/en/vps/), select a VPS with the right
@@ -32,7 +30,7 @@ may need to adjust some of the code snippets provided later on.
 I usually skip the **Auto Backup** feature. This machine serves purely as a
 development environment, and my source code is safely secured on external Git
 servers anyway. It’s not a big deal to recreate the machine from scratch,
-especially once you've automated it with a few scripts.
+especially once you have a few setup scripts in place.
 
 Scrolling down, you'll see **Additional Features**. I personally skip private
 networking for this setup; it would require an additional VPN configuration,
