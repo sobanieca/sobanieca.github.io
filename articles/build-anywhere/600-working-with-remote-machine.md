@@ -86,7 +86,9 @@ cd ~/code/my-project/assets
 And run the `rfm` command there. From now on, I can navigate to
 `localhost:8000/file-explorer` to see files within the given directory:
 
-TODO: add screenshot of remote file manager
+![Remote File Manager](./images/rfm.jpg)
+
+> Built-in file explorer is very handy for transferring files between machines
 
 It's possible to edit text files (which is also useful when I need to copy &
 paste some text content between the local and remote machine). This is a very
