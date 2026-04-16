@@ -1,21 +1,25 @@
 ---
 title: "Working with remote machine"
-excerpt: "Practical hints on your new remote server. How to do software development there?"
+excerpt: "Practical tips on your new remote server. How to do software development there?"
 date: 2026-03-04
 ---
 
-So now you have your machine configured and ready to start coding. There are a
-few things you need to keep in mind when utilizing such a remote setup.
+With your VPS connected and secured, you can start using it as your main
+development environment. Believe it or not - with a bit of SSH plumbing it's
+possible to run a full project (say, a Vite frontend with a Node.js backend
+orchestrated by Nomad or Kubernetes) entirely on a remote server and work on it
+as if everything ran locally. Two things make this possible: port forwarding and
+a simple way to transfer files. Let's go through both.
 
 # Port forwarding
 
 ## Accessing remote services
 
-This is essential. Whenever you run your backend that listens on, let's say,
-http://localhost:8000 and you try to reach it from your local machine it won't
-be available (and it shouldn't!). In order to access it you need to set up port
-forwarding the moment you connect to the remote machine. Use the `-L` parameter
-for this. For example, for the alias defined in the previous article:
+Whenever you run your backend on, let's say, http://localhost:8000 on the remote
+machine and try to reach it from your laptop, it won't be available (and it
+shouldn't!). To access it you need to set up port forwarding the moment you
+connect. Use the `-L` parameter. For example, extending the alias defined in the
+previous article:
 
 ```bash
 ssh -L 8000:localhost:8000 -o TCPKeepAlive=yes -o ServerAliveCountMax=20 -o ServerAliveInterval=15 -q -p {ssh_port} -i ~/.ssh/id_rsa {user}@{IP or DNS}
@@ -27,23 +31,18 @@ machine!
 > **Note:** There is no need to update firewall rules. A single port (the SSH
 > port) is used and acts as a connection tunnel.
 
-The main drawback here is that you need to know in advance what ports you need
-when making the connection. Especially when you work on a large project, this
-may be an issue. In my case, discipline works - each time I discover yet another
-port, I keep updating my connection alias/script. After that, I run another
-parallel ssh connection. The ssh tool is smart enough to extend the setup by
-just one more port.
+The main drawback is that you need to know the ports in advance. On larger
+projects this gets tricky. I just update my alias each time I hit a new port,
+then open a second ssh connection with the extra `-L` flag - the new tunnel is
+added without disturbing the first session.
 
-There are some situations when on your remote machine you will see a very
-temporary port open. For instance, during MCP authentication in tools like
-Claude Code. I haven't tried it yet, but there is a possibility to extend an
-established ssh connection with one more port. For now, I do the same as
-described above - just initiate another ssh connection, since I rarely have to
-do it.
+## Adding ports to a live connection
 
-Believe it or not - with port forwarding it's possible to run a big project with
-Vite for the frontend and some Node.js backend with orchestrators like
-Nomad/Kubernetes completely on a remote server.
+Sometimes a port pops up only briefly and you don't want to reconnect - for
+instance during MCP authentication in tools like Claude Code. SSH supports
+extending a live connection: press `~C` inside the session to open an SSH
+command prompt, then type something like `-L 9000:localhost:9000`. I still tend
+to open a second session, but it's good to know the option is there.
 
 ---
 
@@ -58,9 +57,9 @@ you need to define the `-R` parameter:
 ssh -R 9222:localhost:9222 -o TCPKeepAlive=yes -o ServerAliveCountMax=20 -o ServerAliveInterval=15 -q -p {ssh_port} -i ~/.ssh/id_rsa {user}@{IP or DNS}
 ```
 
-With such a connection, whenever you run Claude Code on the remote machine, it
-can access your local Chrome as if it were running on the remote machine. In
-order to do this add following in `.claude.json` file:
+With such a connection, whenever you run Claude Code on the remote machine it
+can reach your local Chrome as if it were running on the server. Add the
+following to your `.claude.json`:
 
 ```json
 "mcpServers": {
@@ -73,52 +72,58 @@ order to do this add following in `.claude.json` file:
       "http://localhost:9222"
     ],
     "env": {}
-  },
+  }
 }
 ```
 
-> Since I've already mentioned Chrome MCP here let me also give some hint on how
-> to enable remote debug on your machine (Windows OS, should be similar for
-> other systems):
-> `"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="C:\Users\{My USER}\chrome-debug"`
-> The most important part is to add `--user-data-dir` together with remote
-> debugging port. Both are required in more recent versions on Chrome. It took
-> me a while to find this that's why I want to share it here.
+### Enabling Chrome remote debug
+
+For any of this to work, something needs to actually listen on port 9222 on your
+local machine. That means starting Chrome with remote debugging enabled. On
+Windows:
+
+```
+"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="C:\Users\{My USER}\chrome-debug"
+```
+
+The command is similar on other systems. The important part is passing
+`--user-data-dir` alongside the debug port - recent Chrome versions require
+both, and it took me a while to track this down, so I want to share it here.
 
 ---
 
 # Transferring files
 
-There is one more important issue to solve when working on a remote machine. How
-to transfer files from my local machine to the remote one? It's very common that
-we download some assets that we need to include in the source code. There are
-lots of ways to solve this, but in my case I wanted something very simple. I was
-looking for a tool that would allow me to navigate to a specific directory on
-the remote server, run a single command, and as a result have a file server
-started for the given working directory. I couldn't find anything like this.
-That's why I've decided to vibe code my own `remote-file-manager`
-([link](https://github.com/sobanieca/remote-file-manager)).
+Port forwarding solves running services remotely, but you still need a way to
+move files between your laptop and the server. Downloading an asset locally and
+then getting it into the repo on the remote machine is the classic case. There
+are plenty of options here (`scp`, `rsync`, mounted drives...) but I wanted
+something very simple: navigate to a directory on the remote, run a single
+command, and have a file server scoped to that directory. I couldn't find
+anything quite like it, so I vibe coded my own:
+[`remote-file-manager`](https://github.com/sobanieca/remote-file-manager).
 
-It's not the ultimate solution, but it works very well for me. Let's say I've
-downloaded some image that I need to include in my project. I just navigate on
-my remote machine to the directory where I want to upload it:
+## Uploading files
+
+On the remote machine, navigate to the target directory and start `rfm`:
 
 ```bash
 cd ~/code/my-project/assets
+rfm
 ```
 
-And run the `rfm` command there. From now on, I can navigate to
-`localhost:8000/file-explorer` to see files within the given directory:
+Then, on your laptop, open `localhost:8000/file-explorer`:
 
 ![Remote File Manager](./images/rfm.jpg)
 
 > Built-in file explorer is very handy for transferring files between machines
 
-It's possible to edit text files (which is also useful when I need to copy &
-paste some text content between the local and remote machine). This is a very
-basic application, but it completely serves its purpose for me. It also has some
-neat features, like pasting a screenshot directly from the clipboard.
+You can also edit text files directly in the browser, which is handy when
+copy-pasting content between machines. There's a small quality-of-life touch on
+top: pasting a screenshot from the clipboard uploads it as an image.
 
-What's more - it acts as an HTTP server! I can serve HTML pages easily. So
-whenever I navigate to `localhost:8000`, it will search for an `index.html` file
-inside the working directory where `rfm` was started.
+## Serving HTML
+
+`rfm` doubles as an HTTP server. If an `index.html` exists in the directory
+where you started it, navigating to `localhost:8000` will serve it - useful when
+you want to preview a static page without spinning up a separate server.
