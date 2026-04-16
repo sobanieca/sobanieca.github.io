@@ -59,7 +59,31 @@ ssh -R 9222:localhost:9222 -o TCPKeepAlive=yes -o ServerAliveCountMax=20 -o Serv
 ```
 
 With such a connection, whenever you run Claude Code on the remote machine, it
-can access your local Chrome as if it were running on the remote machine.
+can access your local Chrome as if it were running on the remote machine. In
+order to do this add following in `.claude.json` file:
+
+```json
+"mcpServers": {
+  "chrome-devtools": {
+    "type": "stdio",
+    "command": "npx",
+    "args": [
+      "chrome-devtools-mcp@latest",
+      "--browserUrl",
+      "http://localhost:9222"
+    ],
+    "env": {}
+  },
+}
+```
+
+> Since I've already mentioned Chrome MCP here let me also give some hint on how
+> to enable remote debug on your machine (Windows OS, should be similar for
+> other systems):
+> `"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="C:\Users\{My USER}\chrome-debug"`
+> The most important part is to add `--user-data-dir` together with remote
+> debugging port. Both are required in more recent versions on Chrome. It took
+> me a while to find this that's why I want to share it here.
 
 ---
 
