@@ -7,7 +7,8 @@ code in this repository.
 
 When asked to fine tune given article perform grammar/syntax corrections. Do all
 that is possible to keep original intent/context. Double check all guidelines
-mentioned in article if they are correct. If not report it immediately.
+mentioned in article if they are correct. If not report it immediately. Ensure
+that fine tuned article has similar tone to other articles.
 
 ## Build Commands
 
