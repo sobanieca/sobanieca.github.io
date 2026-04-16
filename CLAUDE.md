@@ -3,6 +3,12 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with
 code in this repository.
 
+## Fine tuning articles
+
+When asked to fine tune given article perform grammar/syntax corrections. Do all
+that is possible to keep original intent/context. Double check all guidelines
+mentioned in article if they are correct. If not report it immediately.
+
 ## Build Commands
 
 ```bash
