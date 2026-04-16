@@ -64,9 +64,30 @@ There is one more important issue to solve when working on remote machine. How
 to transfer files from my local machine to the remote one? It's very common that
 we download some assets that we need to include in source code. There are lots
 of ways to solve it actually, but in my case I wanted something very simple. I
-was looking for a simple utility that will allow me to navigate to specific
-directory on remote server, run single command and as a result file server is
-being started for given working directory. I couldn't find anything like this.
+was looking for a tool that will allow me to navigate to specific directory on
+remote server, run single command and as a result file server would be started
+for given working directory. I couldn't find anything like this. That's why I've
+decided to vibe code my own `remote-file-manager`
+([link](https://github.com/sobanieca/remote-file-manager)).
 
-TODO: Elaborate on rfm. Explain how to use it, provide screenshot of file
-manager. Describe option to edit files ot upload screenshot.
+It's not an ultimate solution, but it works very well for me. Let's say I've
+downloaded some image that I need to include in my project. I just navigate on
+my remote machine to given directory where I want to upload it:
+
+```bash
+cd ~/code/my-project/assets
+```
+
+And run `rfm` command there. From now I can navigate to
+`locahost:8000/file-explorer` to see files within given directory:
+
+TODO: add screenshot of remote file manager
+
+It's possible to edit text files (which is also useful in case when I need to
+copy&paste some text content between local - remote machine). This is very basic
+application but it completely serves it's purpose for me. Also it has some neat
+feature like pasting screenshot directly from clipboard.
+
+What is more - it acts as http server! I can serve html pages easily. So
+whenever I navigate to `localhost:8000` it will search for `index.html` file
+inside working directory where `rfm` was started.
