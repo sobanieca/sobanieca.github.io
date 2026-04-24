@@ -39,10 +39,10 @@ added without disturbing the first session.
 ## Adding ports to a live connection
 
 Sometimes a port pops up only briefly and you don't want to reconnect - for
-instance during MCP authentication in tools like Claude Code. SSH supports
-extending a live connection: press `~C` inside the session to open an SSH
-command prompt, then type something like `-L 9000:localhost:9000`. I still tend
-to open a second session, but it's good to know the option is there.
+instance during MCP authentication in tools like Claude Code. SSH has ways to
+extend a live connection without dropping it. Since I rarely hit this case I
+just open a second session with an extra `-L` flag, but if you run into it often
+it's worth digging into the options.
 
 ---
 
@@ -58,39 +58,7 @@ ssh -R 9222:localhost:9222 -o TCPKeepAlive=yes -o ServerAliveCountMax=20 -o Serv
 ```
 
 With such a connection, whenever you run Claude Code on the remote machine it
-can reach your local Chrome as if it were running on the server. Add the
-following to your `.claude.json`:
-
-```json
-"mcpServers": {
-  "chrome-devtools": {
-    "type": "stdio",
-    "command": "npx",
-    "args": [
-      "chrome-devtools-mcp@latest",
-      "--browserUrl",
-      "http://localhost:9222"
-    ],
-    "env": {}
-  }
-}
-```
-
-### Enabling Chrome remote debug
-
-For any of this to work, something needs to actually listen on port 9222 on your
-local machine. That means starting Chrome with remote debugging enabled. On
-Windows:
-
-```
-"C:\Program Files\Google\Chrome\Application\chrome.exe" --remote-debugging-port=9222 --user-data-dir="C:\Users\{My USER}\chrome-debug"
-```
-
-The command is similar on other systems. The important part is passing
-`--user-data-dir` alongside the debug port - recent Chrome versions require
-both, and it took me a while to track this down, so I want to share it here.
-
----
+can reach your local Chrome as if it were running on the server.
 
 # Transferring files
 
