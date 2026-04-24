@@ -378,6 +378,8 @@ async function build() {
     articlesByCategory[cat].sort((a, b) => a.order - b.order);
   }
 
+  const categorySlugsInOrder = Object.keys(categories);
+
   for (const article of articles) {
     const categoryArticles = articlesByCategory[article.categorySlug];
     const currentIndex = categoryArticles.findIndex((a) =>
@@ -394,9 +396,21 @@ async function build() {
       ? categoryArticles[currentIndex + 1]
       : null;
 
+    let nextCategory = null;
+    if (!newerArticle) {
+      const catIndex = categorySlugsInOrder.indexOf(article.categorySlug);
+      for (let i = catIndex + 1; i < categorySlugsInOrder.length; i++) {
+        if (articlesByCategory[categorySlugsInOrder[i]]?.length > 0) {
+          nextCategory = categories[categorySlugsInOrder[i]];
+          break;
+        }
+      }
+    }
+
     const articleContent = articlePage(article, context, {
       olderArticle,
       newerArticle,
+      nextCategory,
     });
     const articleHtml = layout(
       articleContent,

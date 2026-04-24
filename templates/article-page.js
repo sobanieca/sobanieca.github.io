@@ -1,7 +1,11 @@
 export function articlePage(article, context, navigation = {}) {
   const category = article.categorySlug;
   const categoryData = context.categories[category];
-  const { olderArticle: prevArticle, newerArticle: nextArticle } = navigation;
+  const {
+    olderArticle: prevArticle,
+    newerArticle: nextArticle,
+    nextCategory,
+  } = navigation;
 
   const heroImage = article.image
     ? `<div class="article-hero">
@@ -16,9 +20,10 @@ export function articlePage(article, context, navigation = {}) {
       categoryData?.name || category
     }</a>`;
 
-  // Next link: only show if there's a next article (higher order)
   const nextLink = nextArticle
     ? `<a href="${nextArticle.url}" class="btn btn-secondary">${nextArticle.title} →</a>`
+    : nextCategory
+    ? `<a href="/category/${nextCategory.slug}.html" class="btn btn-secondary">${nextCategory.name} →</a>`
     : "";
 
   // Top navigation: minimal prev/next links
@@ -29,6 +34,8 @@ export function articlePage(article, context, navigation = {}) {
     }</a>`;
   const topNextLink = nextArticle
     ? `<a href="${nextArticle.url}" class="article-top-nav-link">${nextArticle.title} →</a>`
+    : nextCategory
+    ? `<a href="/category/${nextCategory.slug}.html" class="article-top-nav-link">${nextCategory.name} →</a>`
     : "";
   const topNav =
     `<nav class="article-top-nav">${topPrevLink}${topNextLink}</nav>`;
