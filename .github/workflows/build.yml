@@ -44,7 +44,7 @@ jobs:
         uses: actions/configure-pages@v4
 
       - name: Build with Deno
-        run: deno task build
+        run: deno task publish
 
       - name: Upload artifact
         if: github.event_name != 'pull_request'

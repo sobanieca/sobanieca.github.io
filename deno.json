@@ -3,8 +3,9 @@
     "exclude": ["dist"]
   },
   "tasks": {
-    "build": "deno run --allow-read --allow-write --allow-env build.js",
-    "build:debug": "DEBUG=1 deno run --allow-read --allow-write --allow-env build.js"
+    "build": "deno run --allow-read --allow-write --allow-env --allow-run build.js",
+    "build:debug": "DEBUG=1 deno run --allow-read --allow-write --allow-env --allow-run build.js",
+    "publish": "deno run --allow-read --allow-write --allow-env build.js --publish"
   },
   "imports": {
     "marked": "npm:marked@^12.0.0",
