@@ -15,9 +15,10 @@ single screen boosts productivity.
 
 There are plenty of terminal emulators that offer such features (Windows
 Terminal, Warp, Termux, Kitty, Alacritty), but I was looking for something that
-works directly on the remote machine. This way I don't get used to a particular
-device or OS that I use to connect to the machine. No matter if I use a PC or
-smartphone, I can split the terminal using the same keyboard shortcuts.
+works directly on the remote machine (when connected to remote VPS). This way I
+don't get used to a particular device or OS that I use to connect to the
+machine. No matter if I use a PC or smartphone, I can split the terminal using
+the same keyboard shortcuts.
 
 `tmux` ([link](https://github.com/tmux/tmux/wiki)) is the tool of my choice. It
 makes it easy to spawn new terminal windows whenever I need to run a process,
@@ -86,7 +87,7 @@ can't imagine working without it!
 As I've mentioned, I use a highly customized tmux with custom key bindings.
 Pre-AI, it allowed me to take a quick look at my `tmux.conf` file to see what
 key shortcuts are available. I've also removed key shortcuts I don't use. If you
-want to take a look at my `env-setup` repository -
+want to take a look at my config in `env-setup` repository -
 [tmux.conf](https://github.com/sobanieca/env-setup/blob/master/tmux.conf). It
 contains quite a bit of setup. It should be fairly easy to elaborate on each
 setting using AI, so I don't see the point in explaining everything here. You
