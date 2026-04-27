@@ -1,20 +1,40 @@
 ---
 title: "How to use AI in terminal"
-excerpt: "How to use AI in terminal without headache?"
+excerpt: "AI agents in form of CLI are taking development world by storm. For good reason"
 date: 2026-03-10
 ---
 
-TODO: write
+# AI Agents in CLI
 
-- AI in terminal - `Claude Code` (git diff to review local changes, github PR to
-  view bigger refatoring, adjust `notify` script to get notification in
-  terminal)
+There are so many AI related articles and how-to's that I wouldn't dare to write
+another one. In this article I only want to share few alignments when working
+fully in terminal. For example the MCP configuration when working with remote
+machine (as described in `build-anywhere`).
 
-- How to configure MCP's
+Also the way of working with AI agents entirely in terminal is a bit different
+than in GUI apps like Cursor.
 
-How to configure Claude MCP for Chrome (mentioned in build-anywhere category)
+# Working with LLM in terminal
 
-Add the following to your `.claude.json`:
+When running prompts in tools like `Claude Code` there is no straightforward way
+of reviewing/accepting all changes that were done. That's why I suggest to get
+familiar with `git` and use it as a safety net and control over all changes done
+to the source code. I use bare `git` in my terminal, but I know there are some
+terminal based tools that aim to make it more friendly to use. Personally I see
+value in plain `git` - it gives some more confidence when using within some
+CI/CD scripts. Whenever there are batch of changes generated with some prompt I
+simply review them with `git diff`. In case when there are lots of changes I
+tend to create PR with platform like Github. This is espeically useful because
+it allows to write comments on specific lines and then tools like `Claude Code`
+(using `Github CLI`) can easily download them and apply required changes.
+
+# MCP`s configuration
+
+Personally, I try to use as much `CLI` tools as possible but in some cases MCP
+is the only proper way to integrate AI agent. For example to work with frontend,
+Chrome MCP can save a lot of time. The tricky part is - how to configure it, if
+you work in terminal on remote machine. For this one has to add the following to
+`.claude.json` file:
 
 ```json
 "mcpServers": {
