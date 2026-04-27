@@ -1,6 +1,6 @@
 ---
 title: "Foundation: tmux"
-excerpt: "Spawn terminals like a boss!"
+excerpt: "One terminal is never enough. Split panes, juggle sessions, and shrug off dropped connections - tmux turns a single shell into a full workspace."
 date: 2026-03-07
 ---
 
