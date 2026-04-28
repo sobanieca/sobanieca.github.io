@@ -4,6 +4,8 @@ excerpt: "Ultimate hacking tool"
 date: 2026-03-08
 ---
 
+TODO: add hero image, add screenshot of full neovim
+
 # Why Neovim
 
 Even with the terminal, `tmux`, and an AI agent ready to go, one piece is still
@@ -73,16 +75,8 @@ in the `init.lua` linked above.
   I'd miss the most.
 - [nvim-tree.lua](https://github.com/nvim-tree/nvim-tree.lua) - the file
   explorer sidebar.
-- [nvim-spectre](https://github.com/nvim-pack/nvim-spectre) - project-wide find
-  & replace with a real preview.
 - [bookmarks.nvim](https://github.com/tomasky/bookmarks.nvim) - persistent
   bookmarks across sessions, very handy in larger codebases.
-
-## Editing quality of life
-
-- [Comment.nvim](https://github.com/numToStr/Comment.nvim) - smart commenting.
-- [uuid-nvim](https://github.com/PauloMessias/uuid-nvim) - quick UUID generation
-  in insert mode.
 
 ## Looks
 
