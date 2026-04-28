@@ -8,8 +8,8 @@ date: 2026-03-08
 
 Even with the terminal, `tmux`, and an AI agent ready to go, one piece is still
 missing: the editor itself. AI generates plenty of code, but you still need a
-fast, keyboard-driven place to read, navigate, and tweak it. For me that place
-is `Neovim`.
+fast, keyboard-driven place to read and navigate it. For me that place is
+`Neovim`.
 
 It's tempting to think that in an era where AI agents write most of the code and
 developers mostly review pull requests, a powerful editor matters less than it
@@ -26,17 +26,27 @@ over SSH, which matters a lot in the workflow described in earlier articles.
 
 # Custom config, not a distribution
 
-There are popular `Neovim` distributions like `LazyVim`, `NvChad`, or
-`AstroNvim` that give you a polished IDE in minutes. They're a great way to get
-started, but I deliberately avoid them.
+There are pre-packed `Neovim` distributions out there that ship with everything
+already wired up - colorscheme, LSP, fuzzy finder, file tree, the works. They
+get you to a polished IDE in minutes, and that's a perfectly fine starting
+point.
 
-The reason is simple: when something breaks - and it will break - I want to know
-exactly which plugin or setting is responsible. With a hand-rolled `init.lua`
-every line is there because I put it there. It also keeps the startup fast and
-the surface area small enough that AI can reason about my config when I ask it
-to.
+In my case I preferred to configure everything on my own. It takes more time
+upfront, but in return I get more control and customization, a leaner setup, and
+noticeably better performance - at the cost of having fewer features than a
+fully loaded distribution. Whatever is in my config is there because I put it
+there, which makes it much easier to reason about (and easier for AI to reason
+about, when I ask it to help).
 
-If you want to see the full file, it lives in my `env-setup` repository:
+One thing worth being honest about: I don't really use the things `Vim` and
+`Neovim` are famous for - macros, advanced motions, the whole modal-editing deep
+end. I use `Neovim` in a way that's pretty close to how I'd use a GUI editor
+like `Visual Studio Code`: open a file, jump around with a fuzzy finder, edit,
+save. The terminal-native nature and the plugin ecosystem are what I'm really
+after.
+
+If you want to see the full configuration, it lives in my `env-setup`
+repository:
 [nvim-init.lua](https://github.com/sobanieca/env-setup/blob/master/nvim-init.lua).
 Below I only highlight the plugins that turn `Neovim` into something close to a
 full IDE.
