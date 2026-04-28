@@ -53,6 +53,10 @@ full IDE.
 
 # The plugins that matter
 
+I only list the ones I consider most important here. There are a few smaller
+helpers in my config that I won't cover - if you're curious, they're all visible
+in the `init.lua` linked above.
+
 ## Language intelligence
 
 - [coc.nvim](https://github.com/neoclide/coc.nvim) - LSP client with a rich
