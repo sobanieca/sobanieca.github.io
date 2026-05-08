@@ -21,18 +21,16 @@ Termux is available in Play Store so installation is straightforward.
 
 # Termux as an entry point
 
-Before installing anything, it's worth being explicit about how I actually use
-Termux day to day. I don't treat it as my main workspace. It is an entry point
-for:
+Termux itself has a lot of capabilities and packages, but personally I use it in
+one of two ways:
 
-- Launch a real Debian via `proot-distro` (covered in the next article).
+- Launch a Debian via `proot-distro` (covered in the next article).
 - `ssh` into a remote machine that I've already prepared (covered in the
   `build-anywhere` series).
 
-That framing keeps the install list refreshingly short. What you install depends
-on which path you want.
+What you install depends on which path you want.
 
-For the full Debian path via `proot-distro`:
+For the Debian path via `proot-distro`:
 
 ```bash
 pkg upgrade
@@ -76,8 +74,6 @@ A quick tour of what that buys you:
 - `` ` ``/`~` - awkward to reach on most software keyboards, but you'll want
   them constantly for shell prompts and home paths.
 
-TODO: screenshot of termux in action
-
 # Visuals: colors and Nerd Font
 
 A proper color palette and a font with full icon coverage make a real
@@ -100,6 +96,11 @@ If you're wondering why a Nerd Font specifically, I covered the rationale in the
 [terminal setup](../build-in-terminal/100-terminal-setup.md) article - short
 version: status lines, file explorers, and prompt themes all expect those
 glyphs.
+
+![termux](./images/termux.jpg)
+
+> Once everything is configured, Termux lets you really squeeze a lot out of
+> your phone
 
 # The one-shot script
 
