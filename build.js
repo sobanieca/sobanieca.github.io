@@ -247,7 +247,7 @@ async function build() {
     renderer: {
       link(href, title, text) {
         const articleMatch = href.match(
-          /^\.\/\d+-(.+)\.md$/,
+          /^(?:\.\/|\.\.\/[^/]+\/)\d+-(.+)\.md$/,
         );
         if (articleMatch) {
           href = `/articles/${articleMatch[1]}.html`;
