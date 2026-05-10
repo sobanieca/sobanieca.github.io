@@ -4,7 +4,7 @@ excerpt: "Ultimate hacking tool"
 date: 2026-03-08
 ---
 
-TODO: add hero image, add screenshot of full neovim
+TODO: Add screenshot of full neovim
 
 # Why Neovim
 

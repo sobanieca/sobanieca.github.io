@@ -4,8 +4,6 @@ excerpt: "If you want to code on the go - Termux is your starting point"
 date: 2026-03-12
 ---
 
-TODO: fine tune article
-
 # Your phone, your terminal
 
 In the previous article I promised that the device in your pocket can be a real
