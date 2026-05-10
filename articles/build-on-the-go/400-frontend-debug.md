@@ -4,25 +4,29 @@ excerpt: "How to debug your frontend javascript code on mobile?"
 date: 2026-03-15
 ---
 
-There is one more topic that has to be covered when talking about building
-software on mobile phone - how to debug frontend effectively. To be honest this
-is IMHO the weakest point here. Since many years I can't find the proper tools
-for it.The best option I've found was `Kiwi` browser - it allowed to open well
-known Chrome dev tools without issues. Unfortunately this browser is no longer
-supported. Also, Chrome devtools are not so optimized to view on mobile screens
-so I could use it only when connecting to external screen with Samsung Dex.
+Before we hand the workflow off entirely to the terminal series, there is one
+mobile-specific gap worth flagging - and it's the one I've struggled with most:
+debugging frontend code. Honestly, this is IMHO the weakest point of building on
+a phone. For years I haven't been able to find the proper tools for it.
 
-I've also tried Eruda (todo: add link to project) and it looks quite nice. It's
-fine for investigating console logs etc. In modern, AI era though I would prefer
-to run something like Chrome MCP (or some CLI) that would allow me to easily
-pass debug data to LLM of choice. So far I didn't find anything meaningful.
+The best option I've found was the `Kiwi` browser - it let you open the well
+known Chrome DevTools without any fuss. Unfortunately, Kiwi is no longer
+maintained. Chrome DevTools themselves aren't really optimized for a phone-sized
+screen either, so in practice I could only use them when plugged into an
+external display via Samsung DeX.
 
-Currently I mostly code non frontend applications so I have given up on digging
+I've also tried [Eruda](https://github.com/liriliri/eruda) and it looks quite
+nice. It's fine for inspecting console logs and poking at the DOM. In the modern
+AI era, though, I would prefer to run something like Chrome MCP (or some CLI)
+that would let me easily pass debug data to an LLM of choice. So far I haven't
+found anything that fits.
+
+Currently I mostly code non-frontend applications, so I've given up on digging
 this topic further.
 
-There is one more thing worth noting. If you are on the go and you want to check
-how your page may look on larger screen on desktop machine, there is a hidden
-option in Chrome that allows to change zoom of desktop mode. I use it quite
+There is one more thing worth noting. If you're on the go and you want to check
+how your page would look on a larger desktop screen, there is a hidden option in
+Chrome that lets you change the zoom level of desktop mode. I use it quite
 frequently:
 
 TODO: show desktop mode zoom screenshot
