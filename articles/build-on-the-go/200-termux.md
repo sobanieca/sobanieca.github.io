@@ -116,7 +116,7 @@ agents around, tweaking such a script to your own preferences is almost trivial.
 
 # What's next
 
-Termux is a great launchpad, but it isn't a full Debian. The moment you reach
-for a package that expects glibc, standard paths, or a system service manager,
-you'll feel the limit. That's the cue for `proot-distro` - a proper Linux
-distribution running on top of Termux. We'll set that up next.
+Termux is a great launchpad, but it isn't a full Debian. As soon as something
+asks for `sudo` or expects standard Linux system paths, you'll feel the limit.
+That's the cue for `proot-distro` - a proper Linux distribution running on top
+of Termux. We'll set that up next.

@@ -4,50 +4,58 @@ excerpt: "If you need more advanced scenarios you can install linux distribution
 date: 2026-03-14
 ---
 
-TODO: fine tune the article, expand some points when suitable
+Termux gets you a usable shell, but the moment a script reaches for `sudo` or
+expects standard system paths, you hit the ceiling. I ran into this myself when
+I tried to write a single bootstrap script that I could use both on a fresh VPS
+and on Termux locally - most of the steps simply didn't translate.
 
-Once you try to use more advanced scripts within Termux described in previous
-article (especially the ones that require `sudo`) you may run into issues. This
-was clearly visible to me when I've tried to come up with shared script that I
-can run on both remote VPS and local Android Termux (for example to setup a new
-fresh instance). That's where `proot-distro` really shines. It creates a
-(almost) regular Debian instance directly on your phone. I've been using it with
-some good results when working on some of my open source projects. What's nice -
-this works fully offline (it was possible to code while in train or in some
-remote location). What are drawbacks of this setup - it runs directly on phone
-CPU. MOdern smartphones are small computers indeed, but let's face it - they
-can't replace proper machine. Also, `proot-distro` is still facing some limited
-set of permissions (if you don't want to root your phone) so some operations may
-not be available. I wasn't also able to run more advanced software like
-`Docker`. If you feel like you don't need very advanced tools and you want to
-work on some quite simple application, I believe `proot-distro` is good choice.
+That's where [`proot-distro`](https://github.com/termux/proot-distro) shines. It
+installs an (almost) regular Debian directly on your phone, and I've been using
+it with good results on a few of my open source projects. The nice part is that
+it works fully offline - perfect for coding on a train or in some remote
+location.
+
+The trade-offs are honest ones:
+
+- It runs on your phone's CPU. Modern smartphones are small computers, but they
+  still can't replace a proper machine.
+- Without rooting your phone, `proot-distro` is constrained by the same Android
+  permission model, so some operations simply aren't available.
+- I haven't been able to run more advanced tooling like `Docker` inside it.
+
+If your work fits within those limits - `proot-distro` is a good choice.
 
 ## Installing Debian via proot-distro
 
-Assumes `proot-distro` is already on Termux (covered in 200's "full Debian path"
-install block).
+This assumes `proot-distro` is already installed in Termux (covered in the
+previous article under the "full Debian path" install block):
 
 ```bash
 proot-distro install debian
 proot-distro login debian
 ```
 
-That's it for the install. The next two sections are about making it actually
-pleasant to live in.
-
 ## The `TERM` quirk that breaks tmux
 
-I use `tmux` quite heavily (as explained in
-[tmux](../build-in-terminal/200-tmux-as-foundation.md) article) - and I've found
-some issue there\
-proot-distro injects `export TERM=xterm-256color` into
-`./profile.d/termux-proot.sh`, which fights tmux's own terminfo and produces
-broken colors / mangled rendering inside tmux sessions.
+I use `tmux` heavily (as explained in the
+[tmux](../build-in-terminal/200-tmux-as-foundation.md) article), and
+`proot-distro` ships a setup that fights with it.
 
-Fix: remove that line before launching tmux. Show the file path and the
-one-liner.
+On login, it sources `/etc/profile.d/termux-proot.sh`, which exports
+`TERM=xterm-256color`. That overrides whatever `tmux` negotiates for itself and
+results in broken colors and mangled rendering inside `tmux` sessions.
+
+The fix is to drop that line before launching `tmux`:
+
+```bash
+sed -i '/export TERM=/d' /etc/profile.d/termux-proot.sh
+```
+
+After re-logging into the distro, `tmux` behaves again.
 
 ## What's next
 
-Now once `proot-distro` and regular Debian is installed one can continue do
-regular stuff which [Build in terminal](../build-in-terminal) section describes.
+With `proot-distro` and Debian in place, the rest of the setup is just a regular
+terminal workflow. From here you can pick up the
+[Build in terminal](../build-in-terminal) series and follow it the same way you
+would on any Linux box.
