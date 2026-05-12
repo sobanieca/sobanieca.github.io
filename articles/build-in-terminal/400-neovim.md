@@ -1,6 +1,6 @@
 ---
 title: "Neovim: your terminal IDE"
-excerpt: "Ultimate hacking tool"
+excerpt: "The ultimate hacking tool."
 date: 2026-03-08
 ---
 

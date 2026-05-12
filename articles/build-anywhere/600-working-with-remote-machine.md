@@ -1,6 +1,6 @@
 ---
 title: "Working with remote machine"
-excerpt: "Practical tips on your new remote server. How to do software development there?"
+excerpt: "Practical tips for your new remote server. How to do software development there?"
 date: 2026-03-04
 ---
 

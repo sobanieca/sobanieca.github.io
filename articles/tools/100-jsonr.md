@@ -1,5 +1,5 @@
 ---
-title: "jsonr: Mastering API Interactions in the Terminal"
+title: "jsonr: mastering API interactions in the terminal"
 excerpt: "Ditch the heavy GUI clients. Discover a secure, scriptable, and terminal-first approach to interacting with JSON APIs."
 date: 2026-02-17
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Setting Up a Virtual Machine on Contabo"
+title: "Setting up a virtual machine on Contabo"
 excerpt: "A walkthrough for provisioning a VPS on Contabo."
 date: 2026-02-28
 ---

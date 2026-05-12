@@ -1,6 +1,6 @@
 ---
 title: "Debugging frontend on your mobile phone?"
-excerpt: "How to debug your frontend javascript code on mobile?"
+excerpt: "How to debug your frontend JavaScript code on mobile?"
 date: 2026-03-15
 ---
 

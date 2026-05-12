@@ -1,6 +1,6 @@
 ---
 title: "Leave the laptop: coding in the age of AI agents"
-excerpt: "Laptops are distraction machines; mobile interfaces force focus. Unlock the magic of turning the device in your pocket from a passive screen into a powerful creation engine"
+excerpt: "Laptops are distraction machines; mobile interfaces force focus. Unlock the magic of turning the device in your pocket from a passive screen into a powerful creation engine."
 date: 2026-01-20
 ---
 

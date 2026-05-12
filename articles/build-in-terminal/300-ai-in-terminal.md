@@ -1,6 +1,6 @@
 ---
 title: "AI agents in the terminal"
-excerpt: "AI agents in form of CLI are taking development world by storm. For good reason"
+excerpt: "AI agents in the form of CLIs are taking the development world by storm. For good reason."
 date: 2026-03-10
 ---
 

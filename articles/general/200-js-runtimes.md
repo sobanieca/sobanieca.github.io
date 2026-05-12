@@ -1,5 +1,5 @@
 ---
-title: "Headache of JavaScript runtimes!"
+title: "The headache of JavaScript runtimes!"
 excerpt: "New JS frameworks pop up frequently. Will we see the same for runtimes?"
 date: 2026-03-17
 ---
