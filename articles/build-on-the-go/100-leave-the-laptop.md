@@ -4,8 +4,6 @@ excerpt: "Laptops are distraction machines; mobile interfaces force focus. Unloc
 date: 2026-01-20
 ---
 
-# Leave the laptop: coding in the age of AI agents
-
 Imagine this: You wake up, get ready, jump on your bicycle/motorcycle, and head
 to your favorite café in the city center. You order your beloved cappuccino,
 find a comfortable spot, and instead of lugging out a heavy backpack, you simply

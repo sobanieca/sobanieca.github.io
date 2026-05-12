@@ -4,8 +4,6 @@ excerpt: "One terminal is never enough. Split panes, juggle sessions, and shrug 
 date: 2026-03-07
 ---
 
-# One terminal is not enough
-
 With the emulator and font in place, the next problem appears quickly: a single
 terminal window is rarely enough. When moving to a terminal-based workflow I was
 searching for an effective way of managing multiple applications. For instance,
@@ -35,9 +33,9 @@ remote machine this often means a dropped connection), I can simply run
 > With `tmux` it's easy to switch to another 'thread' and continue work. You can
 > split the terminal and move to another tool to accomplish a given task.
 
-# Tmux plugins
+## Tmux plugins
 
-## Managed via plugin manager
+### Managed via plugin manager
 
 In most cases the default `tmux` installation won't be enough. To enjoy working
 with it, you have to introduce some customization. First of all, there are a few
@@ -75,14 +73,14 @@ Two plugins that I use with `tpm` (and recommend) are:
 > This small symbol in the lower right corner indicates that the `tmux` prefix
 > key was pressed and `tmux` is waiting for an additional keystroke.
 
-## Gitmux
+### Gitmux
 
 There is one more plugin which is (IMHO) a `must-have` -
 [gitmux](https://gitmux.com/). It displays git status in the tmux status line,
 which gives a quick overview of the current branch and the amount of changes. I
 can't imagine working without it!
 
-# Configuration
+## Configuration
 
 As I've mentioned, I use a highly customized tmux with custom key bindings.
 Pre-AI, it allowed me to take a quick look at my `tmux.conf` file to see what

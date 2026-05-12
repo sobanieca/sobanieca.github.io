@@ -11,9 +11,9 @@ orchestrated by Nomad or Kubernetes) entirely on a remote server and work on it
 as if everything ran locally. Two things make this possible: port forwarding and
 a simple way to transfer files. Let's go through both.
 
-# Port forwarding
+## Port forwarding
 
-## Accessing remote services
+### Accessing remote services
 
 Whenever you run your backend on, let's say, http://localhost:8000 on the remote
 machine and try to reach it from your laptop, it won't be available (and it
@@ -36,7 +36,7 @@ projects this gets tricky. I just update my alias each time I hit a new port,
 then open a second ssh connection with the extra `-L` flag - the new tunnel is
 added without disturbing the first session.
 
-## Adding ports to a live connection
+### Adding ports to a live connection
 
 Sometimes a port pops up only briefly and you don't want to reconnect - for
 instance during MCP authentication in tools like Claude Code. SSH has ways to
@@ -46,7 +46,7 @@ it's worth digging into the options.
 
 ---
 
-## Exposing local services to remote
+### Exposing local services to remote
 
 There may be a situation where you have to expose some service on your machine
 to the remote machine. For example, you may want to expose your Chrome with
@@ -60,7 +60,7 @@ ssh -R 9222:localhost:9222 -o TCPKeepAlive=yes -o ServerAliveCountMax=20 -o Serv
 With such a connection, whenever you run Claude Code on the remote machine it
 can reach your local Chrome as if it were running on the server.
 
-# Transferring files
+## Transferring files
 
 Port forwarding solves running services remotely, but you still need a way to
 move files between your laptop and the server. Downloading an asset locally and
@@ -71,7 +71,7 @@ command, and have a file server scoped to that directory. I couldn't find
 anything quite like it, so I vibe coded my own:
 [`remote-file-manager`](https://github.com/sobanieca/remote-file-manager).
 
-## Uploading files
+### Uploading files
 
 On the remote machine, navigate to the target directory and start `rfm`:
 
@@ -90,7 +90,7 @@ You can also edit text files directly in the browser, which is handy when
 copy-pasting content between machines. There's a small quality-of-life touch on
 top: pasting a screenshot from the clipboard uploads it as an image.
 
-## Serving HTML
+### Serving HTML
 
 `rfm` doubles as an HTTP server. If an `index.html` exists in the directory
 where you started it, navigating to `localhost:8000` will serve it - useful when

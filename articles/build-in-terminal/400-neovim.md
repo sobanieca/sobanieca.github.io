@@ -4,8 +4,6 @@ excerpt: "Ultimate hacking tool"
 date: 2026-03-08
 ---
 
-# Why Neovim
-
 Even with the terminal, `tmux`, and an AI agent ready to go, one piece is still
 missing: the editor itself. AI generates plenty of code, but you still need a
 fast, keyboard-driven place to read and navigate it. For me that place is
@@ -24,7 +22,7 @@ There are other terminal editors out there, but out of all the alternatives
 development. It also runs equally well on a beefy workstation and on a phone
 over SSH, which matters a lot in the workflow described in earlier articles.
 
-# Custom config, not a distribution
+## Custom config, not a distribution
 
 There are pre-packed `Neovim` distributions out there that ship with everything
 already wired up - colorscheme, LSP, fuzzy finder, file tree, the works. They
@@ -51,13 +49,13 @@ repository:
 Below I only highlight the plugins that turn `Neovim` into something close to a
 full IDE.
 
-# The plugins that matter
+## The plugins that matter
 
 I only list the ones I consider most important here. There are a few smaller
 helpers in my config that I won't cover - if you're curious, they're all visible
 in the `init.lua` linked above.
 
-## Language intelligence
+### Language intelligence
 
 - [coc.nvim](https://github.com/neoclide/coc.nvim) - LSP client with a rich
   extension ecosystem (TypeScript, Deno, Lua, Terraform, Docker, YAML, ESLint,
@@ -66,7 +64,7 @@ in the `init.lua` linked above.
 - [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter) - proper
   syntax highlighting and indentation across 40+ languages.
 
-## Navigation and search
+### Navigation and search
 
 - [telescope.nvim](https://github.com/nvim-telescope/telescope.nvim) - fuzzy
   finder for files, live grep, references, jumplist, and more. The single plugin
@@ -76,7 +74,7 @@ in the `init.lua` linked above.
 - [bookmarks.nvim](https://github.com/tomasky/bookmarks.nvim) - persistent
   bookmarks across sessions, very handy in larger codebases.
 
-## Looks
+### Looks
 
 - [tokyonight.nvim](https://github.com/folke/tokyonight.nvim) - the colorscheme.
 - [lualine.nvim](https://github.com/nvim-lualine/lualine.nvim) - the status
@@ -92,7 +90,7 @@ in the `init.lua` linked above.
 > Once everything is configured - Neovim is a great tool for navigating a
 > codebase with focus.
 
-# Wrapping up the terminal walkthrough
+## Wrapping up the terminal walkthrough
 
 That closes the loop on the terminal-based setup: emulator and font, `tmux` for
 layout and persistence, AI agents living next to your shell, and `Neovim` as the

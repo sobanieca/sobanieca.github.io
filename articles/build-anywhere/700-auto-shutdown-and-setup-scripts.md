@@ -9,7 +9,7 @@ between machines, there are two small habits left that make day-to-day life with
 a remote server much easier: not paying for idle compute, and being able to
 rebuild the whole setup quickly when you need a new machine.
 
-# Scheduled shutdown
+## Scheduled shutdown
 
 If your remote machine is billed hourly, forgetting to turn it off is the most
 common way to end up with an uncontrolled bill. I use a very simple guardrail
@@ -42,7 +42,7 @@ sudo dpkg-reconfigure tzdata
 That's it. This single line covers the "I forgot to turn it off" case, which is
 where most of the actual savings come from.
 
-# Setup scripts
+## Setup scripts
 
 The other habit is making it cheap to spin up a fresh machine. Over time I've
 collected a small repository of setup scripts that take a new VPS from a blank
@@ -64,7 +64,7 @@ end-to-end.
 Nowadays, with AI, it should be very easy to adjust such scripts to your own
 needs.
 
-# Conclusion
+## Conclusion
 
 That's more or less everything I wanted to share for the `build-anywhere`
 category. This workflow has served me very well for a couple of years now, and I

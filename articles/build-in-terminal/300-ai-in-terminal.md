@@ -4,8 +4,6 @@ excerpt: "AI agents in form of CLI are taking development world by storm. For go
 date: 2026-03-10
 ---
 
-# Staying in the terminal
-
 With the terminal and `tmux` in place, the workspace is ready - but the
 workspace is only as useful as what runs inside it. These days, that
 increasingly means an AI agent. There are so many AI-related articles and
@@ -17,7 +15,7 @@ example, the MCP configuration when working on a remote machine (as described in
 The way of working with AI agents entirely in the terminal is also a bit
 different from GUI apps like Cursor.
 
-# Working with an LLM in the terminal
+## Working with an LLM in the terminal
 
 When running prompts in tools like `Claude Code` there is no straightforward way
 to review and accept every change as it happens. That's why I suggest getting
@@ -32,7 +30,7 @@ a platform like GitHub. This is especially useful because it allows writing
 comments on specific lines, and tools like `Claude Code` (using `GitHub CLI`)
 can then easily download those comments and apply the required changes.
 
-# MCP configuration
+## MCP configuration
 
 Personally, I try to use as many `CLI` tools as possible, but in some cases MCP
 is the only proper way to integrate an AI agent. For example, when working with

@@ -4,8 +4,6 @@ excerpt: "If you want to code on the go - Termux is your starting point"
 date: 2026-03-12
 ---
 
-# Your phone, your terminal
-
 In the previous article I promised that the device in your pocket can be a real
 development environment. The first piece of that puzzle is a usable shell. On
 Android that means **Termux**.
@@ -17,7 +15,7 @@ article), but as a launchpad it is excellent. It allows you to run tools like
 
 Termux is available in Play Store so installation is straightforward.
 
-# Termux as an entry point
+## Termux as an entry point
 
 Termux itself has a lot of capabilities and packages, but personally I use it in
 one of two ways:
@@ -42,7 +40,7 @@ pkg upgrade
 pkg install openssh
 ```
 
-# Making the on-screen keyboard tolerable
+## Making the on-screen keyboard tolerable
 
 A bare Android keyboard is missing every key that matters in a terminal - no
 Esc, no Tab, no Ctrl, no arrows. Termux fixes this with a configurable
@@ -72,7 +70,7 @@ A quick tour of what that buys you:
 - `` ` ``/`~` - awkward to reach on most software keyboards, but you'll want
   them constantly for shell prompts and home paths.
 
-# Visuals: colors and Nerd Font
+## Visuals: colors and Nerd Font
 
 A proper color palette and a font with full icon coverage make a real
 difference, especially on a phone-sized screen. I drop a Tokyo Night palette
@@ -100,7 +98,7 @@ glyphs.
 > Once everything is configured, Termux lets you really squeeze a lot out of
 > your phone
 
-# The one-shot script
+## The one-shot script
 
 If typing all of the above sounds tedious, it is. I keep the whole flow in my
 [env-setup](https://github.com/sobanieca/env-setup) repository and trigger it
@@ -114,7 +112,7 @@ That covers the package install, both `*.properties` files, and the font in one
 go. It's nothing fancy - feel free to fork it and adjust to taste. With AI
 agents around, tweaking such a script to your own preferences is almost trivial.
 
-# What's next
+## What's next
 
 Termux is a great launchpad, but it isn't a full Debian. As soon as something
 asks for `sudo` or expects standard Linux system paths, you'll feel the limit.

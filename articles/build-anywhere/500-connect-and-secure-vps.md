@@ -4,7 +4,7 @@ excerpt: "SSH setup, key-based authentication, firewall configuration, and conne
 date: 2026-03-02
 ---
 
-# First Connection
+## First Connection
 
 Before we begin, I assume you already have the following:
 
@@ -43,7 +43,7 @@ ssh -i {path to PEM file} {user}@{IP or DNS}
 
 ---
 
-# Add a New User
+## Add a New User
 
 Once connected as `root` (or the default admin user), you need to finalize your
 machine's setup. Running your server as `root` is a major security risk.
@@ -69,7 +69,7 @@ prompted for a password every time.
 
 ---
 
-# Initial SSH Server Configuration
+## Initial SSH Server Configuration
 
 The next step is to lock down your SSH daemon. Run
 `sudo nano /etc/ssh/sshd_config` and ensure the following settings are present
@@ -107,7 +107,7 @@ sudo systemctl reload sshd.service
 
 ---
 
-# Connect as a Newly Added User
+## Connect as a Newly Added User
 
 Now connect to the machine with the newly created user. Remember that SSH is no
 longer listening on the default port:
@@ -131,7 +131,7 @@ chmod 600 ~/.ssh/authorized_keys
 
 ---
 
-# Generate an SSH Key
+## Generate an SSH Key
 
 Open a new terminal on your **local client machine** - we're going to generate a
 key pair there and then upload the public part to your VPS.
@@ -154,7 +154,7 @@ produces two files:
 
 ---
 
-# Upload the Public Key
+## Upload the Public Key
 
 The cleanest way to get the public key onto the VPS is `ssh-copy-id`. It takes
 care of appending the key to `~/.ssh/authorized_keys` on the server and making
@@ -168,7 +168,7 @@ You'll be asked for your VPS user's password one last time.
 
 ---
 
-# Disable Password Authentication
+## Disable Password Authentication
 
 Now connect to your server using the SSH key this time:
 
@@ -195,7 +195,7 @@ sudo systemctl reload sshd.service
 
 From now on, the only way to SSH into your VPS is with your private key.
 
-# Set Up a Firewall
+## Set Up a Firewall
 
 This step is especially crucial if you are using a budget VPS provider that
 lacks a built-in cloud firewall. Without one, your VPS is fully exposed to
@@ -245,7 +245,7 @@ fi
 
 ---
 
-# Set Up an SSH Connection Alias
+## Set Up an SSH Connection Alias
 
 Your machine is now configured. The last step is to set up your local client so
 you can connect without dealing with idle connection timeouts.
