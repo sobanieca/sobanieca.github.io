@@ -4,18 +4,20 @@ excerpt: "Want to query SQL databases directly from the terminal? Don't want to 
 date: 2026-03-23
 ---
 
-Few years ago (when I worked in .NET tech stack) I was working on a project
-where frequently I've had to check something in the database. At that time it
-was SQL Azure database. It become quite frustrating for me to open each time SQL
-Management Studio, wait for it to load, wait for it to connect to the database
-and finally run some SQL. That was the moment when I've decided that I need to
-search for a simple to use CLI tool so I can have some scripts which will
-automate some of these tasks. I didn't find anything suitable for me. I wanted
-to have JSON results and easily manageable list of connections. That's where
-I've decided to create [sqlr](https://github.com/sobanieca/sqlr) project.
+TODO: fine tune this paragraph Few years ago (when I worked in .NET tech stack)
+I was working on a project where frequently I've had to check something in the
+database. At that time it was SQL Azure database. It become quite frustrating
+for me to open each time SQL Management Studio, wait for it to load, wait for it
+to connect to the database and finally run some SQL. That was the moment when
+I've decided that I need to search for a simple to use CLI tool so I can have
+some scripts which will automate some of these tasks. I didn't find anything
+suitable for me. I wanted to have JSON results and easily manageable list of
+connections. That's where I've decided to create
+[sqlr](https://github.com/sobanieca/sqlr) project.
 
-It allows to define and manage connections from CLI. Then querying database is
-as simple as `sqlr query "select * from main.users"`.
+TODO: fine tune this paragraph It allows to define and manage connections from
+CLI. Then querying database is as simple as
+`sqlr query "select * from main.users"`.
 
 **Why `sqlr`?**
 
@@ -41,9 +43,7 @@ Let's see it on example of SQLite database:
 ### Setting up
 
 I'll use the
-[Northwind sample database](https://github.com/jpwhite3/northwind-SQLite3) — a
-prebuilt `northwind.db` file is available in the `dist/` folder of that repo.
-Drop it in a working directory and add a connection:
+[Northwind sample database](https://github.com/jpwhite3/northwind-SQLite3)
 
 ```sh
 sqlr add -n northwind -t sqlite -s ./northwind.db
@@ -64,6 +64,8 @@ A quick sanity check:
 ```sh
 sqlr ls
 ```
+
+TODO: add screenshot
 
 ```
 ┌─────────────────────┬────────┐
@@ -92,6 +94,8 @@ schema; for a quick overview, ask only for table names:
 sqlr describe --tables-only
 ```
 
+TODO: add screenshot
+
 ```
 main.Categories
 main.Customers
@@ -110,6 +114,8 @@ with `--compact` and a filter:
 ```sh
 sqlr describe -f Products --compact
 ```
+
+TODO: add screenshot
 
 ```
 main.Products [ ProductID INTEGER, ProductName TEXT,
@@ -145,6 +151,8 @@ sqlr "SELECT c.CompanyName, c.Country, COUNT(o.OrderID) AS orders
       LIMIT 5" --table
 ```
 
+TODO: add screenshot
+
 ```
 ┌────────────────────────┬───────────┬────────┐
 │ CompanyName            │ Country   │ orders │
@@ -157,33 +165,9 @@ sqlr "SELECT c.CompanyName, c.Country, COUNT(o.OrderID) AS orders
 └────────────────────────┴───────────┴────────┘
 ```
 
-Remember those nullable `UnitsInStock` and `ReorderLevel` columns we spotted on
-`Products`? Put them to work — list everything currently at or below its reorder
-level, ignoring discontinued items:
-
-```sh
-sqlr "SELECT ProductName, UnitsInStock, ReorderLevel
-      FROM Products
-      WHERE UnitsInStock <= ReorderLevel AND Discontinued = '0'
-      ORDER BY UnitsInStock
-      LIMIT 5" --table
-```
-
-```
-┌───────────────────────────┬──────────────┬──────────────┐
-│ ProductName               │ UnitsInStock │ ReorderLevel │
-├───────────────────────────┼──────────────┼──────────────┤
-│ Gorgonzola Telino         │ 0            │ 20           │
-│ Sir Rodney's Scones       │ 3            │ 5            │
-│ Louisiana Hot Spiced Okra │ 4            │ 20           │
-│ Longlife Tofu             │ 4            │ 5            │
-│ Rogede sild               │ 5            │ 15           │
-└───────────────────────────┴──────────────┴──────────────┘
-```
-
 `--table` is the human-friendly view. Drop it and you get JSON, which is what
 you actually want once a query graduates from interactive exploration to
-something a script consumes.
+something a script (or AI agent) consumes.
 
 ### Versioning queries: SQL files with variables
 
@@ -213,6 +197,8 @@ Then run it:
 ```sh
 sqlr top-products-by-country.sql -i "country: Germany" -y --table
 ```
+
+TODO: add screenshot
 
 ```
 ┌─────────────────────────┬────────────┬────────────┐
@@ -254,6 +240,8 @@ sqlr "SELECT c.Country, COUNT(o.OrderID) AS orders
       LIMIT 3" -o orders-by-country.json
 ```
 
+TODO: add screenshot
+
 ```json
 [
   { "Country": "USA", "orders": 2280 },
@@ -267,6 +255,10 @@ The point is that there's no parsing layer between you and the data; the CLI
 hands you a structure, not text you have to scrape.
 
 ### Encrypted connections and AI agents
+
+TODO: refactor this section. Don't elaborate on SQLR_ENCRYPTION_PASSWORD instead
+mention use of sqlr with AI agents instead of some MCP. Provide some example of
+prompt like `run sqlr help and list all tenants from last 3 days`
 
 Northwind on SQLite is harmless. Production isn't. The same `sqlr add` flow
 supports encryption — set a password in the environment when adding the
