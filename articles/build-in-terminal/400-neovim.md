@@ -4,8 +4,6 @@ excerpt: "Ultimate hacking tool"
 date: 2026-03-08
 ---
 
-TODO: Add screenshot of full neovim
-
 # Why Neovim
 
 Even with the terminal, `tmux`, and an AI agent ready to go, one piece is still
@@ -88,6 +86,11 @@ in the `init.lua` linked above.
 - [indent-blankline.nvim](https://github.com/lukas-reineke/indent-blankline.nvim)
   and [nvim-colorizer.lua](https://github.com/NvChad/nvim-colorizer.lua) - small
   visual touches that help when scanning code.
+
+![Neovim](./images/neovim.jpg)
+
+> Once everything is configured - Neovim is a great tool for navigating a
+> codebase with focus.
 
 # Wrapping up the terminal walkthrough
 
