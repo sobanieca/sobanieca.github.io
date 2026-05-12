@@ -11,9 +11,8 @@ import { checkAssets, optimizeAssets } from "./scripts/optimize-assets.js";
 const SITE_AUTHOR = "Adam Sobaniec";
 const SITE_TITLE = `${SITE_AUTHOR} - Software Developer`;
 
-// Set to false to restore normal site build
-const UNDER_CONSTRUCTION =
-  Deno.env.get("SOBANIECA_PAGE_REPO_DEVELOP") === "true" ? false : true;
+// Set to true to serve a maintenance placeholder instead of the full site
+const UNDER_MAINTENANCE = false;
 
 async function readCategories() {
   const categoryList = [];
@@ -183,8 +182,8 @@ async function build() {
     await optimizeAssets();
   }
 
-  if (UNDER_CONSTRUCTION) {
-    console.log("Under construction mode enabled");
+  if (UNDER_MAINTENANCE) {
+    console.log("Under maintenance mode enabled");
     try {
       await Deno.remove("dist", { recursive: true });
     } catch {
@@ -198,7 +197,7 @@ async function build() {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <title>Under Construction</title>
+  <title>Under Maintenance</title>
   <style>
     body {
       font-family: system-ui, sans-serif;
@@ -214,12 +213,12 @@ async function build() {
   </style>
 </head>
 <body>
-  <h1>Under construction</h1>
+  <h1>Under maintenance</h1>
 </body>
 </html>`;
 
     await Deno.writeTextFile("dist/index.html", html);
-    console.log("\n✓ Under construction page generated in dist/");
+    console.log("\n✓ Under maintenance page generated in dist/");
     return;
   }
 
