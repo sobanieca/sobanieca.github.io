@@ -1,7 +1,7 @@
 ---
 title: "sqlr: interact with SQL databases"
 excerpt: "Want to query SQL databases directly from the terminal? Don't want to leak your connection strings to an LLM?"
-date: 2026-03-23
+date: 2026-05-10
 ---
 
 A few years ago, while working on a .NET project, I frequently had to inspect

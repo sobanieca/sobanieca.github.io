@@ -1,7 +1,7 @@
 ---
 title: "Remote machine as your development foundation"
 excerpt: "Physical devices have real limits. A remote machine lets you decouple your development environment from your hardware."
-date: 2026-02-06
+date: 2026-05-04
 ---
 
 You are likely reading this on a physical device - a laptop, a tablet, or a
