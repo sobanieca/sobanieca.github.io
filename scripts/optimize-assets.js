@@ -94,7 +94,7 @@ async function convertImage(path) {
   if (r.code !== 0) {
     try {
       await Deno.remove(tmp);
-    } catch {}
+    } catch { /* ignore */ }
     throw new Error(`ffmpeg failed for ${path}:\n${r.stderr}`);
   }
   await Deno.rename(tmp, target);
@@ -132,7 +132,7 @@ async function convertVideo(path) {
   if (r.code !== 0) {
     try {
       await Deno.remove(tmp);
-    } catch {}
+    } catch { /* ignore */ }
     throw new Error(`ffmpeg failed for ${path}:\n${r.stderr}`);
   }
   await Deno.rename(tmp, path);
