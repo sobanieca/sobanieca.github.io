@@ -61,15 +61,10 @@ A quick sanity check:
 sqlr ls
 ```
 
-TODO: add screenshot
+![sqlr ls](./images/sqlr-ls.jpg)
 
-```
-┌─────────────────────┬────────┐
-│ Name                │ Type   │
-├─────────────────────┼────────┤
-│ northwind [default] │ sqlite │
-└─────────────────────┴────────┘
-```
+> If you run `sqlr add` interactively, you'll also be asked to pick an icon and
+> color so each connection is easier to spot at a glance.
 
 The connection is stored — but only for this directory. Because we're inside a
 git repository, `sqlr` scoped both the connection and the default to the repo.
@@ -90,19 +85,10 @@ schema; for a quick overview, ask only for table names:
 sqlr describe --tables-only
 ```
 
-TODO: add screenshot
+![sqlr describe](./images/sqlr-describe-tables.jpg)
 
-```
-main.Categories
-main.Customers
-main.Employees
-main.Orders
-main.Order Details
-main.Products
-main.Shippers
-main.Suppliers
-...
-```
+> `--tables-only` gives a quick overview of every table without the column-level
+> noise.
 
 Thirteen tables — a classic order-management schema. Let's drill into `Products`
 with `--compact` and a filter:
@@ -111,16 +97,9 @@ with `--compact` and a filter:
 sqlr describe -f Products --compact
 ```
 
-TODO: add screenshot
+![sqlr describe compact](./images/sqlr-describe-compact.jpg)
 
-```
-main.Products [ ProductID INTEGER, ProductName TEXT,
-  SupplierID -> "main.Suppliers.SupplierID",
-  CategoryID -> "main.Categories.CategoryID",
-  QuantityPerUnit? TEXT, UnitPrice? NUMERIC,
-  UnitsInStock? INTEGER, UnitsOnOrder? INTEGER,
-  ReorderLevel? INTEGER, Discontinued TEXT ]
-```
+> `--compact` packs the same information into as little space as possible.
 
 A few things to notice in that one line:
 
@@ -147,19 +126,7 @@ sqlr "SELECT c.CompanyName, c.Country, COUNT(o.OrderID) AS orders
       LIMIT 5" --table
 ```
 
-TODO: add screenshot
-
-```
-┌────────────────────────┬───────────┬────────┐
-│ CompanyName            │ Country   │ orders │
-├────────────────────────┼───────────┼────────┤
-│ B's Beverages          │ UK        │ 210    │
-│ Ricardo Adocicados     │ Brazil    │ 203    │
-│ LILA-Supermercado      │ Venezuela │ 203    │
-│ Gourmet Lanchonetes    │ Brazil    │ 202    │
-│ Princesa Isabel Vinhos │ Portugal  │ 200    │
-└────────────────────────┴───────────┴────────┘
-```
+![sqlr query](./images/sqlr-query-table.jpg)
 
 `--table` is the human-friendly view. Drop it and you get JSON, which is what
 you actually want once a query graduates from interactive exploration to
@@ -194,19 +161,7 @@ Then run it:
 sqlr top-products-by-country.sql -i "country: Germany" -y --table
 ```
 
-TODO: add screenshot
-
-```
-┌─────────────────────────┬────────────┬────────────┐
-│ ProductName             │ units_sold │ revenue    │
-├─────────────────────────┼────────────┼────────────┤
-│ Côte de Blaye           │ 23175      │ 6106612.5  │
-│ Thüringer Rostbratwurst │ 22846      │ 2828106.34 │
-│ Mishi Kobe Niku         │ 22933      │ 2224501    │
-│ Sir Rodney's Marmalade  │ 24218      │ 1961658    │
-│ Carnarvon Tigers        │ 22241      │ 1390062.5  │
-└─────────────────────────┴────────────┴────────────┘
-```
+![sqlr query file](./images/sqlr-query-file.jpg)
 
 A few things worth calling out:
 
@@ -236,7 +191,7 @@ sqlr "SELECT c.Country, COUNT(o.OrderID) AS orders
       LIMIT 3" -o orders-by-country.json
 ```
 
-TODO: add screenshot
+The resulting `orders-by-country.json`:
 
 ```json
 [
