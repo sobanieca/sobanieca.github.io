@@ -38,7 +38,9 @@ Having said that, there are a few things I don't like about Deno:
 - TypeScript was a foundation of Deno. As a result, there were some performance
   issues in the initial versions (due to type checking files at runtime). It has
   since been moved to a separate command, but I definitely prefer the Node.js
-  approach here - support TypeScript by just supporting erasable syntax.
+  approach here - support TypeScript by just supporting erasable syntax. When
+  using plain JavaScript one can see errors when publishing to JSR, and some
+  workarounds with TS compiler settings are needed anyway. This is bad.
 - At some point Deno decided to chase a running rabbit - Node.js compatibility.
   This resulted in the Deno team focusing on allowing Deno developers to reuse
   well-known NPM packages. Instead, I would love to see some Deno-native
@@ -67,9 +69,9 @@ I won't write anything new here, but Node.js is still a thing in the JS world.
 It's mature, stable and supported in many places. If I had to write a B2C/B2B
 application, I would most likely choose Node.js.
 
-Not much to add here. I don't see Node.js popularity declining in the near
-future. Actually, it may be the opposite. Many new projects are some combination
-of a frontend framework + Node.js.
+I don't see Node.js popularity declining in the near future. Actually, it may be
+the opposite. Many new projects are some combination of a frontend framework +
+Node.js.
 
 ## Bun phenomenon
 
