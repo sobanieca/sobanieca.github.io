@@ -1,7 +1,11 @@
 export function articlePage(article, context, navigation = {}) {
   const category = article.categorySlug;
   const categoryData = context.categories[category];
-  const { olderArticle, newerArticle } = navigation;
+  const {
+    olderArticle: prevArticle,
+    newerArticle: nextArticle,
+    nextCategory,
+  } = navigation;
 
   const heroImage = article.image
     ? `<div class="article-hero">
@@ -9,17 +13,32 @@ export function articlePage(article, context, navigation = {}) {
       </div>`
     : "";
 
-  // Older link: points to older article, or category page if this is the oldest
-  const olderLink = olderArticle
-    ? `<a href="${olderArticle.url}" class="btn btn-secondary">← ${olderArticle.title}</a>`
+  // Previous link: points to previous article (lower order), or category page if first
+  const prevLink = prevArticle
+    ? `<a href="${prevArticle.url}" class="btn btn-secondary">← ${prevArticle.title}</a>`
     : `<a href="/category/${category}.html" class="btn btn-secondary">← Back to ${
       categoryData?.name || category
     }</a>`;
 
-  // Newer link: only show if there's a newer article
-  const newerLink = newerArticle
-    ? `<a href="${newerArticle.url}" class="btn btn-secondary">${newerArticle.title} →</a>`
+  const nextLink = nextArticle
+    ? `<a href="${nextArticle.url}" class="btn btn-secondary">${nextArticle.title} →</a>`
+    : nextCategory
+    ? `<a href="/category/${nextCategory.slug}.html" class="btn btn-secondary">${nextCategory.name} →</a>`
     : "";
+
+  // Top navigation: minimal prev/next links
+  const topPrevLink = prevArticle
+    ? `<a href="${prevArticle.url}" class="article-top-nav-link">← ${prevArticle.title}</a>`
+    : `<a href="/category/${category}.html" class="article-top-nav-link">← Back to ${
+      categoryData?.name || category
+    }</a>`;
+  const topNextLink = nextArticle
+    ? `<a href="${nextArticle.url}" class="article-top-nav-link">${nextArticle.title} →</a>`
+    : nextCategory
+    ? `<a href="/category/${nextCategory.slug}.html" class="article-top-nav-link">${nextCategory.name} →</a>`
+    : "";
+  const topNav =
+    `<nav class="article-top-nav">${topPrevLink}${topNextLink}</nav>`;
 
   return `<article class="article-page">
   <div class="article-top">
@@ -27,6 +46,7 @@ export function articlePage(article, context, navigation = {}) {
     categoryData?.name || category
   }</a>
   </div>
+  ${topNav}
 
   <header>
     <h1>${article.title}</h1>
@@ -44,8 +64,8 @@ export function articlePage(article, context, navigation = {}) {
   </div>
 
   <div class="article-footer">
-    ${olderLink}
-    ${newerLink}
+    ${prevLink}
+    ${nextLink}
   </div>
 
   <div class="article-comments">

@@ -6,13 +6,13 @@ import { homePage } from "./templates/home-page.js";
 import { articlePage } from "./templates/article-page.js";
 import { categoryPage } from "./templates/category-page.js";
 import { aboutPage } from "./templates/about-page.js";
+import { checkAssets, optimizeAssets } from "./scripts/optimize-assets.js";
 
 const SITE_AUTHOR = "Adam Sobaniec";
 const SITE_TITLE = `${SITE_AUTHOR} - Software Developer`;
 
-// Set to false to restore normal site build
-const UNDER_CONSTRUCTION =
-  Deno.env.get("SOBANIECA_PAGE_REPO_DEVELOP") === "true" ? false : true;
+// Set to true to serve a maintenance placeholder instead of the full site
+const UNDER_MAINTENANCE = false;
 
 async function readCategories() {
   const categoryList = [];
@@ -74,12 +74,12 @@ function parseFrontMatter(content) {
 }
 
 function getSlugFromFilename(filename) {
-  return filename.replace(/^\d{4}-\d{2}-\d{2}-/, "").replace(/\.md$/, "");
+  return filename.replace(/^\d+-/, "").replace(/\.md$/, "");
 }
 
-function getDateFromFilename(filename) {
-  const match = filename.match(/^(\d{4}-\d{2}-\d{2})/);
-  return match ? match[1] : null;
+function getOrderFromFilename(filename) {
+  const match = filename.match(/^(\d+)/);
+  return match ? parseInt(match[1], 10) : 0;
 }
 
 function formatDate(dateStr) {
@@ -152,7 +152,8 @@ async function readArticles() {
 
       articles.push({
         title: data.title || "Untitled",
-        date: getDateFromFilename(file.name),
+        date: data.date || null,
+        order: getOrderFromFilename(file.name),
         categorySlug: category,
         excerpt: data.excerpt || "",
         content: html,
@@ -163,16 +164,26 @@ async function readArticles() {
     }
   }
 
-  return articles.sort((a, b) =>
-    new Date(b.date).getTime() - new Date(a.date).getTime()
-  );
+  return articles.sort((a, b) => {
+    // Sort by date descending (most recently updated first)
+    const dateCompare = new Date(b.date).getTime() - new Date(a.date).getTime();
+    if (dateCompare !== 0) return dateCompare;
+    // Tie-break by order descending
+    return b.order - a.order;
+  });
 }
 
 async function build() {
   console.log("Building site...");
 
-  if (UNDER_CONSTRUCTION) {
-    console.log("Under construction mode enabled");
+  if (Deno.args.includes("--publish")) {
+    await checkAssets();
+  } else {
+    await optimizeAssets();
+  }
+
+  if (UNDER_MAINTENANCE) {
+    console.log("Under maintenance mode enabled");
     try {
       await Deno.remove("dist", { recursive: true });
     } catch {
@@ -186,7 +197,7 @@ async function build() {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <title>Under Construction</title>
+  <title>Under Maintenance</title>
   <style>
     body {
       font-family: system-ui, sans-serif;
@@ -202,12 +213,12 @@ async function build() {
   </style>
 </head>
 <body>
-  <h1>Under construction</h1>
+  <h1>Under maintenance</h1>
 </body>
 </html>`;
 
     await Deno.writeTextFile("dist/index.html", html);
-    console.log("\n✓ Under construction page generated in dist/");
+    console.log("\n✓ Under maintenance page generated in dist/");
     return;
   }
 
@@ -233,6 +244,17 @@ async function build() {
   marked.use({
     async: false,
     renderer: {
+      link(href, title, text) {
+        const articleMatch = href.match(
+          /^(?:\.\/|\.\.\/[^/]+\/)\d+-(.+)\.md$/,
+        );
+        if (articleMatch) {
+          href = `/articles/${articleMatch[1]}.html`;
+        }
+        return `<a href="${href}"${
+          title ? ` title="${title}"` : ""
+        }>${text}</a>`;
+      },
       image(href, title, text) {
         const videoExts = [".mp4", ".webm", ".ogg"];
         if (videoExts.some((ext) => href.endsWith(ext))) {
@@ -342,7 +364,7 @@ async function build() {
   await Deno.writeTextFile("dist/about-me.html", aboutHtml);
   console.log("Generated about-me.html");
 
-  // Group articles by category for prev/next navigation
+  // Group articles by category for prev/next navigation, sorted by order
   const articlesByCategory = {};
   for (const article of articles) {
     if (!articlesByCategory[article.categorySlug]) {
@@ -350,6 +372,12 @@ async function build() {
     }
     articlesByCategory[article.categorySlug].push(article);
   }
+  // Sort each category by order ascending (lowest order = first article)
+  for (const cat of Object.keys(articlesByCategory)) {
+    articlesByCategory[cat].sort((a, b) => a.order - b.order);
+  }
+
+  const categorySlugsInOrder = Object.keys(categories);
 
   for (const article of articles) {
     const categoryArticles = articlesByCategory[article.categorySlug];
@@ -357,19 +385,31 @@ async function build() {
       a.slug === article.slug
     );
 
-    // Articles are sorted newest first, so:
-    // - "older" = next in array (higher index)
-    // - "newer" = previous in array (lower index)
-    const olderArticle = currentIndex < categoryArticles.length - 1
-      ? categoryArticles[currentIndex + 1]
-      : null;
-    const newerArticle = currentIndex > 0
+    // Articles are sorted by order ascending, so:
+    // - "prev" (←) = previous in array (lower index / lower order)
+    // - "next" (→) = next in array (higher index / higher order)
+    const olderArticle = currentIndex > 0
       ? categoryArticles[currentIndex - 1]
       : null;
+    const newerArticle = currentIndex < categoryArticles.length - 1
+      ? categoryArticles[currentIndex + 1]
+      : null;
+
+    let nextCategory = null;
+    if (!newerArticle) {
+      const catIndex = categorySlugsInOrder.indexOf(article.categorySlug);
+      for (let i = catIndex + 1; i < categorySlugsInOrder.length; i++) {
+        if (articlesByCategory[categorySlugsInOrder[i]]?.length > 0) {
+          nextCategory = categories[categorySlugsInOrder[i]];
+          break;
+        }
+      }
+    }
 
     const articleContent = articlePage(article, context, {
       olderArticle,
       newerArticle,
+      nextCategory,
     });
     const articleHtml = layout(
       articleContent,

@@ -3,6 +3,30 @@
 This file provides guidance to Claude Code (claude.ai/code) when working with
 code in this repository.
 
+## Fine tuning articles
+
+When asked to fine tune given article perform grammar/syntax corrections. Do all
+that is possible to keep original intent/context. Double check all guidelines
+mentioned in article if they are correct. If not report it immediately. Ensure
+that fine tuned article has similar tone to other articles.
+
+Articles are grouped into categories, with the numeric prefix (100, 200, 300...)
+defining reading order. Treat the category as a single continuous walkthrough,
+not a bag of independent posts. When reviewing or editing an article, check
+that:
+
+- The opening of each article builds on the outcome of the previous article in
+  the same category. The reader should feel they are picking up where the last
+  article left off - not starting from scratch. Read the neighbouring articles
+  (the one before and the one after) before editing so transitions line up.
+- Within an article, each section and step is framed as a natural consequence of
+  what came before it. The reader should never have to ask "why are we doing
+  this now?" - the motivation for each step should come from the state or
+  problem the previous step established.
+- Flag structural gaps: orphaned sections, steps that don't flow from prior
+  context, weak openers that restate the title instead of connecting to the
+  previous article, or trailing content that doesn't set up the next one.
+
 ## Build Commands
 
 ```bash
@@ -53,22 +77,28 @@ Directory structure:
 
 ```
 articles/{category-slug}/
-  YYYY-MM-DD-article-slug.md
-  YYYY-MM-DD-article-slug.jpg  # optional hero image (matches article filename)
+  NNN-article-slug.md          # NNN = order index (100, 200, 300...)
+  NNN-article-slug.jpg         # optional hero image (matches article filename)
   images/                       # inline images referenced in markdown
 ```
 
 Categories: `general`, `build-anywhere`, `build-on-the-go`, `build-in-terminal`,
 `tools`
 
-YAML frontmatter (only title and excerpt):
+YAML frontmatter:
 
 ```yaml
 ---
 title: Article Title
 excerpt: Short description
+date: YYYY-MM-DD
 ---
 ```
+
+The numeric prefix (100, 200, 300...) controls article order within a category.
+Use gaps (100s) to allow inserting articles between existing ones. The `date`
+field in frontmatter tracks when the article was last updated and is used for
+"most recent" sorting on the home page.
 
 Inline images: reference as `images/filename.jpg` in markdown.
 

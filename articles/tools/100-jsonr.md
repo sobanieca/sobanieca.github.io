@@ -1,6 +1,7 @@
 ---
-title: "jsonr: Mastering API Interactions in the Terminal"
+title: "jsonr: mastering API interactions in the terminal"
 excerpt: "Ditch the heavy GUI clients. Discover a secure, scriptable, and terminal-first approach to interacting with JSON APIs."
+date: 2026-02-17
 ---
 
 A few years ago, after yet another Postman update resulted in a slower startup
@@ -177,8 +178,3 @@ without the bloat of a GUI, give `jsonr` a try.
 
 It might take a moment to set up your environments, but the payoff is a fast,
 secure, and version-controlled workflow that lives right alongside your code.
-
-> **Note:** I am not aware of any specific HTTP file specification that enforces
-> a standard syntax for environment variables or comments. That is why `jsonr`
-> implements its own interpretation using `@@variable@@` and `# comment` syntax.
-> This may change in the future to align with emerging specifications.

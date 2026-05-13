@@ -1,6 +1,7 @@
 ---
 title: "Put a bet on JavaScript!"
 excerpt: "JavaScript: The ultimate language for modern development, accelerating your career in an AI-powered world."
+date: 2026-01-21
 ---
 
 "Which programming language should I bet my career on?"
