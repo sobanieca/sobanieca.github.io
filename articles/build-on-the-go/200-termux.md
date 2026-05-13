@@ -40,6 +40,12 @@ pkg upgrade
 pkg install openssh
 ```
 
+One thing worth highlighting here: SSH port forwarding works flawlessly from
+Termux. If you have a service running on `localhost:8000` on the remote machine,
+a simple `ssh -L 8000:localhost:8000 user@host` lets you open it in Chrome on
+your Android as if it were hosted locally. Very handy for previewing a local dev
+server or a tool that only binds to loopback on the remote side.
+
 ## Making the on-screen keyboard tolerable
 
 A bare Android keyboard is missing every key that matters in a terminal - no
