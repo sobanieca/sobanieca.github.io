@@ -4,19 +4,15 @@ excerpt: "Want to query SQL databases directly from the terminal? Don't want to 
 date: 2026-03-23
 ---
 
-TODO: fine tune this paragraph Few years ago (when I worked in .NET tech stack)
-I was working on a project where frequently I've had to check something in the
-database. At that time it was SQL Azure database. It become quite frustrating
-for me to open each time SQL Management Studio, wait for it to load, wait for it
-to connect to the database and finally run some SQL. That was the moment when
-I've decided that I need to search for a simple to use CLI tool so I can have
-some scripts which will automate some of these tasks. I didn't find anything
-suitable for me. I wanted to have JSON results and easily manageable list of
-connections. That's where I've decided to create
-[sqlr](https://github.com/sobanieca/sqlr) project.
+A few years ago, while working on a .NET project, I frequently had to inspect
+data in a SQL Azure database. Opening SQL Management Studio each time, waiting
+for it to load, connect, and finally accept a query, got old fast. I started
+looking for a simple CLI tool I could script against — something with JSON
+output and a manageable list of connections. I didn't find anything that fit, so
+I built [sqlr](https://github.com/sobanieca/sqlr).
 
-TODO: fine tune this paragraph It allows to define and manage connections from
-CLI. Then querying database is as simple as
+It lets you define and manage connections from the CLI. Once a connection is set
+up, querying the database is as simple as
 `sqlr query "select * from main.users"`.
 
 **Why `sqlr`?**
@@ -254,36 +250,17 @@ From here it's just JSON — `jq` it, post it to Slack, drop it in a daily repor
 The point is that there's no parsing layer between you and the data; the CLI
 hands you a structure, not text you have to scrape.
 
-### Encrypted connections and AI agents
+### Using `sqlr` with AI agents
 
-TODO: refactor this section. Don't elaborate on SQLR_ENCRYPTION_PASSWORD instead
-mention use of sqlr with AI agents instead of some MCP. Provide some example of
-prompt like `run sqlr help and list all tenants from last 3 days`
+Structured JSON output is also what makes `sqlr` work well with AI agents.
+There's no MCP server to install, no separate adapter, no schema layer to keep
+in sync. Drop the binary in the agent's environment, and a prompt like:
 
-Northwind on SQLite is harmless. Production isn't. The same `sqlr add` flow
-supports encryption — set a password in the environment when adding the
-connection, and the connection string is encrypted on disk:
+> run `sqlr help` and list all tenants signed up in the last 3 days
 
-```sh
-SQLR_ENCRYPTION_PASSWORD=secret \
-  sqlr add -n prod -t postgresql -s "postgres://user:pass@host/db"
-```
-
-When you later run `sqlr describe` or `sqlr query` against `prod`, `sqlr` will
-prompt for the password — or read it from `SQLR_ENCRYPTION_PASSWORD` if it's
-set, which is what you want for cron jobs and AI agents.
-
-That last bit is the one I care about most. The agent workflow looks like:
-
-1. `sqlr ls` — discover what's connectable.
-2. `sqlr describe --compact` — learn the schema.
-3. `sqlr "SELECT ..."` — query.
-
-At no point does the agent see a connection string. It can read schemas, write
-queries, save JSON results — all without touching the credential. The same
-property holds for screen shares and pasted terminal sessions: the secret stays
-in `~/.sqlr` (encrypted) and in your shell's environment, never in your
-scrollback.
+is enough. The agent reads `sqlr help`, lists connections with `sqlr ls`, learns
+the schema with `sqlr describe --compact`, and writes the query. The same three
+steps you would run yourself, just typed by something else.
 
 ### Conclusion
 

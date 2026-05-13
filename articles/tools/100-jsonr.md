@@ -178,8 +178,3 @@ without the bloat of a GUI, give `jsonr` a try.
 
 It might take a moment to set up your environments, but the payoff is a fast,
 secure, and version-controlled workflow that lives right alongside your code.
-
-> **Note:** I am not aware of any specific HTTP file specification that enforces
-> a standard syntax for environment variables or comments. That is why `jsonr`
-> implements its own interpretation using `@@variable@@` and `# comment` syntax.
-> This may change in the future to align with emerging specifications.
