@@ -88,7 +88,10 @@ Then, on your laptop, open `localhost:8000/file-explorer`:
 
 You can also edit text files directly in the browser, which is handy when
 copy-pasting content between machines. There's a small quality-of-life touch on
-top: pasting a screenshot from the clipboard uploads it as an image.
+top: pasting a screenshot from the clipboard uploads it as an image. This is
+especially useful when working with CLI AI tools like Claude Code or Codex,
+where you can paste a screenshot, then reference the uploaded file's path to
+feed visual context into the prompt.
 
 ### Serving HTML
 

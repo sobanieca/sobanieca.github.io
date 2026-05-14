@@ -82,6 +82,25 @@ function getOrderFromFilename(filename) {
   return match ? parseInt(match[1], 10) : 0;
 }
 
+function slugifyHeading(text) {
+  return text
+    .toLowerCase()
+    .replace(/<[^>]+>/g, "")
+    .replace(/&[a-z]+;/g, "")
+    .replace(/[^\w\s-]/g, "")
+    .trim()
+    .replace(/\s+/g, "-");
+}
+
+let headingSlugCounts = null;
+
+function renderMarkdown(content) {
+  headingSlugCounts = new Map();
+  const html = marked.parse(content);
+  headingSlugCounts = null;
+  return html;
+}
+
 function formatDate(dateStr) {
   const date = new Date(dateStr);
   return date.toLocaleDateString("en-US", {
@@ -138,7 +157,7 @@ async function readArticles() {
 
       const slug = getSlugFromFilename(file.name);
       const baseName = file.name.replace(/\.md$/, "");
-      const html = marked.parse(content);
+      const html = renderMarkdown(content);
 
       // Check for article image
       const imageInfo = await findArticleImage(categoryPath, baseName);
@@ -244,6 +263,16 @@ async function build() {
   marked.use({
     async: false,
     renderer: {
+      heading(text, level, raw) {
+        const baseId = slugifyHeading(raw);
+        let id = baseId;
+        if (headingSlugCounts) {
+          const count = headingSlugCounts.get(baseId) ?? 0;
+          if (count > 0) id = `${baseId}-${count}`;
+          headingSlugCounts.set(baseId, count + 1);
+        }
+        return `<h${level} id="${id}"><a class="heading-anchor" href="#${id}" aria-label="Link to this section">${text}</a></h${level}>\n`;
+      },
       link(href, title, text) {
         const articleMatch = href.match(
           /^(?:\.\/|\.\.\/[^/]+\/)\d+-(.+)\.md$/,
@@ -353,7 +382,7 @@ async function build() {
   // Generate about page
   const aboutMd = await Deno.readTextFile("about.md");
   const { data: aboutData, content: aboutMarkdown } = parseFrontMatter(aboutMd);
-  const aboutHtmlContent = marked.parse(aboutMarkdown);
+  const aboutHtmlContent = renderMarkdown(aboutMarkdown);
   const aboutContent = aboutPage(aboutHtmlContent, aboutData, context);
   const aboutHtml = layout(
     aboutContent,
