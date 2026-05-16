@@ -80,8 +80,8 @@ Deno did (no ES module imports from URL, AFAIK). It was focused on performance
 and adding more tools inside the runtime so everything is in a single place.
 From what I hear from time to time, there are some stability issues similar to
 what Deno has (let's face it, Bun is the youngest project out of all three
-runtimes listed here). I don't see value in using it and I would not consider it
-for any of my future projects.
+runtimes listed here). Currently I would not consider it for a new project.
+Maybe it changes someday.
 
 ## Wrap-up
 
