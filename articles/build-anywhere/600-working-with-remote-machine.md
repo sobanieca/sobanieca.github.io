@@ -22,7 +22,7 @@ connect. Use the `-L` parameter. For example, extending the alias defined in the
 previous article:
 
 ```bash
-ssh -L 8000:localhost:8000 -o TCPKeepAlive=yes -o ServerAliveCountMax=20 -o ServerAliveInterval=15 -q -p {ssh_port} -i ~/.ssh/id_rsa {user}@{IP or DNS}
+ssh -L 8000:localhost:8000 -o TCPKeepAlive=yes -o ServerAliveCountMax=20 -o ServerAliveInterval=15 -q -p {ssh_port} -i ~/.ssh/id_ed25519 {user}@{IP or DNS}
 ```
 
 As a result, you can access your service as if it were running directly on your
@@ -54,7 +54,7 @@ remote debug so that Claude Code can connect to it via Chrome MCP. In this case
 you need to define the `-R` parameter:
 
 ```bash
-ssh -R 9222:localhost:9222 -o TCPKeepAlive=yes -o ServerAliveCountMax=20 -o ServerAliveInterval=15 -q -p {ssh_port} -i ~/.ssh/id_rsa {user}@{IP or DNS}
+ssh -R 9222:localhost:9222 -o TCPKeepAlive=yes -o ServerAliveCountMax=20 -o ServerAliveInterval=15 -q -p {ssh_port} -i ~/.ssh/id_ed25519 {user}@{IP or DNS}
 ```
 
 With such a connection, whenever you run Claude Code on the remote machine it

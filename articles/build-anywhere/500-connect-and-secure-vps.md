@@ -139,18 +139,20 @@ key pair there and then upload the public part to your VPS.
 On your local machine, run:
 
 ```bash
-ssh-keygen -t rsa
+ssh-keygen
 ```
 
-Press **Enter** to accept the default path (`~/.ssh/id_rsa`). You will be
+Modern OpenSSH generates an Ed25519 key by default.
+
+Press **Enter** to accept the default path (`~/.ssh/id_ed25519`). You will be
 prompted to set an optional passphrase. A passphrase adds an extra layer of
 protection in case someone ever gets hold of your private key file. This command
 produces two files:
 
-- `~/.ssh/id_rsa` - Your **private** key. Keep it secret, never share it, and
-  never copy it anywhere outside of your client machine.
-- `~/.ssh/id_rsa.pub` - Your **public** key. This is the one that goes on the
-  server.
+- `~/.ssh/id_ed25519` - Your **private** key. Keep it secret, never share it,
+  and never copy it anywhere outside of your client machine.
+- `~/.ssh/id_ed25519.pub` - Your **public** key. This is the one that goes on
+  the server.
 
 ---
 
@@ -161,7 +163,7 @@ care of appending the key to `~/.ssh/authorized_keys` on the server and making
 sure file permissions are correct:
 
 ```bash
-ssh-copy-id -i ~/.ssh/id_rsa.pub -p {ssh_port} {user}@{IP or DNS}
+ssh-copy-id -i ~/.ssh/id_ed25519.pub -p {ssh_port} {user}@{IP or DNS}
 ```
 
 You'll be asked for your VPS user's password one last time.
@@ -173,7 +175,7 @@ You'll be asked for your VPS user's password one last time.
 Now connect to your server using the SSH key this time:
 
 ```bash
-ssh -i ~/.ssh/id_rsa -p {ssh_port} {user}@{IP or DNS}
+ssh -i ~/.ssh/id_ed25519 -p {ssh_port} {user}@{IP or DNS}
 ```
 
 Run `sudo nano /etc/ssh/sshd_config` again and set:
@@ -254,7 +256,7 @@ It makes sense to create a dedicated alias for this connection in your local
 `~/.bashrc` file. Be sure to adjust the placeholder values to match your setup:
 
 ```bash
-echo "alias my-connection='ssh -o TCPKeepAlive=yes -o ServerAliveCountMax=20 -o ServerAliveInterval=15 -q -p {ssh_port} -i ~/.ssh/id_rsa {user}@{IP or DNS}'" >> ~/.bashrc
+echo "alias my-connection='ssh -o TCPKeepAlive=yes -o ServerAliveCountMax=20 -o ServerAliveInterval=15 -q -p {ssh_port} -i ~/.ssh/id_ed25519 {user}@{IP or DNS}'" >> ~/.bashrc
 ```
 
 Apply the changes by running `source ~/.bashrc`. From now on, you can just type
