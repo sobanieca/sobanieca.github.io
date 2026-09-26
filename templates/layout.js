@@ -49,6 +49,14 @@ export function layout(
       </div>
     </div>
 
+    <a href="/projects.html" class="sidebar-projects-link ${
+    activeCategory === "projects" ? "active" : ""
+  }">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.4 7.6L22 12l-7.6 2.4L12 22l-2.4-7.6L2 12l7.6-2.4z"/></svg>
+      <span>Projects</span>
+      <svg class="arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+
     <nav>
       <a href="/" class="${
     activeCategory === null || activeCategory === "" ? "active" : ""

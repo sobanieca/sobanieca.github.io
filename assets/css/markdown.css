@@ -1,4 +1,9 @@
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 700;
   line-height: 1.25;
   color: var(--main-text);
@@ -92,13 +97,15 @@ a:hover {
   text-decoration: underline;
 }
 
-ul, ol {
+ul,
+ol {
   margin-bottom: 1.5rem;
   padding-left: 2rem;
   line-height: 1.75;
 }
 
-ul li, ol li {
+ul li,
+ol li {
   margin-bottom: 0.5rem;
 }
 

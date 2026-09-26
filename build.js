@@ -6,6 +6,7 @@ import { homePage } from "./templates/home-page.js";
 import { articlePage } from "./templates/article-page.js";
 import { categoryPage } from "./templates/category-page.js";
 import { aboutPage } from "./templates/about-page.js";
+import { projectsPage } from "./templates/projects-page.js";
 import { checkAssets, optimizeAssets } from "./scripts/optimize-assets.js";
 
 const SITE_AUTHOR = "Adam Sobaniec";
@@ -393,6 +394,11 @@ async function build() {
   await Deno.writeTextFile("dist/about-me.html", aboutHtml);
   console.log("Generated about-me.html");
 
+  // Generate projects page
+  const projectsHtml = layout(projectsPage(), "Projects", "projects", context);
+  await Deno.writeTextFile("dist/projects.html", projectsHtml);
+  console.log("Generated projects.html");
+
   // Group articles by category for prev/next navigation, sorted by order
   const articlesByCategory = {};
   for (const article of articles) {
@@ -482,6 +488,7 @@ async function build() {
     ...new Set([
       "index.html",
       "about-me.html",
+      "projects.html",
       ...articles.map((a) => `${a.slug}.html`),
       ...Object.keys(categories).map((slug) => `${slug}.html`),
     ]),
