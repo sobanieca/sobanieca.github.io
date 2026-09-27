@@ -27,6 +27,34 @@ that:
   context, weak openers that restate the title instead of connecting to the
   previous article, or trailing content that doesn't set up the next one.
 
+## New articles
+
+When asked to write or add a new article, always ask the user for a hero image
+(unless one was already provided). Every article is expected to have one, named
+after the article file (e.g. `300-tunnelr.md` -> `300-tunnelr.jpg`) and placed
+next to it. Match existing hero images in cyberpunk/neon illustration style.
+
+## Image sizes
+
+Heroes display at most 512px wide (`.article-hero`) and article content is 800px
+wide, so keep images small:
+
+- Hero images: JPEG, max 1024px wide (e.g. 1024x559 or 1024x1024), ~100-170KB.
+- Inline images: JPEG, max 1600px wide / 1400px tall, ideally under 150KB.
+- Make sure the file extension matches the real format (no PNGs named `.jpg`).
+
+Resize/recompress any provided image that exceeds these limits, e.g. with
+ffmpeg:
+
+```bash
+ffmpeg -i input.jpg -vf "scale='min(1024,iw)':-2,format=yuvj420p" \
+  -map_metadata -1 -q:v 4 output.jpg
+```
+
+For inline images, use
+`scale='min(1600,iw)':'min(1400,ih)':force_original_aspect_ratio=decrease`
+instead.
+
 ## Build Commands
 
 ```bash
