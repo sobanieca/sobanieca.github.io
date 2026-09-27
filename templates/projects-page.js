@@ -76,7 +76,7 @@ export function projectsPage() {
   return `<div class="projects-page">
   <header class="category-header">
     <h1>Projects</h1>
-    <p class="category-description projects-intro">I work on these projects in my free time, whenever I get the chance. Being able to <a href="/category/build-on-the-go.html">code on mobile</a> gives me quite a few opportunities during afternoons, evenings and weekends.</p>
+    <p class="category-description projects-intro">I work on these projects in my free time, whenever I get the chance. Being able to <a href="/category/build-on-the-go.html">code on mobile</a> gives me quite a few opportunities.</p>
   </header>
   <div class="projects-grid">
     ${cards}
