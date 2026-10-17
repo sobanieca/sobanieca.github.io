@@ -1,8 +1,15 @@
 ---
 title: "The headache of JavaScript runtimes!"
 excerpt: "New JS frameworks pop up frequently. Will we see the same for runtimes?"
-date: 2026-03-17
+date: 2026-10-17
 ---
+
+> **Update (October 2026):** It seems the Deno runtime is about to be
+> deprecated. Deno was recently acquired by Cloudflare, but there are no plans
+> to push the runtime forward - it will only receive bug-fix and security
+> releases for about a year, and Deno Deploy is being shut down. I've struck
+> through the parts of this article that no longer hold, and I've moved my Deno
+> projects to Rust - more on that in the wrap-up.
 
 So you've decided to bet on JavaScript. Now comes the next question: where do
 you actually run it?
@@ -18,11 +25,11 @@ runtime, though so far I haven't seen anything else joining the mainstream
 It's really easy to get lost here, so I thought I would share my take on this
 topic.
 
-## Deno as default choice
+## ~~Deno as default choice~~
 
 I really like Deno. This runtime was a real revolution IMHO. I've been following
-the project since version 1.0, and every open source project I write uses Deno
-by default.
+the project since version 1.0, and ~~every open source project I write uses Deno
+by default~~.
 
 I have the following reasons to do so:
 
@@ -61,7 +68,8 @@ Having said that, there are a few things I don't like about Deno:
   hosting a supporting API that collects metrics or receives webhooks. But to
   host a complete application there, I would have to use some other providers
   anyway. This makes me question whether this business model is viable, and
-  whether we'll hear some bad news about Deno one day (hopefully not!).
+  whether we'll hear some bad news about Deno one day ~~(hopefully not!)~~.
+  Well, we did - see the update at the top.
 
 ## Node.js for stability
 
@@ -87,6 +95,10 @@ Maybe it changes someday.
 
 I guess it's impossible to say which runtime is the best one. Choose the right
 tool for the job. To summarize - Node.js IMHO is still a valid choice for a
-user-facing application. I will keep using Deno for my open source projects
+user-facing application. ~~I will keep using Deno for my open source projects
 targeted at developers. It's a pleasure to work with, and maybe one day I'll
-give it a try in a user-facing application?
+give it a try in a user-facing application?~~
+
+With Deno's future in question, I've moved my Deno projects to Rust. Some of the
+changes are really amazing - the `jsonr` binary went from 80 MB to only 3 MB
+(`deno compile` bundles the whole runtime into every binary).
