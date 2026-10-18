@@ -95,8 +95,8 @@ tunnelr add vps 203.0.113.10:20185 -p 30185:3000 -a ~/.secret/tunnelr-key
 ```
 
 From now on `tunnelr` alone opens the last used connection. Working on a
-different app today? `tunnelr -p 4000` keeps the same VPS port and forwards it
-to local port `4000` instead. `tunnelr ls` and `tunnelr rm vps` manage the saved
+different app today? `tunnelr -p 5000` keeps the same VPS port and forwards it
+to local port `5000` instead. `tunnelr ls` and `tunnelr rm vps` manage the saved
 connections.
 
 ### Good to know

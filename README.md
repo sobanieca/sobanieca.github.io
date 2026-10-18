@@ -24,9 +24,9 @@ To run this blog locally:
    ```
 5. Serve the `dist/` directory with any static file server:
    ```bash
-   deno run --allow-net --allow-read https://deno.land/std/http/file_server.ts dist
+   deno run --allow-net --allow-read --allow-sys jsr:@std/http/file-server --port 8000 dist
    ```
-6. Open your browser to `http://localhost:4000`
+6. Open your browser to `http://localhost:8000`
 
 ## Technology Stack
 

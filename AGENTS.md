@@ -62,7 +62,7 @@ instead.
 deno task build
 
 # Serve locally after building
-python -m http.server -d dist 4000
+deno run --allow-net --allow-read --allow-sys jsr:@std/http/file-server --port 8000 dist
 ```
 
 ## Architecture

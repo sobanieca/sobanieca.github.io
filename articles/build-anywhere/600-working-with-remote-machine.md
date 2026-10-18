@@ -80,7 +80,9 @@ cd ~/code/my-project/assets
 rfm
 ```
 
-Then, on your laptop, open `localhost:8000/file-explorer`:
+`rfm` listens on port 4000, so forward it the same way
+(`-L 4000:localhost:4000`). Then, on your laptop, open
+`localhost:4000/file-explorer`:
 
 ![Remote File Manager](./images/rfm.jpg)
 
@@ -96,5 +98,5 @@ feed visual context into the prompt.
 ### Serving HTML
 
 `rfm` doubles as an HTTP server. If an `index.html` exists in the directory
-where you started it, navigating to `localhost:8000` will serve it - useful when
+where you started it, navigating to `localhost:4000` will serve it - useful when
 you want to preview a static page without spinning up a separate server.
