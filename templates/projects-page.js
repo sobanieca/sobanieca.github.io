@@ -43,6 +43,16 @@ const PROJECTS = [
     icon:
       `<path d="M4 20V10a8 8 0 0 1 16 0v10"/><path d="M9 20v-6a3 3 0 0 1 6 0v6"/><path d="M2 20h20"/>`,
   },
+  {
+    name: "todoer",
+    tagline: "Todos and pull requests as plain files in git",
+    description:
+      "Keeps the todos and pull requests of a git project next to the code. AI agents and people claim todos, work in git worktrees, and review one-commit pull requests line by line in the terminal. One binary, no database, server or account.",
+    website: "https://sobanieca.github.io/todoer/",
+    github: "https://github.com/sobanieca/todoer",
+    icon:
+      `<rect x="3" y="5" width="6" height="6" rx="1"/><path d="m3 17 2 2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/>`,
+  },
 ];
 
 const githubIcon =
