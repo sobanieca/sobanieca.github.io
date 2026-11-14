@@ -34,7 +34,7 @@ export const aboutPage = component('blog-about-page', {
           socialLink('https://x.com/@AdamSobaniec', 'X', xIcon),
         ),
       ),
-      // HTML that build.js rendered from about.md
+      // HTML that cargo content rendered from about.md
       section({ class: 'about-content markdown-body' }, html(about.content)),
     ),
 })

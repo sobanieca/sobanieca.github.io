@@ -4,15 +4,15 @@
 
 ## About This Repo
 
-This repository hosts my personal development blog built with Deno and Claude.
-Visit the site to read my latest posts about web development, JavaScript and
-Deno.
+This repository hosts my personal development blog built with imp, Rust and
+Claude. Visit the site to read my latest posts about building software on remote
+machines, in the terminal and on the go.
 
 ## Local Development
 
 To run this blog locally:
 
-1. Install [Deno](https://deno.land/)
+1. Install [Rust](https://www.rust-lang.org/tools/install)
 2. Clone this repository
 3. Set up git hooks:
    ```bash
@@ -24,17 +24,18 @@ To run this blog locally:
    ```
 5. Generate the content and start the dev server with live reload:
    ```bash
-   deno task dev
+   cargo dev
    ```
 6. Open your browser to `http://localhost:4400`
 
-To build the static site into `dist/`, run `deno task build`.
+To build the static site into `dist/`, run `cargo site`, and `cargo serve` to
+serve it. `cargo verify` runs the checks of CI.
 
 ## Technology Stack
 
-- **Runtime**: Deno
-- **Markdown Parser**: marked
-- **Syntax Highlighting**: Shiki (synthwave-84 theme)
+- **Build**: Rust (`xtask/`, run through cargo aliases)
+- **Markdown Parser**: pulldown-cmark
+- **Syntax Highlighting**: imp's `codeBlock`, in the browser
 - **UI**: [imp](https://github.com/sobanieca/imp-ui), each article a lazily
   loaded area
 - **Analytics**: [imp-aly](https://github.com/sobanieca/imp-aly)
@@ -51,8 +52,8 @@ pushed to the `main` branch using GitHub Actions.
 
 This project uses the following open source libraries:
 
-- [Deno](https://deno.com) - JavaScript/TypeScript runtime
-- [marked](https://github.com/markedjs/marked) - Markdown parser
-- [Shiki](https://github.com/shikijs/shiki) - Syntax highlighting
-- [yaml](https://github.com/eemeli/yaml) - YAML parser
+- [pulldown-cmark](https://github.com/pulldown-cmark/pulldown-cmark) - Markdown
+  parser
+- [serde_json](https://github.com/serde-rs/json) - JSON serializer
+- [anyhow](https://github.com/dtolnay/anyhow) - Error handling
 - [imp](https://github.com/sobanieca/imp-ui) - Buildless UI toolkit

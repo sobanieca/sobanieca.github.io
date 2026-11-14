@@ -6,7 +6,7 @@ import { routeLinkClicks } from './links.js'
 import { siteCss } from './styles/site.js'
 import { darkTheme, lightTheme } from './themes.js'
 
-// On only in the prod environment (deno task publish), so a local build sends nothing
+// On only in the prod environment (cargo site --publish), so a local build sends nothing
 if (flag('ANALYTICS')) {
   onAnalytics(alySink({ app: 'sobanieca-blog', servers: ['https://aly.admware.com'] }))
 }

@@ -1,0 +1,5 @@
+# The site itself is an imp app. This workspace holds only its build tooling: the xtask crate turns
+# the Markdown articles into the modules the app imports and builds the site (see .cargo/config.toml).
+[workspace]
+resolver = "3"
+members = ["xtask"]

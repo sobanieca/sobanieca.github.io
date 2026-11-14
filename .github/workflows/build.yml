@@ -21,10 +21,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
 
-      - name: Setup Deno
-        uses: denoland/setup-deno@v2
+      # The runner comes with Rust. The cache keeps the compiled xtask between runs.
+      - name: Cache cargo
+        uses: actions/cache@v6
         with:
-          deno-version: v2.x
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: cargo-${{ runner.os }}-${{ hashFiles('Cargo.lock') }}
 
       - name: Install imp
         run: |
@@ -32,34 +37,18 @@ jobs:
           curl -fsSL https://imp-ui.com/install.sh | INSTALL_DIR="$HOME/.local/bin" bash
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
-      - name: Check formatting
-        run: |
-          deno fmt --check
-          imp fmt --check
-
-      - name: Lint
-        run: deno lint
-
-      - name: Check for TODOs in articles
-        run: |
-          if grep -r 'TODO:' --include='*.md' articles/; then
-            echo "Found TODO: markers in markdown files. Please resolve them before merging."
-            exit 1
-          fi
+      # cargo fmt, clippy and tests of xtask/, imp fmt and imp lint of the app, no TODO: left in
+      # an article and no oversized image or video
+      - name: Verify
+        run: cargo verify
 
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v6
 
-      - name: Generate content
-        run: deno task content
-
-      - name: Lint the app
-        run: imp lint
-
       # Builds with the prod environment, which turns the imp-aly analytics on
-      - name: Build with Deno and imp
-        run: deno task publish
+      - name: Build with Rust and imp
+        run: cargo site --publish
 
       - name: Upload artifact
         if: github.event_name != 'pull_request'

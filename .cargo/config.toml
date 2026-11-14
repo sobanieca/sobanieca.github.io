@@ -1,0 +1,13 @@
+# Development tasks of the site, backed by xtask/
+[alias]
+xtask = "run --quiet --package xtask --"
+# Generate src/content/ from articles/ and about.md, then serve with live reload
+dev = "xtask dev"
+# Only regenerate the content (after editing an article while `imp start` runs)
+content = "xtask content"
+# Build the static site into dist/ (analytics off). `cargo site --publish` is the deploy build.
+site = "xtask site"
+# Serve dist/ locally, with GitHub Pages' extensionless .html lookup
+serve = "xtask serve"
+# Formatting, lints and checks of the articles: run before committing, and what CI runs
+verify = "xtask verify"

@@ -1088,23 +1088,8 @@ video.horizontal-video {
   }
 }
 
-pre.shiki {
-  padding: 1.5rem;
-  border-radius: 0.5rem;
-  overflow-x: auto;
+imp-code-block {
+  display: block;
   margin-bottom: 1.5rem;
-  border: 1px solid var(--border-color);
-}
-
-pre.shiki code {
-  background: none !important;
-  padding: 0 !important;
-  border-radius: 0 !important;
-  color: inherit !important;
-}
-
-pre.shiki .line {
-  display: inline-block;
-  min-height: 1em;
 }
 `
