@@ -26,8 +26,16 @@ jobs:
         with:
           deno-version: v2.x
 
+      - name: Install imp
+        run: |
+          mkdir -p "$HOME/.local/bin"
+          curl -fsSL https://sobanieca.github.io/imp-ui/install.sh | INSTALL_DIR="$HOME/.local/bin" bash
+          echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+
       - name: Check formatting
-        run: deno fmt --check
+        run: |
+          deno fmt --check
+          imp fmt --check
 
       - name: Lint
         run: deno lint
@@ -43,7 +51,14 @@ jobs:
         id: pages
         uses: actions/configure-pages@v4
 
-      - name: Build with Deno
+      - name: Generate content
+        run: deno task content
+
+      - name: Lint the app
+        run: imp lint
+
+      # Builds with the prod environment, which turns the imp-aly analytics on
+      - name: Build with Deno and imp
         run: deno task publish
 
       - name: Upload artifact

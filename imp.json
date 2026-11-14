@@ -1,0 +1,34 @@
+{
+  "version": "0.1.0",
+  "map": "src/app-map.js",
+  // ANALYTICS sends the records of imp/analytics to imp-aly. It is on only in the prod
+  // environment, which the deploy builds with (deno task publish).
+  "flags": ["ANALYTICS"],
+  "environments": {
+    "prod": "env/prod.json"
+  },
+  "fmt": {
+    "exclude": [
+      "articles",
+      "tools-articles",
+      "src/content",
+      "public/articles",
+      "public/assets/images/articles",
+      "build.js",
+      "scripts",
+      "git-hooks",
+      ".github",
+      ".claude",
+      "stats.html",
+      "about.md",
+      "README.md",
+      "AGENTS.md",
+      "deno.json",
+      "deno.lock"
+    ]
+  },
+  "lint": {
+    "exclude": ["build.js", "scripts", "tools-articles", "git-hooks", "stats.html"]
+  },
+  "maxFileSizeIgnore": ["articles", "public/assets/images", "tools-articles"]
+}

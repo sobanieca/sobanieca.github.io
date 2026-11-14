@@ -1,11 +1,24 @@
 {
   "fmt": {
-    "exclude": ["dist"]
+    "exclude": [
+      "dist",
+      "src",
+      "public",
+      "env",
+      "index.html",
+      "imp.json",
+      ".imp"
+    ]
+  },
+  "lint": {
+    "exclude": ["dist", "src", "public", "env", ".imp"]
   },
   "tasks": {
+    "content": "deno run --allow-read --allow-write --allow-env --allow-run build.js --content",
+    "dev": "deno task content && imp start",
     "build": "deno run --allow-read --allow-write --allow-env --allow-run build.js",
-    "build:debug": "DEBUG=1 deno run --allow-read --allow-write --allow-env --allow-run build.js",
-    "publish": "deno run --allow-read --allow-write --allow-env build.js --publish"
+    "publish": "deno run --allow-read --allow-write --allow-env --allow-run build.js --publish",
+    "serve": "deno run --allow-net --allow-read --allow-sys jsr:@std/http/file-server --port 8000 dist"
   },
   "imports": {
     "marked": "npm:marked@^12.0.0",

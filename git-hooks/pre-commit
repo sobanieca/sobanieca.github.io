@@ -1,3 +1,4 @@
 #!/bin/sh
 deno fmt
+imp fmt
 git add -u
