@@ -20,7 +20,7 @@ To run this blog locally:
    ```
 4. Install [imp](https://github.com/sobanieca/imp-ui):
    ```bash
-   curl -fsSL https://sobanieca.github.io/imp-ui/install.sh | bash
+   curl -fsSL https://imp-ui.com/install.sh | bash
    ```
 5. Generate the content and start the dev server with live reload:
    ```bash

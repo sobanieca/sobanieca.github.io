@@ -17,7 +17,7 @@ Issue trackers and pull requests on GitHub support this flow, but they live on a
 remote service. Every step is a round trip to the network, and GitHub hasn't
 been the most stable service recently. I wanted the speed of local development:
 todos and reviews right next to the code, available even when the network is
-not. So I built [todoer](https://sobanieca.github.io/todoer/).
+not. So I built [todoer](https://adam.sobaniec.com/todoer/).
 
 **Why `todoer`?**
 
@@ -34,7 +34,7 @@ not. So I built [todoer](https://sobanieca.github.io/todoer/).
 ### Install
 
 ```bash
-curl -fsSL sobanieca.github.io/todoer/install.sh | bash
+curl -fsSL adam.sobaniec.com/todoer/install.sh | bash
 ```
 
 Then go to your project and write the todoer skill for Claude Code, Codex and

@@ -47,7 +47,7 @@ internet  -->  my-vps.example.com:30185  ==tunnel==>  your machine:3000
 Log in to your VPS (Debian is recommended) and install `tunnelr`:
 
 ```bash
-curl -fsSL sobanieca.github.io/tunnelr/install.sh | bash
+curl -fsSL adam.sobaniec.com/tunnelr/install.sh | bash
 ```
 
 Check in your provider's panel which ports are open for your VPS. Let's assume

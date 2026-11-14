@@ -29,7 +29,7 @@ jobs:
       - name: Install imp
         run: |
           mkdir -p "$HOME/.local/bin"
-          curl -fsSL https://sobanieca.github.io/imp-ui/install.sh | INSTALL_DIR="$HOME/.local/bin" bash
+          curl -fsSL https://imp-ui.com/install.sh | INSTALL_DIR="$HOME/.local/bin" bash
           echo "$HOME/.local/bin" >> "$GITHUB_PATH"
 
       - name: Check formatting

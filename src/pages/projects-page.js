@@ -9,7 +9,7 @@ const PROJECTS = [
     tagline: 'JSON APIs from the terminal',
     description:
       'A simple CLI for sending requests stored in .http files. Keeps secrets out of your repository and LLM context, switches environments with a flag, and lets you chain requests into smoke tests with plain JavaScript.',
-    website: 'https://sobanieca.github.io/jsonr/',
+    website: 'https://adam.sobaniec.com/jsonr/',
     github: 'https://github.com/sobanieca/jsonr',
     article: '/articles/jsonr',
     icon: `<path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/>`,
@@ -19,7 +19,7 @@ const PROJECTS = [
     tagline: 'SQL databases from the terminal',
     description:
       'Query PostgreSQL, MySQL, MSSQL, ClickHouse and SQLite with one small CLI. Connections are scoped to the git repository, results come out as JSON or tables, and queries can live in versioned .sql files.',
-    website: 'https://sobanieca.github.io/sqlr/',
+    website: 'https://adam.sobaniec.com/sqlr/',
     github: 'https://github.com/sobanieca/sqlr',
     article: '/articles/sqlr',
     icon: `<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/>`,
@@ -29,7 +29,7 @@ const PROJECTS = [
     tagline: 'Web file explorer for remote machines',
     description:
       'Run rfm on a remote machine and browse its files from the browser. Dual-pane mode, fuzzy search, code viewer and editor, git status, diffs and worktrees, and clipboard uploads. Built for SSH port forwarding and works great on a phone.',
-    website: 'https://sobanieca.github.io/remote-file-manager/',
+    website: 'https://adam.sobaniec.com/remote-file-manager/',
     github: 'https://github.com/sobanieca/remote-file-manager',
     article: '/articles/working-with-remote-machine',
     icon: `<path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/>`,
@@ -39,7 +39,7 @@ const PROJECTS = [
     tagline: 'Expose local ports through a cheap VPS',
     description:
       'One binary that runs as a server on a VPS and as a client on your machine. Needs only two open ports, installs itself as a systemd service, and remembers your connections so opening a tunnel is just typing tunnelr.',
-    website: 'https://sobanieca.github.io/tunnelr/',
+    website: 'https://adam.sobaniec.com/tunnelr/',
     github: 'https://github.com/sobanieca/tunnelr',
     article: '/articles/tunnelr',
     icon: `<path d="M4 20V10a8 8 0 0 1 16 0v10"/><path d="M9 20v-6a3 3 0 0 1 6 0v6"/><path d="M2 20h20"/>`,
@@ -49,7 +49,7 @@ const PROJECTS = [
     tagline: 'Todos and pull requests as plain files in git',
     description:
       'Keeps the todos and pull requests of a git project next to the code. AI agents and people claim todos, work in git worktrees, and review one-commit pull requests line by line in the terminal. One binary, no database, server or account.',
-    website: 'https://sobanieca.github.io/todoer/',
+    website: 'https://adam.sobaniec.com/todoer/',
     github: 'https://github.com/sobanieca/todoer',
     article: '/articles/todoer',
     icon: `<rect x="3" y="5" width="6" height="6" rx="1"/><path d="m3 17 2 2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/>`,
