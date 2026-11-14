@@ -4,8 +4,8 @@
 
 ## About This Repo
 
-This repository hosts my personal development blog built with imp, Rust and
-Claude. Visit the site to read my latest posts about building software on remote
+This repository hosts my personal development blog built with imp and Claude.
+Visit the site to read my latest posts about building software on remote
 machines, in the terminal and on the go.
 
 ## Local Development

@@ -169,8 +169,6 @@ export const layout = () => {
         p(
           `© ${new Date().getFullYear()} ${SITE_AUTHOR}. Built with `,
           a({ href: 'https://imp-ui.com', target: '_blank', rel: 'noopener' }, 'imp'),
-          ', ',
-          a({ href: 'https://www.rust-lang.org', target: '_blank', rel: 'noopener' }, 'Rust'),
           ' and ',
           a({ href: 'https://claude.ai', target: '_blank', rel: 'noopener' }, 'Claude'),
           '.',
