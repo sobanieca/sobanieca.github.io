@@ -18,7 +18,7 @@ extensions, and the config that keeps them all together.
 So I decided to spend one evening on giving Claude a shot: write my own terminal
 editor that matches my `Neovim` setup. Claude created a really decent result,
 and a few more prompts improved it a bit. I decided to give it a try in my daily
-work. That's how [yate](https://adam.sobaniec.com/yate/) was born.
+work. That's how [yate](https://adam.sobaniec.com/yate) was born.
 
 **Why `yate`?**
 
