@@ -102,4 +102,4 @@ commands, key bindings and react to events.
 today: quick, comfortable reading and small edits in a `tmux` pane next to an AI
 agent, with nothing to configure.
 
-[https://github.com/sobanieca/yate](https://github.com/sobanieca/yate)
+[https://adam.sobaniec.com/yate](https://adam.sobaniec.com/yate)
