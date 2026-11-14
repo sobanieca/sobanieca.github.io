@@ -1,5 +1,4 @@
 {
-  "version": "0.1.0",
   "map": "src/app-map.js",
   // ANALYTICS sends the records of imp/analytics to imp-aly. It is on only in the prod
   // environment, which the deploy builds with (deno task publish).
