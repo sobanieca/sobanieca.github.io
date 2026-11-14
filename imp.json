@@ -18,7 +18,6 @@
       "git-hooks",
       ".github",
       ".claude",
-      "stats.html",
       "about.md",
       "README.md",
       "AGENTS.md",
@@ -27,7 +26,7 @@
     ]
   },
   "lint": {
-    "exclude": ["build.js", "scripts", "tools-articles", "git-hooks", "stats.html"]
+    "exclude": ["build.js", "scripts", "tools-articles", "git-hooks"]
   },
   "maxFileSizeIgnore": ["articles", "public/assets/images", "tools-articles"]
 }

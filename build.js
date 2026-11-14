@@ -671,9 +671,6 @@ async function build() {
 
   await writeRoutePages(site);
 
-  await Deno.copyFile("stats.html", "dist/stats.html");
-  console.log("Copied stats.html");
-
   console.log("\n✓ Build complete! Output in dist/");
 }
 
