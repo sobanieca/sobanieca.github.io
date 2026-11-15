@@ -92,8 +92,6 @@ commands, key bindings and react to events.
 
 - `yate` is an early release. Keys, options and the plugin API may still change
   between versions.
-- I will try to maintain it properly, but the truth is - I rarely look at its
-  code. It may take a while until it's polished.
 - `yate update` installs the latest release.
 
 ### Conclusion
