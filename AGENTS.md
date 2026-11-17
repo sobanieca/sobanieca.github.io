@@ -103,13 +103,15 @@ lazily loaded imp **area**, so a visit downloads only the article it shows.
    - `articles-map.js`, `categories-map.js` - parts of the imp app map, one node
      per page
    - `routes.js` - the screens; each article is
-     `area(() => import('./articles/<slug>.js'))`
+     `area(() => import('./articles/<slug>.js'))`, and `/articles/<category>`
+     redirects to the category page
    - `articles/<slug>.js` - one area module per article, holding its rendered
      HTML and its code blocks
 4. Copies hero images to `public/assets/images/articles/` and inline images to
    `public/articles/images/` (both gitignored)
 5. Runs `imp build` into `dist/` (`--env prod` for `cargo site --publish`)
-6. Writes a copy of `dist/index.html` per route (`articles/<slug>.html`,
+6. Writes a copy of `dist/index.html` per route (`articles/<category>/<slug>.html`,
+   and `articles/<slug>.html` for the old address of an article,
    `category/<slug>.html`, `about-me.html`, `projects.html`) with its own title
    and description, plus `404.html`, so GitHub Pages answers every page with its
    HTML (`pages.rs`)
@@ -126,7 +128,10 @@ camelCase key of the app map, and imp serves it as the kebab-case path again.
   `ANALYTICS` build flag is on), applies the themes, adopts the site stylesheet,
   mounts the layout
 - `app-map.js` - the imp application map (pages: `/`, `/about-me`, `/projects`,
-  `/category/<slug>`, `/articles/<slug>`)
+  `/category/<slug>`, `/articles/<category>/<slug>`). The category is part of
+  the address of an article, so the imp-aly console can filter the analytics by
+  category: `/articles/<category>` groups the articles of the category in its
+  page filter
 - `layout.js` - sidebar, router, comments section and footer, rendered in the
   light DOM
 - `pages/*.js` - one imp component per screen, each with a `*.skill.md`
@@ -138,8 +143,13 @@ camelCase key of the app map, and imp serves it as the kebab-case path again.
   uses it as its `styles` (components render in shadow roots) and `main.js`
   adopts it for the light DOM layout
 
-URLs have no `.html`. Old `.html` addresses are redirected by
-`pages/not-found-page.js`.
+URLs have no `.html`. Old `.html` addresses, and old article addresses without
+the category (`/articles/<slug>`), are redirected by `pages/not-found-page.js`.
+An article slug is unique across categories and cannot be a category slug.
+
+Giscus comments use the `specific` mapping with the term `articles/<slug>`, the
+path an article had before the category was part of it, so moving an article
+to another category keeps its discussion.
 
 ### Theme System
 
@@ -154,6 +164,14 @@ inherit into every shadow root.
 imp-aly server at `https://aly.admware.com` under the app name `sobanieca-blog`.
 The `ANALYTICS` flag is declared in `imp.json` and turned on only by
 `env/prod.json`, so `imp start` and `cargo site` send nothing.
+
+The article page sends two outcomes, at most once each per page view:
+`blog.read-halfway` when the middle of the article body comes into view, and
+`blog.read-full` when its end does (the end counts as the middle too). The
+record's `page` is `/articles/<category>/<slug>`, so it tells the article and
+its category; no segment is needed. An article shorter than the screen sends
+both at once. A new outcome or page is a new entry of `app-analytics.json`, which
+the imp-aly server must read again after the deploy.
 
 ### Content Structure
 
@@ -185,7 +203,8 @@ field in frontmatter tracks when the article was last updated and is used for
 "most recent" sorting on the home page.
 
 Inline images: reference as `images/filename.jpg` in markdown. Link another
-article as `./200-other-article.md` or `../category/200-other-article.md`.
+article as `./200-other-article.md` or `../category/200-other-article.md`; the
+link becomes `/articles/<category>/<slug>`.
 
 ### Deployment
 

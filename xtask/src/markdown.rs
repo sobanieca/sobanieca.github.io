@@ -77,26 +77,29 @@ fn image_url(href: &str) -> String {
     }
 }
 
-/// `./200-article.md#part` or `../category/200-article.md` is the article, `../category` the
-/// category page
-fn link_url(href: &str, categories: &[String]) -> String {
+/// `./200-article.md#part` is the article in the category of the page, `../category/200-article.md`
+/// the article in that category, and `../category` the category page
+fn link_url(href: &str, categories: &[String], current: Option<&str>) -> String {
     let (path, fragment) = match href.find('#') {
         Some(index) => (&href[..index], &href[index..]),
         None => (href, ""),
     };
-    let file = path.strip_prefix("./").or_else(|| {
-        let rest = path.strip_prefix("../")?;
-        let (category, file) = rest.split_once('/')?;
-        (!category.is_empty()).then_some(file)
-    });
-    if let Some(name) = file.and_then(|file| file.strip_suffix(".md"))
+    let target = match path.strip_prefix("./") {
+        Some(file) => current.map(|category| (category, file)),
+        None => path
+            .strip_prefix("../")
+            .and_then(|rest| rest.split_once('/'))
+            .filter(|(category, _)| !category.is_empty()),
+    };
+    if let Some((category, name)) =
+        target.and_then(|(category, file)| Some((category, file.strip_suffix(".md")?)))
         && !name.contains('/')
         && let Some((order, slug)) = name.split_once('-')
         && !order.is_empty()
         && order.chars().all(|c| c.is_ascii_digit())
         && !slug.is_empty()
     {
-        return format!("/articles/{slug}{fragment}");
+        return format!("/articles/{category}/{slug}{fragment}");
     }
     if fragment.is_empty()
         && let Some(category) = path.strip_prefix("../")
@@ -149,7 +152,12 @@ struct Heading {
     events: Vec<Event<'static>>,
 }
 
-pub fn render(source: &str, categories: &[String], code_blocks: CodeBlocks) -> Rendered {
+pub fn render(
+    source: &str,
+    categories: &[String],
+    current: Option<&str>,
+    code_blocks: CodeBlocks,
+) -> Rendered {
     let mut options = Options::empty();
     options.insert(Options::ENABLE_TABLES);
     options.insert(Options::ENABLE_STRIKETHROUGH);
@@ -254,7 +262,7 @@ pub fn render(source: &str, categories: &[String], code_blocks: CodeBlocks) -> R
                 dest_url, title, ..
             }) => Event::InlineHtml(CowStr::from(format!(
                 "<a href=\"{}\"{}>",
-                escape(&link_url(&dest_url, categories)),
+                escape(&link_url(&dest_url, categories, current)),
                 title_attribute(&title)
             ))),
             Event::End(TagEnd::Link) => Event::InlineHtml(CowStr::from("</a>")),
@@ -286,7 +294,12 @@ mod tests {
             "using-tmux-neovim"
         );
         assert_eq!(slug_of_heading("A &amp; B"), "a-b");
-        let rendered = render("## Setup\n\n## Setup\n", &[], CodeBlocks::Placeholders);
+        let rendered = render(
+            "## Setup\n\n## Setup\n",
+            &[],
+            None,
+            CodeBlocks::Placeholders,
+        );
         assert!(rendered.html.contains("<h2 id=\"setup\">"));
         assert!(rendered.html.contains("<h2 id=\"setup-1\">"));
     }
@@ -294,15 +307,26 @@ mod tests {
     #[test]
     fn links_to_articles_and_categories() {
         let tools = categories();
-        assert_eq!(link_url("./200-tmux.md", &tools), "/articles/tmux");
+        let here = Some("build-in-terminal");
         assert_eq!(
-            link_url("../tools/100-jsonr.md#install", &tools),
-            "/articles/jsonr#install"
+            link_url("./200-tmux.md", &tools, here),
+            "/articles/build-in-terminal/tmux"
         );
-        assert_eq!(link_url("../tools", &tools), "/category/tools");
-        assert_eq!(link_url("../other", &tools), "../other");
-        assert_eq!(link_url("images/a.jpg", &tools), "/articles/images/a.jpg");
-        assert_eq!(link_url("https://x.com/a.md", &tools), "https://x.com/a.md");
+        assert_eq!(link_url("./200-tmux.md", &tools, None), "./200-tmux.md");
+        assert_eq!(
+            link_url("../tools/100-jsonr.md#install", &tools, here),
+            "/articles/tools/jsonr#install"
+        );
+        assert_eq!(link_url("../tools", &tools, here), "/category/tools");
+        assert_eq!(link_url("../other", &tools, here), "../other");
+        assert_eq!(
+            link_url("images/a.jpg", &tools, here),
+            "/articles/images/a.jpg"
+        );
+        assert_eq!(
+            link_url("https://x.com/a.md", &tools, here),
+            "https://x.com/a.md"
+        );
     }
 
     #[test]
@@ -310,6 +334,7 @@ mod tests {
         let rendered = render(
             "Text\n\n```bash\necho <hi>\n```\n\n```http\nGET /\n```\n",
             &[],
+            None,
             CodeBlocks::Placeholders,
         );
         assert!(rendered.html.contains("<div data-code=\"0\"></div>"));
@@ -326,6 +351,7 @@ mod tests {
         let rendered = render(
             "![A *cat*](images/cat.jpg) ![](./images/clip.mp4 \"Clip\")",
             &[],
+            None,
             CodeBlocks::Placeholders,
         );
         assert!(

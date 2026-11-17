@@ -33,7 +33,7 @@ export const routeLinkClicks = () => {
       return
     }
 
-    // A page of the site has no extension: /articles/jsonr, /category/tools
+    // A page of the site has no extension: /articles/tools/jsonr, /category/tools
     if (/\.[a-z0-9]+$/i.test(url.pathname)) return
     event.preventDefault()
     navigate(url.pathname + url.search + url.hash)

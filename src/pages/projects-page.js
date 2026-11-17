@@ -1,5 +1,6 @@
 import { component } from 'imp'
 import { a, article, div, h1, h2, header, html, p, span } from 'imp/html'
+import { articleBySlug } from '../data.js'
 import { siteCss } from '../styles/site.js'
 
 // The open source projects, with a link to the article about each one
@@ -11,7 +12,7 @@ const PROJECTS = [
       'A simple CLI for sending requests stored in .http files. Keeps secrets out of your repository and LLM context, switches environments with a flag, and lets you chain requests into smoke tests with plain JavaScript.',
     website: 'https://adam.sobaniec.com/jsonr/',
     github: 'https://github.com/sobanieca/jsonr',
-    article: '/articles/jsonr',
+    article: articleBySlug('jsonr').url,
     icon: `<path d="m18 16 4-4-4-4"/><path d="m6 8-4 4 4 4"/><path d="m14.5 4-5 16"/>`,
   },
   {
@@ -21,7 +22,7 @@ const PROJECTS = [
       'Query PostgreSQL, MySQL, MSSQL, ClickHouse and SQLite with one small CLI. Connections are scoped to the git repository, results come out as JSON or tables, and queries can live in versioned .sql files.',
     website: 'https://adam.sobaniec.com/sqlr/',
     github: 'https://github.com/sobanieca/sqlr',
-    article: '/articles/sqlr',
+    article: articleBySlug('sqlr').url,
     icon: `<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/>`,
   },
   {
@@ -31,7 +32,7 @@ const PROJECTS = [
       'Run rfm on a remote machine and browse its files from the browser. Dual-pane mode, fuzzy search, code viewer and editor, git status, diffs and worktrees, and clipboard uploads. Built for SSH port forwarding and works great on a phone.',
     website: 'https://adam.sobaniec.com/remote-file-manager/',
     github: 'https://github.com/sobanieca/remote-file-manager',
-    article: '/articles/working-with-remote-machine',
+    article: articleBySlug('working-with-remote-machine').url,
     icon: `<path d="M20 20a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.69-.9L9.6 3.9A2 2 0 0 0 7.93 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2Z"/>`,
   },
   {
@@ -41,7 +42,7 @@ const PROJECTS = [
       'One binary that runs as a server on a VPS and as a client on your machine. Needs only two open ports, installs itself as a systemd service, and remembers your connections so opening a tunnel is just typing tunnelr.',
     website: 'https://adam.sobaniec.com/tunnelr/',
     github: 'https://github.com/sobanieca/tunnelr',
-    article: '/articles/tunnelr',
+    article: articleBySlug('tunnelr').url,
     icon: `<path d="M4 20V10a8 8 0 0 1 16 0v10"/><path d="M9 20v-6a3 3 0 0 1 6 0v6"/><path d="M2 20h20"/>`,
   },
   {
@@ -51,7 +52,7 @@ const PROJECTS = [
       'Keeps the todos and pull requests of a git project next to the code. AI agents and people claim todos, work in git worktrees, and review one-commit pull requests line by line in the terminal. One binary, no database, server or account.',
     website: 'https://adam.sobaniec.com/todoer/',
     github: 'https://github.com/sobanieca/todoer',
-    article: '/articles/todoer',
+    article: articleBySlug('todoer').url,
     icon: `<rect x="3" y="5" width="6" height="6" rx="1"/><path d="m3 17 2 2 4-4"/><path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/>`,
   },
   {
@@ -61,7 +62,7 @@ const PROJECTS = [
       'A terminal editor somewhere between nano and Neovim. No modes and the keys you need on screen, plus a file tree, fuzzy file finder, live grep, split view and go to definition without a language server. Made for reading code next to an AI agent in a tmux pane.',
     website: 'https://adam.sobaniec.com/yate',
     github: 'https://github.com/sobanieca/yate',
-    article: '/articles/yate',
+    article: articleBySlug('yate').url,
     icon: `<path d="M12 20h9"/><path d="M16.376 3.622a1 1 0 0 1 3.002 3.002L7.368 18.635a2 2 0 0 1-.855.506l-2.872.838a.5.5 0 0 1-.62-.62l.838-2.872a2 2 0 0 1 .506-.854z"/>`,
   },
   {
@@ -71,7 +72,7 @@ const PROJECTS = [
       'The dev server, component library, state, router, test runner, linter, formatter and bundler in one file. Components are real web components, development has no build step, and the production build is static files for any CDN.',
     website: 'https://imp-ui.com',
     github: 'https://github.com/sobanieca/imp-ui',
-    article: '/articles/imp',
+    article: articleBySlug('imp').url,
     icon: `<rect width="7" height="7" x="14" y="3" rx="1"/><path d="M10 21V8a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-5a1 1 0 0 0-1-1H3"/>`,
   },
 ]

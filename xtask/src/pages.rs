@@ -1,4 +1,4 @@
-use crate::content::Site;
+use crate::content::{Site, url_of};
 use crate::markdown::escape;
 use anyhow::{Context, Result, bail};
 use std::fs;
@@ -24,8 +24,8 @@ fn description_tag(page: &str) -> Option<(usize, usize)> {
 }
 
 /// One copy of the built page per route, with the title and the description of that route.
-/// GitHub Pages serves /articles/jsonr from articles/jsonr.html. The imp router takes over in the
-/// browser, and writes the title and the description again on every navigation.
+/// GitHub Pages serves /articles/tools/jsonr from articles/tools/jsonr.html. The imp router takes
+/// over in the browser, and writes the title and the description again on every navigation.
 pub fn write_route_pages(site: &Site) -> Result<()> {
     let page = fs::read_to_string("dist/index.html").context("cannot read dist/index.html")?;
     let (Some(title_start), Some(title_end), Some((meta_start, meta_end))) = (
@@ -74,6 +74,12 @@ pub fn write_route_pages(site: &Site) -> Result<()> {
     }
     for article in &site.articles {
         write(
+            &format!("{}.html", &url_of(article)[1..]),
+            &article.title,
+            &article.excerpt,
+        )?;
+        // The address before the category was part of it: the page forwards to the article
+        write(
             &format!("articles/{}.html", article.slug),
             &article.title,
             &article.excerpt,
@@ -84,7 +90,7 @@ pub fn write_route_pages(site: &Site) -> Result<()> {
 
     println!(
         "Generated {} route pages",
-        3 + site.categories.len() + site.articles.len()
+        3 + site.categories.len() + 2 * site.articles.len()
     );
     Ok(())
 }

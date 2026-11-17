@@ -2,13 +2,17 @@ import { component } from 'imp'
 import { a, div, h1, header, p } from 'imp/html'
 import { navigate } from 'imp/router'
 import { app } from '../app-map.js'
+import { articleBySlug } from '../data.js'
 import { siteCss } from '../styles/site.js'
 
-// The address of a page before the move to imp: /articles/jsonr.html, /index.html
+// The address of a page before the move to imp: /articles/jsonr.html, /index.html. And the address
+// of an article before its category was part of it: /articles/jsonr
 const legacyPath = (path) => {
   if (path === '/index.html') return '/'
-  if (path.endsWith('.html')) return path.slice(0, -'.html'.length)
-  return null
+  const bare = path.endsWith('.html') ? path.slice(0, -'.html'.length) : path
+  const article = bare.match(/^\/articles\/([^/]+)$/)?.[1]
+  if (article && articleBySlug(article)) return articleBySlug(article).url
+  return bare === path ? null : bare
 }
 
 export const notFoundPage = component('blog-not-found-page', {

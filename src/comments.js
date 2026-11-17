@@ -21,9 +21,10 @@ const giscusTheme = (dark) => {
 
 const isDark = () => document.documentElement.getAttribute('data-theme') === 'dark'
 
-// Loads the discussion of the current page. Giscus maps a discussion to the path, so a fresh
-// script on each article loads the discussion of that article.
-export const showComments = () => {
+// Loads the discussion of an article. A fresh script on each article loads the discussion of that
+// article. The discussions were started when an article lived at /articles/<slug>, so the term is
+// that path, and not the address with the category.
+export const showComments = (slug) => {
   commentsSection.hidden = false
   container.replaceChildren(
     el('script', {
@@ -32,7 +33,8 @@ export const showComments = () => {
       'data-repo-id': 'R_kgDOQmdbKA',
       'data-category': 'Giscuss Comments',
       'data-category-id': 'DIC_kwDOQmdbKM4C0kgc',
-      'data-mapping': 'pathname',
+      'data-mapping': 'specific',
+      'data-term': `articles/${slug}`,
       'data-strict': '0',
       'data-reactions-enabled': '1',
       'data-emit-metadata': '0',

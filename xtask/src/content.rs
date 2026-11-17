@@ -169,7 +169,8 @@ fn read_articles(categories: &[Category]) -> Result<Vec<Article>> {
                 _ => base,
             }
             .to_string();
-            let rendered = markdown::render(body, &slugs, CodeBlocks::Placeholders);
+            let rendered =
+                markdown::render(body, &slugs, Some(&category.slug), CodeBlocks::Placeholders);
             let image = HERO_EXTENSIONS.iter().find_map(|extension| {
                 let source = format!("{dir}/{base}.{extension}");
                 Path::new(&source).is_file().then(|| {
@@ -179,6 +180,14 @@ fn read_articles(categories: &[Category]) -> Result<Vec<Article>> {
                     )
                 })
             });
+            // `/articles/<category>` forwards to the category page, and an old address
+            // `/articles/<slug>` forwards to the article, so a slug cannot be a category
+            if slugs.contains(&slug) {
+                bail!("The article {dir}/{file} has the slug of a category - rename it");
+            }
+            if slug == "description" {
+                bail!("The article {dir}/{file} cannot have the slug \"description\" - rename it");
+            }
             if let Some(existing) = articles.iter().find(|article| article.slug == slug) {
                 bail!(
                     "Duplicate article slug \"{slug}\"\n  - {}/{slug} ({})\n  - {}/{slug} ({})",
@@ -207,8 +216,18 @@ fn read_articles(categories: &[Category]) -> Result<Vec<Article>> {
     Ok(articles)
 }
 
-fn url_of(article: &Article) -> String {
-    format!("/articles/{}", article.slug)
+/// The address of an article holds its category, so the analytics can group the articles by it
+pub fn url_of(article: &Article) -> String {
+    format!("/articles/{}/{}", article.category, article.slug)
+}
+
+/// The handle of an article in the application map: `app.articles.buildAnywhere.introduction`
+fn handle_of(article: &Article) -> Result<String> {
+    Ok(format!(
+        "app.articles.{}.{}",
+        map_key(&article.category)?,
+        article.key
+    ))
 }
 
 fn link_of(article: &Article) -> Value {
@@ -304,7 +323,7 @@ fn read_about(categories: &[Category]) -> Result<Value> {
     if let (Some(name), Some(url)) = (fields.get("company.name"), fields.get("company.url")) {
         about.insert("company".into(), json!({ "name": name, "url": url }));
     }
-    let rendered = markdown::render(body, &slugs, CodeBlocks::Plain);
+    let rendered = markdown::render(body, &slugs, None, CodeBlocks::Plain);
     about.insert("content".into(), json!(rendered.html));
     Ok(Value::Object(about))
 }
@@ -345,14 +364,28 @@ fn write_modules(categories: &[Category], articles: &[Article], about: &Value) -
         ),
     )?;
 
+    // The articles hang from their category, so an article is at /articles/<category>/<slug>
     let mut nodes = String::new();
-    for article in articles {
-        let description = if article.excerpt.is_empty() {
-            &article.title
+    for category in categories {
+        let description = if category.description.is_empty() {
+            &category.name
         } else {
-            &article.excerpt
+            &category.description
         };
-        nodes.push_str(&format!("  {}: {},\n", article.key, quote(description)));
+        nodes.push_str(&format!(
+            "  {}: {{\n    description: {},\n",
+            map_key(&category.slug)?,
+            quote(description)
+        ));
+        for article in articles.iter().filter(|a| a.category == category.slug) {
+            let description = if article.excerpt.is_empty() {
+                &article.title
+            } else {
+                &article.excerpt
+            };
+            nodes.push_str(&format!("    {}: {},\n", article.key, quote(description)));
+        }
+        nodes.push_str("  },\n");
     }
     write(
         &format!("{CONTENT_DIR}/articles-map.js"),
@@ -361,26 +394,31 @@ fn write_modules(categories: &[Category], articles: &[Article], about: &Value) -
         ),
     )?;
 
-    // The screens: a category page is part of the main bundle, each article is an area of its own
+    // The screens: a category page is part of the main bundle, each article is an area of its own.
+    // /articles/<category> forwards to the category page.
     let mut category_screens = String::new();
+    let mut article_screens = String::new();
     for category in categories {
+        let key = map_key(&category.slug)?;
         category_screens.push_str(&format!(
-            "  [app.category.{}]: () => categoryPage({}),\n",
-            map_key(&category.slug)?,
+            "  [app.category.{key}]: () => categoryPage({}),\n",
             quote(&category.slug)
         ));
+        article_screens.push_str(&format!(
+            "  [app.articles.{key}]: redirect(app.category.{key}),\n"
+        ));
     }
-    let mut article_screens = String::new();
     for article in articles {
         article_screens.push_str(&format!(
-            "  [app.articles.{}]: area(() => import('./articles/{}.js')),\n",
-            article.key, article.slug
+            "  [{}]: area(() => import('./articles/{}.js')),\n",
+            handle_of(article)?,
+            article.slug
         ));
     }
     write(
         &format!("{CONTENT_DIR}/routes.js"),
         format!(
-            "{GENERATED}import {{ area }} from 'imp/router'
+            "{GENERATED}import {{ area, redirect }} from 'imp/router'
 import {{ app }} from '../app-map.js'
 import {{ categoryPage }} from '../pages/category-page.js'
 
@@ -408,13 +446,13 @@ const code = {}
 
 export default area({{
   screens: {{
-    [app.articles.{}]: () => articlePage({}, content, code),
+    [{}]: () => articlePage({}, content, code),
   }},
 }})
 ",
                 quote(&article.html),
                 serde_json::to_string_pretty(&article.code)?,
-                article.key,
+                handle_of(article)?,
                 quote(&article.slug),
             ),
         )?;
